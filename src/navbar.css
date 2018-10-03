@@ -1,0 +1,46 @@
+#Navbar {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5rem;
+  font-weight:500;
+  background: white;
+}
+#logo {
+  color: rgb(237, 121, 0);
+margin: 10px 10px 0px 10px;
+  font-size: 53px;
+}
+
+#selection li {
+  margin: 0 20px;
+}
+
+#search {
+  margin-left: 70px;
+}
+
+#headernav {
+  margin-left: 40px;
+}
+
+#rightbuttons {
+  margin-right: 20px;
+  font-weight:300;
+  font-size: 1.6rem;
+
+}
+
+#search input {
+  padding-right: 30px;
+}
+
+#wishlistbutton i {
+  color: rgb(193, 3, 3);
+  font-size: 2.2rem;
+  padding: 15px;
+}
+
+#cartbutton i {
+  color: rgb(97, 97, 97);
+  font-size: 2.2rem;
+  padding: 15px;
+}

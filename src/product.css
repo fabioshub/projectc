@@ -1,0 +1,47 @@
+#carousel {
+  margin: 20px 0 70px;
+}
+
+#productitem{
+  margin: 30px 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+
+#productitem ul {
+  list-style: none;
+  padding: 0;
+
+}
+
+#productitem ul li {
+  margin: 4px 0;
+}
+
+#productname {
+  color: rgb(50, 50, 50);
+  font-size: 23px;
+}
+
+#prijs {
+  color: rgb(101, 101, 101);
+  font-size: 18px;
+}
+
+#instock {
+  cursor: default;
+  font-size: 13px;
+  border-style: solid;
+  padding: 4px 10px;
+  border-radius: 4px;
+   border-width: 2px;
+   color: rgb(84, 209, 0);
+   border-color: rgb(84, 209, 0);
+}
+
+#addtocartbtn {
+  margin-top: 8px;
+  background: rgba(242, 188, 67, 0.99);
+  color: white;
+}
