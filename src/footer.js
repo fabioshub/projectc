@@ -11,7 +11,7 @@ class Footer extends Component {
             <div className="col-md-2 col-xs-12 text-center-xs text-left-sm ">
               <img style={{marginLeft: "30px"}}src="" width="100px" height="100px"></img>
             </div>
-            <div></>
+
 
 
             <div className="col-xs-6 col-sm-2 col-md-2 ">
