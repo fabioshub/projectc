@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './footer.css'
+import {Link} from 'react-router-dom';
 
 
 class Footer extends Component {
@@ -19,7 +20,7 @@ class Footer extends Component {
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Wishlist</a></li>
 						<li><a href="#">Cart</a></li>
-						<li><a href="#">Contact us</a></li>
+						<Link to="/contact"><li><a href="#">Contact us</a></li></Link>
 					</ul>
 				</div>
         <div className="col-xs-6 col-sm-4 col-md-4">
