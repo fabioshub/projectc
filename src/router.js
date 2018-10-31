@@ -5,6 +5,7 @@ import Pagina1 from './pagina1';
 import Pagina2 from './pagina2';
 import Browse from './browse';
 import ProductInfoPage from './productInfoPage';
+import Contact from './contact';
 
 
 
@@ -15,6 +16,7 @@ const Router = () => (
     <Route path="/pagina2" component={Pagina2} />
     <Route path="/pagina1" component={Pagina1} />
     <Route path="/browse" component={Browse} />
+    <Route path="/contact" component ={Contact} />
       <Route path="/productinfo" component={ProductInfoPage} />
 
       <Route path="/productifopage" component={ProductInfoPage} />
