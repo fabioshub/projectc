@@ -18,7 +18,7 @@ class Navbarcomplete extends Component {
       <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i class="fas fa-search"></i></button>
     </form>
     <ul className="nav navbar-nav navbar-right" id="rightbuttons">
-      <li id="loginbutton"><Link to="/pagina2">pagina2</Link></li>
+      <li id="loginbutton"><Link to="/login">Login</Link></li>
       <li id="wishlistbutton"><i className="fas fa-heart" ></i></li>
       <li id="cartbutton"><i className="fas fa-shopping-cart"></i></li>
     </ul>
