@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './index.css'
 import Product from './product'
-import { Link } from 'react-router-dom';
 
 
 
@@ -14,14 +13,14 @@ class Pagina1 extends Component {
   }
 
   componentDidMount() {
-  fetch('https://api.themoviedb.org/3/trending/all/day?api_key=dbb619d6178c8ecdfc83dc6e69d51737')
+  fetch('https://api.themoviedb.org/3/movie/popular?api_key=dbb619d6178c8ecdfc83dc6e69d51737&language=en-US&page=1')
   .then(results => {
     return results.json();
   }).then(data => {
     let title = data.results.map((pic) => {
                     return(
                       <div>
-                    <Product name={pic.title} price={pic.id + ",-"} onClick={ () => {console.log("PEIS")} } image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path }/>
+                    <Product name={pic.title} price={pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path }/>
                     </div>
                 )
     })
@@ -69,7 +68,7 @@ carousel() {
 
       <div className="container-fluid text-center" id="carousel">
         <div className="row">
-          <li id="loginbutton"><Link to="/browse">{this.carousel()}</Link></li>
+          {this.carousel()}
         </div>
       </div>
 

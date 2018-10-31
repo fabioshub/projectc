@@ -11,12 +11,11 @@ var destination = document.querySelector('#root')
 
 ReactDOM.render(
   <BrowserRouter>
-    <div>
-      <Navbarcomplete/>
-      <Router/>
-      <Footer/>
-    </div>
-
+  <div>
+    <Navbarcomplete/>
+    <Router/>
+    <Footer/>
+  </div>
   </BrowserRouter>
 
   ,destination
