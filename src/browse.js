@@ -34,7 +34,7 @@ class Browse extends Component {
         console.log(pic)
                       return(
                         <div>
-                      <Link to={{ pathname: '/productifopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link><button type="button" id="addtocartbtn" class="btn" >Add to cart </button>
+                      <Link to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link><button type="button" id="addtocartbtn" class="btn" >Add to cart </button>
                       </div>
                   )
       })
@@ -75,7 +75,7 @@ filterList(n = '') {
   let lengthOfString = n.length;
 
 
-  console.log(this.state.items[0].props.children[0].props.children[1].props)
+  // console.log(this.state.items[0].props.children[0].props.children[1].props)
 
   for (let b = 0; b < this.state.items.length; b++) {
   const currentIteminLoop = this.state.items[b];
