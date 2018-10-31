@@ -3,6 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Pagina1 from './pagina1';
 import Pagina2 from './pagina2';
+import Contact from './contact';
 
 
 const Router = () => (
@@ -10,6 +11,7 @@ const Router = () => (
     <Route exact path="/" component={Pagina1} />
     <Route path="/pagina2" component={Pagina2} />
     <Route path="/pagina1" component={Pagina1} />
+    <Route path="/contact" component ={Contact} />
   </Switch>
 )
 
