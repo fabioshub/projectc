@@ -34,7 +34,7 @@ class Browse extends Component {
         console.log(pic)
                       return(
                         <div>
-                      <Link to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link><button type="button" id="addtocartbtn" class="btn" >Add to cart </button>
+                      <Link to={{ pathname: '/productifopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link><button type="button" id="addtocartbtn" class="btn" >Add to cart </button>
                       </div>
                   )
       })
