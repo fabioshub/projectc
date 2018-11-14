@@ -6,6 +6,8 @@ import Pagina2 from './pagina2';
 import Browse from './browse';
 import ProductInfoPage from './productInfoPage';
 import Contact from './contact';
+import Terms from './termsandconditions'
+import Privacy from './privacy';
 
 
 
@@ -17,9 +19,10 @@ const Router = () => (
     <Route path="/pagina1" component={Pagina1} />
     <Route path="/browse" component={Browse} />
     <Route path="/contact" component ={Contact} />
-      <Route path="/productinfo" component={ProductInfoPage} />
-
-      <Route path="/productifopage" component={ProductInfoPage} />
+    <Route path='/termsandservices' component={Terms} />
+    <Route path='/privacy' component={Privacy} />
+    <Route path="/productinfo" component={ProductInfoPage} />
+    <Route path="/productifopage" component={ProductInfoPage} />
 
   </Switch>
 )
