@@ -15,7 +15,7 @@ class Contact extends Component {
                                 <div class='col-sm-4'>
                                     <div class='form-group'>
                                         <label for='fname'>First Name</label>
-                                        <input type='text' name='fname' class='form-control' placeholder="Heb het aangepast;) Gr, Soner."/>
+                                        <input type='text' name='fname' class='form-control' />
                                     </div>
                                     <div class='form-group'>
                                         <label for='lname'>Last Name</label>
