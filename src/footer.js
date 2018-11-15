@@ -25,7 +25,7 @@ class Footer extends Component {
 				</div>
         <div className="col-xs-6 col-sm-4 col-md-4">
       <ul className="list-unstyled quick-links-2">
-        <li><a href="#">Search</a></li>
+        <li><a href="#">Browse</a></li>
         <li><a href="#">T & Cs</a></li>
         <li><a href="#">Privacy</a></li>
         <li><a href="#">FAQ</a></li>
