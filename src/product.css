@@ -4,19 +4,21 @@
 
 #productitem{
   margin:60px 0 0 0;
-  font-family: 'Roboto Slab', serif;
-  font-weight: 400;
+  font-family: 'Rubik', serif;
+  font-weight: 100;
 }
 
 
 #productitem ul {
   list-style: none;
   padding: 0;
+  display: inline;
 
 }
 
 #productitem ul li {
   margin: 4px 0;
+  display: inline;
 }
 
 #productname {
@@ -46,13 +48,12 @@
 }
 
 #addtocartbtn {
-  margin: 15px 0;
-  background: rgba(242, 188, 67, 0.99);
+  /* margin: 15px 0; */
+  background: rgba(249, 168, 46, 0.99);
   color: white;
 }
 
 #addtowishlist {
-  margin-left: 20px;
   background: white;
   border: 2px solid rgb(230, 60, 60);
   color: rgb(230, 60, 60);

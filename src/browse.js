@@ -49,8 +49,12 @@ class Browse extends Component {
             <div style={{
                 boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
             <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={"€" +pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link>
-            <button type="button" onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i class="fas fa-plus"></i>  cart  <i className="fas fa-shopping-cart"></i></button>
-              <button type="button" onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" ><i class="fas fa-plus"></i>  wenslijst  <i className="fas fa-heart" ></i></button>
+            <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
+              <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
+              <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
+
+            </div>
+
           </div>
           </div>
         )
@@ -156,6 +160,17 @@ class Browse extends Component {
     this.buttonClicked(1)
   }
 
+  backupcode() {
+    [<div className="col-sm-3 hidden-xs">
+      <ul className="list-group">
+        <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>Alle tassen weergeven</li>
+        <li onClick={() => {this.filterList("Incr")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Incr'</li>
+        <li onClick={() => {this.filterList("Chris")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Robin'</li>
+        <li onClick={() => {this.filterList("The")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>'the'</li>
+      </ul>
+
+    </div>]
+  }
 
   render() {
     return(
@@ -171,17 +186,9 @@ class Browse extends Component {
             </div>
           </div>
           <div className="row text-center" style={{height: "500px"}}>
-            <div className="col-sm-3 hidden-xs">
-              <ul className="list-group">
-                <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>Alle tassen weergeven</li>
-                <li onClick={() => {this.filterList("Incr")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Incr'</li>
-                <li onClick={() => {this.filterList("Chris")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Robin'</li>
-                <li onClick={() => {this.filterList("The")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>'the'</li>
-              </ul>
 
-            </div>
 
-            <div className="col-sm-9" style={{}}>
+            <div className="col-sm-12 text-right" style={{}}>
               {this.browseGrid(this.state.itemAmount , this.state.itemsInBrowse)}
             </div>
             <div className="col-sm-12 text-center" style={{marginTop: "100px"}}>

@@ -80,7 +80,7 @@ class ProductInfoPage extends Component {
                   </ul>
                 </div>
                 <div className="col-md-6">
-                  <button  type="button" id="instock">In voorraad</button>
+                  <button  type="button" id="instock">Op voorraad</button>
                   <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.id + ',-'}</h3>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
