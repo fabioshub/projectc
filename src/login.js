@@ -12,7 +12,7 @@ class Login extends Component {
                     <h3>Login for Form 1</h3>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *"/>
+                            <input type="email" class="form-control" placeholder="Your Email *"/>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Your Password *"/>
@@ -29,7 +29,7 @@ class Login extends Component {
                     <h3>Login for Form 2</h3>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *"/>
+                            <input type="email" class="form-control" placeholder="Your Email *"/>
                         </div>
                         <div class="form-group">
                             <input type="password" class="form-control" placeholder="Your Password *"/>
