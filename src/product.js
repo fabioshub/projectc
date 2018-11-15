@@ -6,20 +6,19 @@ class Product extends Component {
   render() {
 
     return(
-      <div style={{}}>
-      <div  className="container-fluid text-center" id="productitem" >
-        <ul>
-
-          <li><img src={this.props.image} width="100px" ></img></li>
-          <div style={{}}>
-            <li><h1 style={{fontFamily:'Roboto', fontWeight: '500',color:'rgb(71, 71, 71)'}} id="productname">{this.props.name}</h1></li>
+      <div style={{marginBottom: "10px"}}>
+      <div  className="container-fluid text-right" id="productitem" >
+        <div className="row">
+          <div className="col-sm-4">
+            <img src={this.props.image} width="150px" ></img>
           </div>
-          <div style={{}}>
-            <li><h1 id="prijs">{this.props.price}</h1></li>
-          </div>
-        <li><button  type="button" id="instock">In voorraad</button></li>
+          <div className="col-sm-8">
+            <h1 style={{fontFamily: "Rubik", fontWeight: '400',color:'rgb(71, 71, 71)'}} id="productname">{this.props.name}</h1>
+            <h3 style={{fontFamily: "Rubik", fontSize: "13px", fontWeight: '400',color:'rgb(71, 71, 71)'}} id="prijs">{this.props.price}</h3>
 
-        </ul>
+          </div>
+
+        </div>
       </div>
       </div>
     );
