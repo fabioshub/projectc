@@ -1,19 +1,38 @@
+body{padding-top:300px;}
+
 .contact-container{
     margin-top: 130px;
     margin-bottom: 30px;
+    margin-left: 450px;
 }
 
 .contact-form{
     padding: 5%;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
-.contact-form h3{
+
+.contact-form h1{
     text-align: center;
+    margin-top: -25px;
+}
+
+.contact-form h4{
+    margin-top: 25px;
+    margin-bottom: 50px;
+    text-align: left;
+    color: #333;
+}
+
+.contact-form h5{
+    margin-top: 25px;
+    text-align: left;
     color: #333;
 }
 
 .btnSubmit
 {
+    margin-top: 50px;
+    margin-left: 115px;
     width: 50%;
     border-radius: 1rem;
     padding: 1.5%;
@@ -21,7 +40,7 @@
     cursor: pointer;
 }
 
-.login-form-1 .btnSubmit{
+.contact-form-1 .btnSubmit{
     font-weight: 600;
     color: #333;
     background-color: #666;

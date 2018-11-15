@@ -8,6 +8,9 @@ import Cart from './cart';
 import Wishlist from './wishlist';
 
 import ProductInfoPage from './productInfoPage';
+import Contact from './contact';
+import Terms from './termsandconditions'
+import Privacy from './privacy';
 
 
 
@@ -19,8 +22,11 @@ const Router = () => (
     <Route path="/pagina2" component={Pagina2} />
     <Route path="/cart" component={Cart} />
     <Route path="/browse" component={Browse} />
-    <Route path="/productinfopage" component={ProductInfoPage} />
-    <Route path="/wishlist" component={Wishlist} />
+    <Route path="/contact" component ={Contact} />
+    <Route path='/termsandservices' component={Terms} />
+    <Route path='/privacy' component={Privacy} />
+    <Route path="/productinfo" component={ProductInfoPage} />
+    <Route path="/productifopage" component={ProductInfoPage} />
 
   </Switch>
 )
