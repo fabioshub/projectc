@@ -21,6 +21,7 @@ const Router = () => (
     <Route path="/pagina1" component={Pagina1} />
     <Route path="/pagina2" component={Pagina2} />
     <Route path="/cart" component={Cart} />
+    <Route path="/wishlist" component={Wishlist} />
     <Route path="/browse" component={Browse} />
     <Route path="/contact" component ={Contact} />
     <Route path='/termsandservices' component={Terms} />
