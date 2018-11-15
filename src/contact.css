@@ -1,8 +1,6 @@
 
 .contact-container{
-    margin-top: 130px;
-    margin-bottom: 30px;
-    margin-left: 450px;
+    margin-top: 190px;
 }
 
 .contact-form{
@@ -10,9 +8,8 @@
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
 }
 
-.contact-form h1{
-    text-align: center;
-    margin-top: -25px;
+.col-sm-offset-1 h1{
+    margin-bottom: 25px;
 }
 
 .contact-form h4{
