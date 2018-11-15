@@ -9,6 +9,50 @@ class ProductInfoPage extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0)
+  }
+
+
+  addToCartClicked(pic) {
+
+    if(localStorage.getItem('arrayInLocalStorage')) {
+      let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
+      console.log(temparray)
+      temparray.push(pic)
+      console.log(temparray)
+      // this.setState({arrayInLocalStorage: temparray})
+      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+    }
+    else {
+      let temparray = [];
+      temparray.push(pic)
+      console.log(temparray)
+      // this.setState({arrayInLocalStorage: temparray})
+      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+    }
+    window.alert("Item added to cart!");
+
+  }
+
+  addToWishlistClicked(pic) {
+
+    if(localStorage.getItem('arrayInLocalStorageWishlist')) {
+      let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
+      console.log(temparray)
+      temparray.push(pic)
+      console.log(temparray)
+      // this.setState({arrayInLocalStorage: temparray})
+      localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
+    }
+    else {
+      let temparray = [];
+      temparray.push(pic)
+      console.log(temparray)
+      // this.setState({arrayInLocalStorage: temparray})
+      localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
+    }
+    window.alert("Item added to Wishlist!");
+
   }
 
 
@@ -23,7 +67,7 @@ class ProductInfoPage extends Component {
             <div className="col-md-7" id="metaPP">
               <div className="row" style={{margin: '0 40px'}}>
                 <div className="col-md-12">
-                  <h1 style={{marginBottom: "50px", fontSize: '50px', color: 'rgb(61, 61, 61)'}}>{this.state.item.title}</h1>
+                  <h1 style={{marginBottom: "50px", fontSize: '60px', color: 'rgb(61, 61, 61)'}}>{this.state.item.title}</h1>
                 </div>
                 <div className="col-md-6">
                   <ul style={{color: 'grey'}} >
@@ -37,11 +81,11 @@ class ProductInfoPage extends Component {
                 </div>
                 <div className="col-md-6">
                   <button  type="button" id="instock">In stock</button>
-                  <h3 style={{color: 'grey'}} >{this.state.item.id + ',-'}</h3>
+                  <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.id + ',-'}</h3>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
-                  <button type="button" id="addtocartbtn" class="btn">Add to cart </button>
-                  <button type="button" id="addtowishlist" class="btn">Add to Wishlist </button>
+                  <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Add to cart  <i className="fas fa-shopping-cart"></i></button>
+                  <button onClick={()=>{this.addToWishlistClicked(this.state.item)}} style={{fontSize: '17px', fontWeight: "500", padding: "10px"}} type="button" id="addtowishlist" class="btn">Add to Wishlist <i className="fas fa-heart" ></i></button>
                 </div>
               </div>
             </div>

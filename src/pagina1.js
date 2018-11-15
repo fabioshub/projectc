@@ -69,7 +69,7 @@ carousel() {
 
       <div className="container-fluid text-center" id="carousel">
         <div className="row">
-          <li id="loginbutton"><Link to="/browse">{this.carousel()}</Link></li>
+          <Link to="/browse">{this.carousel()}</Link>
         </div>
       </div>
 

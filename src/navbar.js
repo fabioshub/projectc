@@ -26,8 +26,8 @@ class Navbarcomplete extends Component {
     </form>
     <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
       <li id="loginbutton"><Link to="/pagina2">Login</Link></li>
-      <li id="wishlistbutton"><i className="fas fa-heart" ></i></li>
-      <li id="cartbutton"><i className="fas fa-shopping-cart"></i></li>
+      <li id="wishlistbutton"><Link to="/wishlist" style={{padding: "0"}}><i className="fas fa-heart" ></i> </Link></li>
+      <li id="cartbutton"><Link to="/cart" style={{padding: "0"}}><i className="fas fa-shopping-cart"></i></Link></li>
     </ul>
   </div>
   <div className="container-fluid">
@@ -39,7 +39,7 @@ class Navbarcomplete extends Component {
                   <li><a href="#">Handbags</a></li>
                   <li><a href="#">Workbags</a></li>
                   <li><a href="#">Free-Time-Bags</a></li>
-                  <li><a href="#">SuitCases</a></li>
+                  <li><a href="#">Suitcases</a></li>
                 </ul>
       </div>
   </div>

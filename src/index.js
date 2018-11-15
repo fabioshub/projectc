@@ -16,7 +16,6 @@ ReactDOM.render(
       <Router/>
       <Footer/>
     </div>
-
   </BrowserRouter>
 
   ,destination
