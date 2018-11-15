@@ -20,7 +20,7 @@ class Navbarcomplete extends Component {
     </div>
     <form className="navbar-form navbar-left hidden-xs">
       <div className="form-group" id="search">
-        <input type="text" className="form-control border " placeholder="Search for bags, brands, etc. "/>
+        <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
       </div>
       <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
     </form>
@@ -34,12 +34,14 @@ class Navbarcomplete extends Component {
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul className="nav navbar-nav navbar-left" id="selection">
-                  <li><a href="#">Male</a></li>
-                  <li><a href="#">Female</a></li>
-                  <li><a href="#">Handbags</a></li>
-                  <li><a href="#">Workbags</a></li>
-                  <li><a href="#">Free-Time-Bags</a></li>
-                  <li><a href="#">Suitcases</a></li>
+                  <li><a href="#">Tassen</a></li>
+                  <li><a href="#">Reistassen</a></li>
+                  <li><a href="#">Schooltassen</a></li>
+                  <li><a href="#">Werktassen</a></li>
+                  <li><a href="#">Rugzakken</a></li>
+                  <li><a href="#">Portemonnees</a></li>
+                  <li><a href="#">Koffers</a></li>
+                  <li><a href="#">Overig</a></li>
                 </ul>
       </div>
   </div>

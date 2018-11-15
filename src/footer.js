@@ -18,20 +18,20 @@ class Footer extends Component {
             <div className="col-xs-6 col-sm-2 col-md-2 ">
 					<ul className="list-unstyled quick-links">
 						<li><a href="#">Home</a></li>
-						<li><a href="#">Wishlist</a></li>
-						<li><a href="#">Cart</a></li>
-						<Link to="/contact"><li><a href="#">Contact us</a></li></Link>
+						<li><a href="#">Verlanglijstje</a></li>
+						<li><a href="#">Winkelmandje</a></li>
+						<Link to="/contact"><li><a href="#">Contact</a></li></Link>
 					</ul>
 				</div>
         <div className="col-xs-6 col-sm-4 col-md-4">
       <ul className="list-unstyled quick-links-2">
-        <li><a href="#">Search</a></li>
+        <li><a href="#">Zoeken</a></li>
         <Link to="/termsandservices"><li><a href="#">T & Cs</a></li></Link>
         <Link to="/privacy"><li><a href="#">Privacy</a></li></Link>
         <li><a href="#">FAQ</a></li>
       </ul>
     </div>
-    <div className="col-md-4 col-sm-4  col-xs-12 text-center">
+    {/* <div className="col-md-4 col-sm-4  col-xs-12 text-center">
       <p style={{marginTop: '10px;', color: 'white'}}>Get out newsletter</p>
       <form className="navbar-form navbar-left">
         <div className="form-group" id="signup">
@@ -39,7 +39,7 @@ class Footer extends Component {
         </div>
         <button id="searchsubmitbutton" type="submit" className="btn btn-default">Sign up!</button>
       </form>
-    </div>
+    </div> */}
           </div>
         </div>
 
