@@ -10,15 +10,16 @@ class Contact extends Component {
             <div class='row'>
                 <div class='col-sm-10 col-sm-offset-1'>
                     <div class='well'>
+                        <h1>Neem contact met ons op</h1>
                         <form>
                             <div class='row'>
                                 <div class='col-sm-4'>
                                     <div class='form-group'>
-                                        <label for='fname'>First Name</label>
+                                        <label for='fname'>Voornaam</label>
                                         <input type='text' name='fname' class='form-control' />
                                     </div>
                                     <div class='form-group'>
-                                        <label for='lname'>Last Name</label>
+                                        <label for='lname'>Achternaam</label>
                                         <input type='text' name='lname' class='form-control' />
                                     </div>
                                     <div class='form-group'>
@@ -26,17 +27,17 @@ class Contact extends Component {
                                         <input type='email' name='email' class='form-control' />
                                     </div>
                                     <div class='form-group'>
-                                        <label for='subject'>Subject</label>
+                                        <label for='subject'>Onderwerp</label>
                                         <select name='subject' class='form-control'>
-                                            <option>General Inquiry</option>
-                                            <option>Site Suggestions</option>
-                                            <option>Product Support</option>
+                                            <option>Algemene vraag</option>
+                                            <option>Site suggesties</option>
+                                            <option>Product-gerelateerde vraag</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class='col-sm-8'>
                                     <div class='form-group'>
-                                        <label for='message'>Message</label>
+                                        <label for='message'>Bericht</label>
                                         <textarea class='form-control' name='message' rows='10'></textarea>
                                     </div>
                                     <div class='text-right'>
