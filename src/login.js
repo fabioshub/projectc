@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import './pagina2.css'
+import './login.css'
 import Product from './product'
 
-class Pagina2 extends Component {
+class Login extends Component {
 
   render() {
     return(
@@ -49,4 +49,4 @@ class Pagina2 extends Component {
   }
 }
 
-export default Pagina2;
+export default Login;

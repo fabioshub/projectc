@@ -17,15 +17,15 @@ class Footer extends Component {
 
             <div className="col-xs-6 col-sm-2 col-md-2 ">
 					<ul className="list-unstyled quick-links">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Verlanglijstje</a></li>
-						<li><a href="#">Winkelmandje</a></li>
+						<Link to="/home"><li><a href="#">Home</a></li></Link>
+						<Link to="/wishlist"><li><a href="#">Verlanglijstje</a></li></Link>
+						<Link to="/cart"><li><a href="#">Winkelmandje</a></li></Link>
 						<Link to="/contact"><li><a href="#">Contact</a></li></Link>
 					</ul>
 				</div>
         <div className="col-xs-6 col-sm-4 col-md-4">
       <ul className="list-unstyled quick-links-2">
-        <li><a href="#">Zoeken</a></li>
+        <Link to="/browse"><li><a href="#">Zoeken</a></li></Link>
         <Link to="/termsandservices"><li><a href="#">T & Cs</a></li></Link>
         <Link to="/privacy"><li><a href="#">Privacy</a></li></Link>
         <li><a href="#">FAQ</a></li>
