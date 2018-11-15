@@ -49,8 +49,8 @@ class Browse extends Component {
             <div style={{
                 boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
             <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={"€" +pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link>
-            <button type="button" onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" >Add to cart  <i className="fas fa-shopping-cart"></i></button>
-              <button type="button" onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >Add to Wishlist <i className="fas fa-heart" ></i></button>
+            <button type="button" onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i class="fas fa-plus"></i>  cart  <i className="fas fa-shopping-cart"></i></button>
+              <button type="button" onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" ><i class="fas fa-plus"></i>  wenslijst  <i className="fas fa-heart" ></i></button>
           </div>
           </div>
         )
@@ -163,7 +163,7 @@ class Browse extends Component {
         <div className="container-fluid ">
           <div className="row text-center" style={{height: "100px"}}>
             <div className="col-sm-12">
-              <h1  style={{margin: '30px 0', fontWeight: "700"}}>BROWSE</h1>
+              <h1  style={{margin: '30px 0', fontWeight: "700"}}>Tassen browsen</h1>
               <hr style={{border: "0px",
                 height: "8px",
                 width: "200px",
@@ -173,7 +173,7 @@ class Browse extends Component {
           <div className="row text-center" style={{height: "500px"}}>
             <div className="col-sm-3 hidden-xs">
               <ul className="list-group">
-                <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>All items</li>
+                <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>Alle tassen weergeven</li>
                 <li onClick={() => {this.filterList("Incr")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Incr'</li>
                 <li onClick={() => {this.filterList("Chris")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Robin'</li>
                 <li onClick={() => {this.filterList("The")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>'the'</li>

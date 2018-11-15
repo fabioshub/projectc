@@ -130,8 +130,8 @@ class Cart extends Component {
           {this.listView()}
           <div className="row">
             <div className="col-md-12 text-right">
-              <button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Checkout</button>
-              <p>Total: {this.state.totalPrice +  ",-"}</p>
+              <button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button>
+              <p>Totaal: {this.state.totalPrice +  ",-"}</p>
             </div>
           </div>
         </div>

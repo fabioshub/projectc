@@ -80,12 +80,12 @@ class ProductInfoPage extends Component {
                   </ul>
                 </div>
                 <div className="col-md-6">
-                  <button  type="button" id="instock">In stock</button>
+                  <button  type="button" id="instock">In voorraad</button>
                   <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.id + ',-'}</h3>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
-                  <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Add to cart  <i className="fas fa-shopping-cart"></i></button>
-                  <button onClick={()=>{this.addToWishlistClicked(this.state.item)}} style={{fontSize: '17px', fontWeight: "500", padding: "10px"}} type="button" id="addtowishlist" class="btn">Add to Wishlist <i className="fas fa-heart" ></i></button>
+                  <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn"><i class="fas fa-plus"></i> cart  <i className="fas fa-shopping-cart"></i></button>
+                  <button onClick={()=>{this.addToWishlistClicked(this.state.item)}} style={{fontSize: '17px', fontWeight: "500", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i class="fas fa-plus"></i> wenslijst <i className="fas fa-heart" ></i></button>
                 </div>
               </div>
             </div>
@@ -93,7 +93,7 @@ class ProductInfoPage extends Component {
         </div>
         <div className="row" style={{margin: ' 40px 80px'}}>
           <div className="col-md-12">
-            <h3 style={{color: 'rgb(61, 61, 61)'}} >Product description</h3>
+            <h3 style={{color: 'rgb(61, 61, 61)'}} >Product beschrijving</h3>
           </div>
           <div className="col-md-12">
             <p style={{color: 'grey'}} >{this.state.item.overview}</p>

@@ -17,7 +17,7 @@ class Product extends Component {
           <div style={{}}>
             <li><h1 id="prijs">{this.props.price}</h1></li>
           </div>
-        <li><button  type="button" id="instock">In stock</button></li>
+        <li><button  type="button" id="instock">In voorraad</button></li>
 
         </ul>
       </div>

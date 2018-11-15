@@ -55,7 +55,7 @@ carousel() {
       <div className="container-fluid text-center">
         <div className="row">
           <div className="col-sm-12">
-            <h1 id="trending">Trending</h1>
+            <h1 id="trending">Populair</h1>
           </div>
           <div className="col-sm-12">
             <hr style={{border: "0px",
