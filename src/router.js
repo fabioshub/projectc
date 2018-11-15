@@ -25,8 +25,7 @@ const Router = () => (
     <Route path="/contact" component ={Contact} />
     <Route path='/termsandservices' component={Terms} />
     <Route path='/privacy' component={Privacy} />
-    <Route path="/productinfo" component={ProductInfoPage} />
-    <Route path="/productifopage" component={ProductInfoPage} />
+    <Route path="/productinfopage" component={ProductInfoPage} />
 
   </Switch>
 )
