@@ -14,7 +14,7 @@ class Cart extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Your cart is empty :(</div> <br/>
+      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div> <br/>
                 <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(45, 82, 163)"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       totalPrice: 0,
@@ -118,7 +118,7 @@ class Cart extends Component {
       <div id="paginaCart" style={{marginTop: "130px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}>Cart</h1>
+            <h1  style={{margin: '50px 0'}}>Winkelmandje</h1>
             <hr style={{border: "0px",
               height: "1px",
               width: "400px",

@@ -14,7 +14,7 @@ class Wishlist extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je wenslijst is leeg :(</div> <br/>
+      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je verlanglijstje is leeg :(</div> <br/>
                 <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(45, 82, 163)"}} type="button" id="addtocartbtn" class="btn">Breng me naar de tassen! <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       listViewList1: []
