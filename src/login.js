@@ -1,45 +1,45 @@
 import React, { Component } from 'react';
-import './pagina2.css'
+import './login.css'
 import Product from './product'
 
-class Pagina2 extends Component {
+class Login extends Component {
 
   render() {
     return(
       <div class="container login-container">
             <div class="row">
                 <div class="col-md-6 login-form-1">
-                    <h3>Login for Form 1</h3>
+                    <h3>Inloggen</h3>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *"/>
+                            <input type="email" class="form-control" placeholder="Vul je email in *"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *"/>
+                            <input type="password" class="form-control" placeholder="Vul je wachtwoord in *"/>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btnSubmit" value="Login" />
+                            <input type="submit" class="btnSubmit" value="Log in" />
                         </div>
                         <div class="form-group">
-                            <a href="#" class="ForgetPwd">Forget Password?</a>
+                            <a href="#" class="ForgetPwd">Wachtwoord vergeten?</a>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-6 login-form-2">
-                    <h3>Login for Form 2</h3>
+                    <h3>Registreren</h3>
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Your Email *"/>
+                            <input type="email" class="form-control" placeholder="Vul je email in *"/>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Your Password *"/>
+                            <input type="password" class="form-control" placeholder="Vul je wachtwoord in *"/>
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btnSubmit" value="Login" />
+                            <input type="submit" class="btnSubmit" value="Registreer" />
                         </div>
                         <div class="form-group">
 
-                            <a href="#" class="ForgetPwd" value="Login">Forget Password?</a>
+                            <a href="#" class="ForgetPwd" value="Login">Wachtwoord vergeten?</a>
                         </div>
                     </form>
                 </div>
@@ -49,4 +49,4 @@ class Pagina2 extends Component {
   }
 }
 
-export default Pagina2;
+export default Login;

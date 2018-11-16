@@ -16,7 +16,7 @@ class Navbarcomplete extends Component {
 
   <div className="container-fluid">
     <div className="navbar-header" id="headernav">
-      <Link to="/pagina1"><i id="logo" className="fab fa-html5"></i></Link>
+      <Link to="/home"><i id="logo" className="fab fa-html5"></i></Link>
     </div>
     <form className="navbar-form navbar-left hidden-xs">
       <div className="form-group" id="search">
@@ -25,7 +25,7 @@ class Navbarcomplete extends Component {
       <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
     </form>
     <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
-      <li id="loginbutton"><Link to="/pagina2">Login</Link></li>
+      <li id="loginbutton"><Link to="/login">Login</Link></li>
       <li id="wishlistbutton"><Link to="/wishlist" style={{padding: "0"}}><i className="fas fa-heart" ></i> </Link></li>
       <li id="cartbutton"><Link to="/cart" style={{padding: "0"}}><i className="fas fa-shopping-cart"></i></Link></li>
     </ul>

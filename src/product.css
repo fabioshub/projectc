@@ -55,6 +55,7 @@ img {
   /* margin: 15px 0; */
   background: rgba(249, 168, 46, 0.99);
   color: white;
+  border: 2px solid rgba(249, 168, 46, 0.99);
 }
 
 #addtowishlist {
