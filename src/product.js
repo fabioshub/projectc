@@ -10,7 +10,7 @@ class Product extends Component {
       <div  className="container-fluid text-right" id="productitem" >
         <div className="row">
           <div className="col-sm-4">
-            <img src={this.props.image} width="150px" ></img>
+              <img src={this.props.image} width="100px" ></img>
           </div>
           <div className="col-sm-8">
             <h1 style={{fontFamily: "Rubik", fontWeight: '400',color:'rgb(71, 71, 71)'}} id="productname">{this.props.name}</h1>

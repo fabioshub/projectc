@@ -39,14 +39,14 @@ class Cart extends Component {
 
 
     let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-    let cartify = (arrayInLocalStorage.map((pic) => {return pic.id}))
+    let cartify = (arrayInLocalStorage.map((pic) => {return pic.productPrice}))
     let cartList = arrayInLocalStorage.map((pic) => {
-      this.state.totalPrice  = this.state.totalPrice + pic.id;
+      this.state.totalPrice  = this.state.totalPrice + pic.productPrice;
       // this.setState({totalPrice: totalPrice});
       return(
         <div>
-          <CartWLI name={pic.title} price={"€" + pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.title)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
+          <CartWLI name={pic.productName} price={"€" + pic.productPrice + ",-"} image="https://www.vanostassenenkoffers.nl/images/collection/middle/5402.400.jpg"></CartWLI>
+            <button onClick={()=>this.deleteFromWishlist(pic.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
               <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
         </div>
       )
@@ -86,10 +86,10 @@ class Cart extends Component {
 
       for (let b = 0; b < arrayInLocalStorage.length; b++) {
         const crrentItem = arrayInLocalStorage[b]
-        if(arrayInLocalStorage[b].title !== h) {
+        if(arrayInLocalStorage[b].productName !== h) {
           tempDeleteArray.push(crrentItem)
         } else {
-          console.log("discard " + arrayInLocalStorage[b].title)
+          console.log("discard " + arrayInLocalStorage[b].productName)
         }
 
       }

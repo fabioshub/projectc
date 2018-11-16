@@ -6,44 +6,64 @@ import {Link} from 'react-router-dom';
 class Footer extends Component {
   render() {
     return(
-      <footer id="footer">
-        <div className="container-fluid">
-          <div className="row">
-            <div className="col-md-2 col-xs-12 text-center-xs text-left-sm ">
-              <img style={{marginLeft: "30px"}}src="" width="100px" height="100px"></img>
-            </div>
-<div></div>
+      <section id="contact" className="s-contact container-fluid">
 
 
-            <div className="col-xs-6 col-sm-2 col-md-2 ">
-					<ul className="list-unstyled quick-links">
-						<li><a href="#">Home</a></li>
-						<li><a href="#">Verlanglijstje</a></li>
-						<li><a href="#">Winkelmandje</a></li>
-						<Link to="/contact"><li><a href="#">Contact</a></li></Link>
-					</ul>
-				</div>
-        <div className="col-xs-6 col-sm-4 col-md-4">
-      <ul className="list-unstyled quick-links-2">
-        <li><a href="#">Zoeken</a></li>
-        <Link to="/termsandservices"><li><a href="#">T & Cs</a></li></Link>
-        <Link to="/privacy"><li><a href="#">Privacy</a></li></Link>
-        <li><a href="#">FAQ</a></li>
-      </ul>
-    </div>
-    {/* <div className="col-md-4 col-sm-4  col-xs-12 text-center">
-      <p style={{marginTop: '10px;', color: 'white'}}>Get out newsletter</p>
-      <form className="navbar-form navbar-left">
-        <div className="form-group" id="signup">
-          <input type="text" className="form-control border " placeholder="Enter your Email "/>
-        </div>
-        <button id="searchsubmitbutton" type="submit" className="btn btn-default">Sign up!</button>
-      </form>
-    </div> */}
-          </div>
-        </div>
+       <div className="row">
 
-      </footer>
+           <div className="col-sm-12 contact-main" data-aos="fade-up">
+               <p>
+               <a href="mailto:#0" className="contact-email">info@backtobag.nl</a>
+               <span className="contact-number">+31 (0) 6 45 74 70 32</span>
+               </p>
+           </div>
+
+       </div>
+
+       <div className="row">
+
+           <div className="col-sm-5 tab-full contact-secondary" data-aos="fade-up">
+               <h3 className="subhead subhead--light">Rotterdam</h3>
+
+               <p className="contact-address">
+                   Kepa10
+                   6543JD<br/>
+                 Rotterdam<br/>
+
+               </p>
+           </div>
+
+           <div className="col-sm-5 tab-full contact-secondary" data-aos="fade-up">
+               <h3 className="subhead subhead--light">Volg ons</h3>
+
+               <ul className="contact-social">
+                   <li>
+                       <a href="#0"><i className="fab fa-facebook"></i></a>
+                   </li>
+
+               </ul>
+
+
+
+           </div>
+
+       </div>
+
+       <div className="row">
+           <div className="col-sm-12 cl-copyright">
+               <span>
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
+</span> <br/>
+<a href="/"><span>Algemene Voorwaarden - Privacy Verklaring</span> </a>
+
+           </div>
+       </div>
+
+       <div className="cl-go-top">
+           <a className="smoothscroll" title="Terug naar boven" href="#top"><i className="icon-arrow-up" aria-hidden="true"></i></a>
+       </div>
+
+   </section>
     );
   };
 }
