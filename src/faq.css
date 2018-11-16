@@ -9,11 +9,28 @@
     border: 1px solid #aaa;
     text-align: center;
     cursor: pointer;
-    background: rgb(66, 79, 89, 0.5);
+    margin-bottom: 40px;
+}
+
+.faq-answerpanel{
+    border: 1px solid #aaa;
+    text-align: left;
+    margin-top: -40px;
+    padding: 1%;
+    margin-bottom: 40px;
+}
+
+.tocontactbtn{
+    margin-top: 25px;
+    background: rgba(249, 168, 46, 0.99);
     color: white;
-    border: 1px solid rgb(66, 79, 89);
+    border: 2px solid rgba(249, 168, 46, 0.99);
+    margin-bottom: 10px;
+    font-size: 17px;
+    font-weight: 300;
+    padding: 10px;
 }
 
 .faq-container h1{
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
