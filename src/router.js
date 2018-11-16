@@ -11,6 +11,7 @@ import ProductInfoPage from './productInfoPage';
 import Contact from './contact';
 import Terms from './termsandconditions'
 import Privacy from './privacy';
+import Faq from './faq';
 
 
 
@@ -26,6 +27,7 @@ const Router = () => (
     <Route path="/contact" component ={Contact} />
     <Route path='/termsandservices' component={Terms} />
     <Route path='/privacy' component={Privacy} />
+    <Route path='/faq' component={Faq} />
     <Route path="/productinfopage" component={ProductInfoPage} />
 
   </Switch>

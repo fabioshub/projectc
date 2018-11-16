@@ -28,7 +28,7 @@ class Footer extends Component {
         <Link to="/browse"><li><a href="#">Zoeken</a></li></Link>
         <Link to="/termsandservices"><li><a href="#">T & Cs</a></li></Link>
         <Link to="/privacy"><li><a href="#">Privacy</a></li></Link>
-        <li><a href="#">FAQ</a></li>
+        <Link to="/faq"><li><a href="#">FAQ</a></li></Link>
       </ul>
     </div>
     {/* <div className="col-md-4 col-sm-4  col-xs-12 text-center">

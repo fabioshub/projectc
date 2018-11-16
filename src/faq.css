@@ -1,0 +1,19 @@
+.faq-container{
+    margin-top: 180px;
+    margin-bottom: 30px;
+    margin-left: 325px;
+    text-align: center;
+}
+
+.faq-panel{
+    border: 1px solid #aaa;
+    text-align: center;
+    cursor: pointer;
+    background: rgb(66, 79, 89, 0.5);
+    color: white;
+    border: 1px solid rgb(66, 79, 89);
+}
+
+.faq-container h1{
+    margin-bottom: 50px;
+}

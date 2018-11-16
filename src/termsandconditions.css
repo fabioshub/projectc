@@ -1,38 +1,13 @@
 .terms-container{
     margin-top: 180px;
     margin-bottom: 30px;
-    margin-left: 450px;
+    margin-left: 400px;
+    text-align: center;
 }
 
 .terms-panel{
     border: 1px solid #aaa;
-}
-
-.terms-form{
-    padding: 5%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
-}
-
-.terms-form h1{
-    text-align: center;
-    margin-top: -25px;
-    margin-bottom: 25px;
-}
-
-.terms-form h4{
-    margin-top: 25px;
-    margin-bottom: 50px;
+    padding: 2%;
     text-align: left;
-    color: #333;
-}
-
-.terms-form h6{
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
-    width: 1;
-    flex-grow: 1;
-    color: #333;
-    text-align: center;
+    min-height: 300px;
 }
