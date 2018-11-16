@@ -67,7 +67,7 @@ class ProductInfoPage extends Component {
             <div className="col-md-7" id="metaPP">
               <div className="row" style={{margin: '0 40px'}}>
                 <div className="col-md-12">
-                  <h1 style={{marginBottom: "50px", fontSize: '60px', color: 'rgb(61, 61, 61)'}}>{this.state.item.title}</h1>
+                  <h1 style={{marginBottom: "50px", fontSize: '60px', color: 'rgb(61, 61, 61)'}}>{this.state.item.productName}</h1>
                 </div>
                 <div className="col-md-6">
                   <ul style={{color: 'grey'}} >
@@ -81,7 +81,7 @@ class ProductInfoPage extends Component {
                 </div>
                 <div className="col-md-6">
                   <button  type="button" id="instock">Op voorraad</button>
-                  <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.id + ',-'}</h3>
+                  <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.productPrice + ',-'}</h3>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
                   <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn"><i class="fas fa-plus"></i> cart  <i className="fas fa-shopping-cart"></i></button>
@@ -96,7 +96,7 @@ class ProductInfoPage extends Component {
             <h3 style={{color: 'rgb(61, 61, 61)'}} >Product beschrijving</h3>
           </div>
           <div className="col-md-12">
-            <p style={{color: 'grey'}} >{this.state.item.overview}</p>
+            <p style={{color: 'grey'}} >{this.state.item.productDescription}</p>
           </div>
         </div>
       </div>

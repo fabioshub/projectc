@@ -18,12 +18,16 @@
 
 #productitem ul li {
   margin: 4px 0;
-  display: inline;
+  /* display: inline; */
 }
 
 #productname {
   color: rgb(50, 50, 50);
   font-size: 18px;
+}
+
+img {
+    width: 100%;
 }
 
 #prijs {

@@ -1,26 +1,164 @@
-#footer {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  min-height: 300px;
-  background: rgb(66, 79, 89);
-  padding: 80px 0 80px 0;
-  margin-top: 70px;
+.s-contact {
+  padding-bottom: 1.2rem;
+  background-color: #ffffff;
+  color: rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+.s-contact a {
+  color: #000000;
+  border-bottom: 1px solid transparent;
+  display: inline-block;
+}
+.s-contact a:hover,
+.s-contact a:focus {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.contact-main {
+  margin-bottom: 4.8rem;
+}
+
+.contact-email {
+  display: inline-block;
+  font-family: "metropolis-light", sans-serif;
+  font-size: 5.4rem;
+  line-height: 1.222;
+  color: #ffffff;
+  padding-top: 3.6rem;
+  position: relative;
+}
+.contact-email::before {
+  content: "";
+  display: block;
+  height: 1px;
+  width: 60px;
+  background-color: #ff9715;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.contact-number {
+  font-family: "metropolis-light", sans-serif;
+  font-size: 3rem;
+  line-height: 1.7;
+  display: block;
+}
+
+.contact-address {
+  font-family: "metropolis-regular", sans-serif;
+  font-size: 2.8rem;
+  line-height: 1.607;
+  margin-top: 2.4rem;
 }
 
 
-/* .quick-links li {
-  margin-left: 10px;
-
-} */
-
-.list-unstyled li a {
-  color: white;
+/* -------------------------------------------------------------------
+ * ## contact social
+ * ------------------------------------------------------------------- */
+.contact-social {
+  list-style: none;
+  display: inline-block;
+  margin: 0 0 0 0.3rem;
+  font-size: 3rem;
+}
+.contact-social li {
+  margin-right: 15px;
+  padding-left: 0;
+  display: inline-block;
+}
+.contact-social li a {
+  color: rgba(0, 0, 0, 0.3);
+  border: none !important;
+}
+.contact-social li a:hover,
+.contact-social li a:focus {
+  color: #ffffff;
+}
+.contact-social li:last-child {
+  margin: 0;
 }
 
-/* .list-unstyled li {
-  margin: 10px 0 10px 0;
+
+/* -------------------------------------------------------------------
+ * ## subscribe
+ * ------------------------------------------------------------------- */
+.contact-subscribe {
+  margin: 0;
+  padding: 0;
+  position: relative;
 }
 
-.quick-links-2  {
-  margin-top: 40px;
-} */
+.mc-form {
+  margin-top: 2.1rem;
+  width: 100%;
+}
+.mc-form input[type="email"] {
+  background-color: rgba(0, 0, 0, 0.267);
+  color: rgb(255, 255, 255);
+  width: 100%;
+  height: 5.4rem;
+  padding: 1.2rem 150px 1.2rem 20px;
+  margin-bottom: 1.8rem;
+  border: none;
+}
+.mc-form input[type="email"]:focus {
+  color: #ffffff;
+}
+.mc-form input[type="email"]::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+.mc-form input[type="email"]:-moz-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  /* Firefox 18- */
+}
+.mc-form input[type="email"]::-moz-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+  /* Firefox 19+ */
+}
+.mc-form input[type="email"]:-ms-input-placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+.mc-form input[type="email"].placeholder {
+  color: rgba(255, 255, 255, 0.2) !important;
+}
+.mc-form input[type="submit"] {
+  color: #ffffff;
+  background: #ff9715;
+  border-color: #ff9715;
+  padding: 0 15px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.mc-form label {
+  color: #ffffff;
+  font-family: "metropolis-semibold", sans-serif;
+  font-size: 1.3rem;
+  padding: 0 2rem;
+}
+.mc-form label i {
+  padding-right: 6px;
+}
+
+
+/* -------------------------------------------------------------------
+ * ## copyright
+ * ------------------------------------------------------------------- */
+.cl-copyright {
+  margin-top: 2.1rem;
+}
+
+.cl-copyright span {
+  font-size: 15px;
+  display: inline-block;
+}
+.cl-copyright span::after {
+  content: "|";
+  display: inline-block;
+  padding: 0 1rem 0 1.2rem;
+  color: rgba(255, 255, 255, 0.1);
+}
+.cl-copyright span:last-child::after {
+  display: none;
+}

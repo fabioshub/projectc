@@ -14,14 +14,14 @@ class Pagina1 extends Component {
   }
 
   componentDidMount() {
-  fetch('https://api.themoviedb.org/3/trending/all/day?api_key=dbb619d6178c8ecdfc83dc6e69d51737')
+  fetch('http://localhost:5000/api/product/1/10')
   .then(results => {
     return results.json();
   }).then(data => {
-    let title = data.results.map((pic) => {
+    let title = data.items.map((pic) => {
                     return(
                       <div>
-                    <Product name={pic.title} price={pic.id + ",-"} onClick={ () => {console.log("PEIS")} } image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path }/>
+                    <Product name={pic.productName} price={pic.productPrice + ",-"} onClick={ () => {console.log("PEIS")} } image="https://www.vanostassenenkoffers.nl/images/collection/middle/5402.400.jpg"/>
                     </div>
                 )
     })
@@ -58,10 +58,7 @@ carousel() {
             <h1 id="trending">Populair</h1>
           </div>
           <div className="col-sm-12">
-            <hr style={{border: "0px",
-                        height: "1px",
-                        width: "400px",
-    backgroundImage: "linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))"}} />
+<hr style={{border: "0px", height: "8px", width: "200px", backgroundColor: "rgb(69, 69, 69)"}}/>
           </div>
 
         </div>

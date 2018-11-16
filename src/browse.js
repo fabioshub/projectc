@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './browse.css'
 import Product from './product'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
 
 
 
@@ -37,18 +39,45 @@ class Browse extends Component {
     this.fetchData()
   }
 
-  fetchData() {
-    fetch('https://api.themoviedb.org/3/trending/all/day?api_key=dbb619d6178c8ecdfc83dc6e69d51737')
-    .then(results => {
+   fetchData() {
+     fetch('http://localhost:5000/api/product/1/10',{
+      host: 'localhost',
+      // port: 5000,
+      // path: '/',
+      method: 'GET',
+      type: 'application/json',
+      // rejectUnauthorized: false,
+      // requestCert: false,
+      mode: "no-cors",
+headers:{
+"Access-Control-Allow-Credentials" : true},
+      agent: false
+    }).then(result => {return result.json()}).then(data => {let items = data.products.map((pic) => {console.log(pic)})})
+
+
+    fetch('http://localhost:5000/api/product/1/10',{
+      host: 'localhost',
+      port: 5000,
+      path: '/',
+      method: 'GET',
+      type: 'application/json',
+
+      rejectUnauthorized: false,
+      requestCert: true,
+      mode: "no-cors",
+headers:{
+"Access-Control-Allow-Credentials" : true},
+      agent: false
+    }).then(results => {
       return results.json();
     }).then(data => {
-      let items = data.results.map((pic) => {
+      let items = data.products.map((pic) => {
         console.log(pic)
         return(
           <div>
             <div style={{
                 boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
-            <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.overview} name={pic.title} price={"€" +pic.id + ",-"} image={"http://image.tmdb.org/t/p/w185/" + pic.poster_path}/></Link>
+            <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice + ",-"} image={pic.images[0]}/></Link>
             <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
               <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
               <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>

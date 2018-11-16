@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css'
 import Navbarcomplete from './navbar'
+import Navigationbar from './newnavbar'
+
 import Pagina1 from './pagina1'
 import Footer from './footer'
 import Router from './router'
@@ -12,7 +14,7 @@ var destination = document.querySelector('#root')
 ReactDOM.render(
   <BrowserRouter>
     <div>
-      <Navbarcomplete/>
+      <Navigationbar/>
       <Router/>
       <Footer/>
     </div>
