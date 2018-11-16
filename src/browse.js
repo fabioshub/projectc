@@ -46,7 +46,7 @@ class Browse extends Component {
   }
 
    fetchData() {
-     
+
 //      fetch('http://localhost:5000/api/product/1/10',{
 //       host: 'localhost',
 //       // port: 5000,
@@ -130,7 +130,7 @@ headers:{
     let table = []
     for (let j = h * p; j < h * (p + 1); j++) {
       // var randomnbr = Math.floor((Math.random() * 10) + 1);
-      table.push(<div className="col-xs-12 col-sm-4 " style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
+      table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
     }
     return table;
   }
@@ -273,7 +273,8 @@ $(window).on('load', loaded);
           </div>
           <div className="row text-center browsercontent" style={{height: "500px"}}>
             <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
-              <ul className="list-group">
+              <ul style={{
+                  boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
                 <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Alle tassen weergeven</li>
                   <li onClick={() => {this.filterList("Halstas")}} style={{cursor: "pointer"}} className="list-group-item">Halster tassen</li>
                 <li onClick={() => {this.filterList("Heren ")}} style={{cursor: "pointer"}} className="list-group-item">Portemonnees</li>

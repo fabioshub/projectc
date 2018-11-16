@@ -43,3 +43,7 @@
    from {transform: rotate(0deg);}
    to {transform: rotate(359deg);}
 }
+
+.list-group li {
+  border: none;
+}
