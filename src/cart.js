@@ -39,19 +39,19 @@ class Cart extends Component {
 
 
     let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-    let cartify = (arrayInLocalStorage.map((pic) => {return pic.productPrice}))
+    let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
     let cartList = arrayInLocalStorage.map((pic) => {
-      this.state.totalPrice  = this.state.totalPrice + pic.productPrice;
+      this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
       // this.setState({totalPrice: totalPrice});
       return(
         <div>
-          <CartWLI name={pic.productName} price={"€" + pic.productPrice + ",-"} image="https://www.vanostassenenkoffers.nl/images/collection/middle/5402.400.jpg"></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
+          <CartWLI name={pic.product.productName} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
+            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
               <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
         </div>
       )
     })
-    this.setState({cartify: cartify})
+    // this.setState({cartify: cartify})
     this.setState({cartList: cartList})
 
 
@@ -64,7 +64,7 @@ class Cart extends Component {
   checkOut() {
     let res = fetch('tester.json').then(results => {return results.json()})
     console.log(res)
-    let checkoutCart = this.state.cartify;
+    let checkoutCart = 10;
     console.log(checkoutCart)
     const headers = new Headers();
     headers.append('content-type', 'application/json');
@@ -86,7 +86,7 @@ class Cart extends Component {
 
       for (let b = 0; b < arrayInLocalStorage.length; b++) {
         const crrentItem = arrayInLocalStorage[b]
-        if(arrayInLocalStorage[b].productName !== h) {
+        if(arrayInLocalStorage[b].product.productName !== h) {
           tempDeleteArray.push(crrentItem)
         } else {
           console.log("discard " + arrayInLocalStorage[b].productName)

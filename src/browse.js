@@ -3,6 +3,8 @@ import './browse.css'
 import Product from './product'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import $ from 'jquery';
+
 
 
 
@@ -18,6 +20,7 @@ class Browse extends Component {
     this.resetItemsInBrowse = this.resetItemsInBrowse.bind(this);
     this.addToCartClicked = this.addToCartClicked.bind(this);
     this.addToWishlistClicked = this.addToWishlistClicked.bind(this);
+    this.fetchData = this.fetchData.bind(this);
 
 
 
@@ -29,7 +32,9 @@ class Browse extends Component {
       itemAmount: 9,
       initialPageAmount: 9,
       arrayInLocalStorage: [],
-      arrayInLocalStorageWishlist: []
+      arrayInLocalStorageWishlist: [],
+      item: [],
+
 
     }
   }
@@ -37,25 +42,27 @@ class Browse extends Component {
   componentDidMount() {
     window.scrollTo(0, 0)
     this.fetchData()
+    this.loaderFunction()
   }
 
    fetchData() {
-     fetch('http://localhost:5000/api/product/1/10',{
-      host: 'localhost',
-      // port: 5000,
-      // path: '/',
-      method: 'GET',
-      type: 'application/json',
-      // rejectUnauthorized: false,
-      // requestCert: false,
-      mode: "no-cors",
-headers:{
-"Access-Control-Allow-Credentials" : true},
-      agent: false
-    }).then(result => {return result.json()}).then(data => {let items = data.products.map((pic) => {console.log(pic)})})
+     
+//      fetch('http://localhost:5000/api/product/1/10',{
+//       host: 'localhost',
+//       // port: 5000,
+//       // path: '/',
+//       method: 'GET',
+//       type: 'application/json',
+//       // rejectUnauthorized: false,
+//       // requestCert: false,
+//       mode: "no-cors",
+// headers:{
+// "Access-Control-Allow-Credentials" : true},
+//       agent: false
+//     }).then(result => {return result.json()}).then(data => {let items = data.products.map((pic) => {console.log(pic)})})
 
-
-    fetch('http://localhost:5000/api/product/1/10',{
+  if(true){
+    fetch('http://localhost:5000/api/product/1/1000',{
       host: 'localhost',
       port: 5000,
       path: '/',
@@ -69,10 +76,10 @@ headers:{
 "Access-Control-Allow-Credentials" : true},
       agent: false
     }).then(results => {
+      console.log("RETRIEVED ITEMS SUCCES!")
       return results.json();
     }).then(data => {
       let items = data.products.map((pic) => {
-        console.log(pic)
         return(
           <div>
             <div style={{
@@ -81,29 +88,57 @@ headers:{
             <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
               <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
               <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
-
             </div>
-
           </div>
           </div>
         )
       })
+
       this.setState({items: items})
       this.setState({itemsClean: items})
+
+      $(".spinner").fadeOut("fast");
+
+      // localStorage.setItem('allproductsfromfetch', JSON.stringify(items));
+      // console.log(JSON.stringify(this.state.items))
+      // console.log(localStorage.getItem('allproductsfromfetch'))
+      // console.log(JSON.parse(localStorage.getItem('allproductsfromfetch')))
+      console.log(items)
+
     })
+  }
+    // else {
+    //   let emptyThing = []
+    //
+    //   let items = JSON.parse(localStorage.getItem('allproductsfromfetch'))
+    //   items.map((pic) => {
+    //     emptyThing.push(pic)
+    //
+    //   })
+    //   console.log(emptyThing)
+    //   this.setState({item: emptyThing})
+    //
+    //   console.log(this.state.item)
+    //   // this.state.items = emptyThing
+    //   // this.setState({itemsClean: emptyThing})
+    // }
+
+
   }
 
   browseGrid(h, p) {
     let table = []
     for (let j = h * p; j < h * (p + 1); j++) {
       // var randomnbr = Math.floor((Math.random() * 10) + 1);
-      table.push(<div className="col-xs-12 col-sm-4 " style={{padding: "0px", margin: "0px", height: "400px"}}>{this.state.items[j]}</div>)
+      table.push(<div className="col-xs-12 col-sm-4 " style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
     }
     return table;
   }
 
   buttonClicked(h) {
     this.state.itemsInBrowse = h - 1;
+    window.scrollTo(0, 0)
+
     this.forceUpdate();
   }
 
@@ -164,7 +199,7 @@ headers:{
     let lengthOfString = n.length;
 
 
-    console.log(this.state.items[0].props.children.props.children[0].props.children[1].props.name)
+    // console.log(this.state.items[0].props.children.props.children[0].props.children[1].props.name)
 
     for (let b = 0; b < this.state.items.length; b++) {
       const currentIteminLoop = this.state.items[b];
@@ -174,7 +209,9 @@ headers:{
         }
       }
     }
-    this.state.itemAmount = filteredArray.length
+    this.state.itemAmount = this.state.initialPageAmount;
+    console.log(filteredArray.length)
+
     this.state.items = filteredArray;
     this.buttonClicked(1)
   }
@@ -184,22 +221,39 @@ headers:{
     for (let b = 0; b < this.state.itemsClean.length; b++) {
       resetArray.push(this.state.itemsClean[b])
     }
+
     this.state.itemAmount = this.state.initialPageAmount;
+    console.log(this.state.initialPageAmount)
+
     this.state.items = resetArray;
     this.buttonClicked(1)
   }
 
-  backupcode() {
-    [<div className="col-sm-3 hidden-xs">
-      <ul className="list-group">
-        <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>Alle tassen weergeven</li>
-        <li onClick={() => {this.filterList("Incr")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Incr'</li>
-        <li onClick={() => {this.filterList("Chris")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Robin'</li>
-        <li onClick={() => {this.filterList("The")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>'the'</li>
-      </ul>
+  // backupcode() {
+  //   [<div className="col-sm-3 hidden-xs">
+  //     <ul className="list-group">
+  //       <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>Alle tassen weergeven</li>
+  //       <li onClick={() => {this.filterList("Halstas")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>Halster tassen</li>
+  //       <li onClick={() => {this.filterList("Chris")}} style={{cursor: "pointer"}} className="list-group-item"><span className="badge">392</span>'Robin'</li>
+  //       <li onClick={() => {this.filterList("The")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item"><span className="badge">392</span>'the'</li>
+  //     </ul>
+  //
+  //   </div>]
+  // }
 
-    </div>]
+  loaderFunction() {
+    // $(".browsercontent").hide()
+    // $(".browsercontent").fadeIn(1000)
+
+    var executed = false;
+var loaded = function () {
+
+};
+$(window).on('load', loaded);
+
+
   }
+
 
   render() {
     return(
@@ -214,10 +268,21 @@ headers:{
                 backgroundColor: "rgb(69, 69, 69)"}} />
             </div>
           </div>
-          <div className="row text-center" style={{height: "500px"}}>
+          <div className="container">
+            <div className="spinner"></div>
+          </div>
+          <div className="row text-center browsercontent" style={{height: "500px"}}>
+            <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
+              <ul className="list-group">
+                <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Alle tassen weergeven</li>
+                  <li onClick={() => {this.filterList("Halstas")}} style={{cursor: "pointer"}} className="list-group-item">Halster tassen</li>
+                <li onClick={() => {this.filterList("Heren ")}} style={{cursor: "pointer"}} className="list-group-item">Portemonnees</li>
+                <li onClick={() => {this.filterList("Dames ")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Koffer</li>
+              </ul>
 
+            </div>
 
-            <div className="col-sm-12 text-right" style={{}}>
+            <div className="col-sm-9 text-right" style={{}}>
               {this.browseGrid(this.state.itemAmount , this.state.itemsInBrowse)}
             </div>
             <div className="col-sm-12 text-center" style={{marginTop: "100px"}}>

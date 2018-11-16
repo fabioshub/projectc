@@ -18,10 +18,10 @@ class Pagina1 extends Component {
   .then(results => {
     return results.json();
   }).then(data => {
-    let title = data.items.map((pic) => {
+    let title = data.products.map((pic) => {
                     return(
                       <div>
-                    <Product name={pic.productName} price={pic.productPrice + ",-"} onClick={ () => {console.log("PEIS")} } image="https://www.vanostassenenkoffers.nl/images/collection/middle/5402.400.jpg"/>
+                    <Product name={pic.product.productName} price={pic.product.productPrice + ",-"} onClick={ () => {console.log("PEIS")} } image={pic.images[1]}/>
                     </div>
                 )
     })
@@ -35,7 +35,7 @@ carousel() {
    let table = []
 
        for (let j = 0; j < 3; j++) {
-         var randomnbr = Math.floor((Math.random() * 10) + 1);
+         var randomnbr = Math.floor((Math.random() * 10) );
          table.push(<div className="col-sm-4">{this.state.title[randomnbr]}</div>)
        }
 

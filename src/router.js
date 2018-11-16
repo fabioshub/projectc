@@ -19,7 +19,7 @@ import Faq from './faq';
 const Router = () => (
   <Switch>
     <Route exact path="/" component={Pagina1} />
-    <Route path="/home" component={Pagina1} />
+    <Route path="/pagina1" component={Pagina1} />
     <Route path="/login" component={Login} />
     <Route path="/cart" component={Cart} />
     <Route path="/wishlist" component={Wishlist} />
