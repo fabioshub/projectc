@@ -54,7 +54,7 @@ class Footer extends Component {
                <span>
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
 </span> <br/>
-<a href="/"><span>Algemene Voorwaarden - Privacy Verklaring</span> </a>
+<a href="/"><span><Link to='/termsandservices'>Algemene Voorwaarden</Link> - <Link to='/privacy'>Privacy Verklaring</Link> - <Link to='/faq'>FAQ</Link> - <Link to='/contact'>Contact</Link></span> </a>
 
            </div>
        </div>

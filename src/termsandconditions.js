@@ -9,7 +9,7 @@ class Terms extends React.Component {
                 <div class='row'>
                     <div class='col-sm-6 col-sm-offset-1'>
                         <div class='well'>
-                            <h1>Terms and Conditions</h1>
+                            <h1>Algemene voorwaarden</h1>
                             <div id='panel' className='panel terms-panel'>
                                 <h6>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur at fermentum eros, et vehicula ipsum. Fusce et nunc vestibulum dolor cursus pulvinar. Ut dignissim feugiat elit non interdum. Quisque porttitor purus sit amet ex bibendum, ac tempor lectus vehicula. Phasellus convallis, ipsum eget congue facilisis, diam nibh mattis nisi, in placerat urna dui ac est. Morbi lectus odio, tempor eu mi quis, tincidunt molestie sapien. Vestibulum malesuada diam massa, ut consequat nunc bibendum non. Praesent aliquet, odio eget rutrum scelerisque, nibh tellus hendrerit urna, eget auctor est diam ut tellus. Phasellus eleifend ac velit eget vehicula. Donec purus metus, euismod sed iaculis sit amet, sollicitudin in ante. Nulla quis lacus ut leo euismod vestibulum in non tellus. Mauris dolor tellus, mollis eget nulla eu, egestas lacinia metus.
 
