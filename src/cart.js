@@ -45,8 +45,8 @@ class Cart extends Component {
       // this.setState({totalPrice: totalPrice});
       return(
         <div>
-          <CartWLI name={pic.product.productName} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
+          <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
+            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
               <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
         </div>
       )
@@ -56,14 +56,31 @@ class Cart extends Component {
 
 
   } else{
-    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Your cart is empty :(</div>]
+    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
   }
 
   }
 
   checkOut() {
-    let res = fetch('tester.json').then(results => {return results.json()})
-    console.log(res)
+    // let res = fetch('tester.json').then(results => {return results.json()})
+    // console.log(res)
+    // let orderObject = {}
+    let productIDs = []
+    let userID = null
+    let AddressID = null
+    for (var i = 0; i < this.state.cartList.length; i++) {
+      console.log(this.state.cartList[i].props.children[0].props.ID)
+      productIDs.push(this.state.cartList[i].props.children[0].props.ID)
+    } 
+    // orderObject.push({orderIDs})
+    // orderObject.push({userID})
+    // orderObject.push({AddressID})
+
+    let orderObject = {orderObject: {productIDs: productIDs, userID: userID, AddressID: AddressID}}
+    console.log(orderObject)
+    // console.log(this.state.cartList[2].props.children[0].props.ID)
+    // let checkOutCartArray = {this.state.cartList[0].props.children[0].props.ID}
+    // console.log(checkOutCartArray)
     let checkoutCart = 10;
     console.log(checkoutCart)
     const headers = new Headers();
@@ -115,14 +132,14 @@ class Cart extends Component {
 
   render() {
     return(
-      <div id="paginaCart" style={{marginTop: "130px"}}>
+      <div id="paginaCart" style={{marginTop: "120px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}>Winkelmandje</h1>
+            <h1  style={{margin: '30px 0', fontWeight: "700"}}>winkelmandje</h1>
             <hr style={{border: "0px",
-              height: "1px",
-              width: "400px",
-              backgroundImage: "linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))"}} />
+              height: "8px",
+              width: "200px",
+              backgroundColor: "rgb(69, 69, 69)"}} />
           </div>
         </div>
 

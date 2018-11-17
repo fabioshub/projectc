@@ -14,22 +14,17 @@ class CartWLI extends Component {
           <div className="col-xs-4">
             <h1 style={{fontFamily:'Roboto', fontSize: '23px', fontWeight: '500',color:'rgb(71, 71, 71)'}} id="productname">{this.props.name}</h1>
               <ul style={{color: 'grey'}} >
-                <li>Spec 1</li>
-                <li>Spec 2</li>
-                <li>Spec 3</li>
-                <li>Spec 4</li>
-                <li>Spec 5</li>
-                <li>Spec 6</li>
+                {this.props.productSpecification}
               </ul>
           </div>
           <div className="col-xs-6 text-right ">
-            <button  type="button" id="instock">In stock</button>
+            <button  type="button" id="instock">Op voorraad</button>
 
             <p style={{marginTop: '20px',fontFamily:'Roboto', fontWeight: '500',color:'rgb(71, 71, 71)'}} id="productname">{this.props.price}</p>
 
           </div>
         </div>
-        
+
       </div>
     );
   };

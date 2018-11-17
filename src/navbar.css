@@ -1,14 +1,14 @@
 #Navbar {
   font-family: 'Open Sans', serif;
-  font-size: 1.5rem;
-  font-weight:400;
+  font-size: 1.3rem;
+  font-weight:600;
   text-transform: uppercase;
   background: white;
   border: none;
 }
 
 #selection li a {
-  color: black;
+  color: white;
 }
 
 #logo {
@@ -57,4 +57,18 @@
   color: black;
   font-size: 2.3rem;
   padding: 15px;
+}
+
+#browsebutton {
+  padding: 16px;
+}
+
+#browsebutton #browsetext {
+  color: white;
+  /* background: black; */
+  font-family: 'Open Sans', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  /* padding: 20px; */
 }

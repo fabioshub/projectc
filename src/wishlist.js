@@ -51,7 +51,7 @@ class Wishlist extends Component {
     this.setState({cartList: cartList})
 
   } else{
-    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Your wishlist is empty :(</div>]
+    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je verlanglijstje is leeg :(</div>]
   }
 
   }
@@ -93,14 +93,14 @@ class Wishlist extends Component {
 
   render() {
     return(
-      <div id="paginaCart" style={{marginTop: "130px"}}>
+      <div id="paginaCart" style={{marginTop: "120px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-heart" style={{color: "red"}}></i></h1>
-            <hr style={{border: "0px",
-              height: "1px",
-              width: "400px",
-              backgroundImage: "linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0))"}} />
+            <h1  style={{margin: '50px 0'}}><i className="fas fa-heart" style={{color: "rgb(244, 78, 78)"}}></i></h1>
+              <hr style={{border: "0px",
+                height: "8px",
+                width: "200px",
+                backgroundColor: "rgb(69, 69, 69)"}} />
           </div>
         </div>
 

@@ -42,12 +42,28 @@ class Navigationbar extends Component {
 
 
     <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
+      <li   style={{background: "black"}}  id="browsebutton"><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
       <li  id="wishlistbutton"><Link to="/wishlist" style={{padding: "0"}}><i className="fas fa-heart" ></i> </Link></li>
       <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i className="fas fa-shopping-cart"></i></Link></li>
       <li style={{background: "black"}}  id="loginbutton"><Link style={{padding: "0"}} to="/pagina2"><i class="fas fa-user-alt"></i></Link></li>
     </ul>
   </div>
 
+  <div className="container-fluid" style={{background: "black"}}>
+      <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul className="nav navbar-nav navbar-left" id="selection">
+                  <li><a href="#">Tassen</a></li>
+                  <li><a href="#">Reistassen</a></li>
+                  <li><a href="#">Schooltassen</a></li>
+                  <li><a href="#">Werktassen</a></li>
+                  <li><a href="#">Rugzakken</a></li>
+                  <li><a href="#">Portemonnees</a></li>
+                  <li><a href="#">Koffers</a></li>
+                  <li><a href="#">Overig</a></li>
+                </ul>
+      </div>
+  </div>
 
 </nav>
     )

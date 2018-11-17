@@ -62,7 +62,7 @@ class Browse extends Component {
 //     }).then(result => {return result.json()}).then(data => {let items = data.products.map((pic) => {console.log(pic)})})
 
   if(true){
-    fetch('http://localhost:5000/api/product/1/1000',{
+    fetch('http://localhost:5000/api/product/1/70',{
       host: 'localhost',
       port: 5000,
       path: '/',
@@ -136,7 +136,13 @@ headers:{
   }
 
   buttonClicked(h) {
-    this.state.itemsInBrowse = h - 1;
+
+    if (this.state.itemsInBrowse = h) {
+      this.state.itemsInBrowse = h - 1;
+    } else {
+      this.state.itemsInBrowse = h ;
+    }
+
     window.scrollTo(0, 0)
 
     this.forceUpdate();
@@ -183,12 +189,38 @@ headers:{
   }
 
 
-  navigator(h) {
+  navigator(h)  {
     let navigatorArray = []
-    let totalPages = Math.ceil(this.state.items.length / h);
-    for (let j = 1; j < totalPages + 1; j++){
-      navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(j)}} >{j}</a></li>)
+    let totalPages = Math.ceil(this.state.items.length / this.state.itemAmount);
+    // for (let j = 1; j < totalPages + 1; j++){
+    //   navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(j)}} >{j}</a></li>)
+    // }
+    console.log(totalPages)
+    h = h + 1;
+
+    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h )}} >{h }</a></li>)
+    if (h !== totalPages) {
+      navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 1)}} >{h + 1}</a></li>)
+      if (h + 1 !== totalPages) {
+        navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 2)}} >{h + 2}</a></li>)
+        if (h + 2 !== totalPages) {
+          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 3)}} >{h + 3}</a></li>)
+        }
+      }
     }
+    if (h - 1 !== 0) {
+      navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 1)}} >{h - 1}</a></li>)
+      if (h - 2 !== 0) {
+        navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 2)}} >{h - 2}</a></li>)
+        if (h - 3 !== 0) {
+          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 3)}} >{h - 3}</a></li>)
+        }
+      }
+    }
+    navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(1)}} >Eerste pagina ...</a></li>)
+    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(totalPages)}} >... Laaste pagina</a></li>)
+
+
     return navigatorArray;
   }
 
@@ -286,10 +318,10 @@ $(window).on('load', loaded);
             <div className="col-sm-9 text-right" style={{}}>
               {this.browseGrid(this.state.itemAmount , this.state.itemsInBrowse)}
             </div>
-            <div className="col-sm-12 text-center" style={{marginTop: "100px"}}>
+            <div className="col-sm-12 text-center" style={{}}>
               <nav aria-label="Page navigation">
                 <ul className="pagination" id="pagination">
-                  {this.navigator(this.state.itemAmount)}
+                  {this.navigator(this.state.itemsInBrowse)}
                 </ul>
               </nav>
             </div>
