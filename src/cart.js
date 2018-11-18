@@ -62,6 +62,8 @@ class Cart extends Component {
   }
 
   checkOut() {
+
+    localStorage.removeItem('cartforcheckout');
     // let res = fetch('tester.json').then(results => {return results.json()})
     // console.log(res)
     // let orderObject = {}
@@ -71,28 +73,34 @@ class Cart extends Component {
     for (var i = 0; i < this.state.cartList.length; i++) {
       console.log(this.state.cartList[i].props.children[0].props.ID)
       productIDs.push(this.state.cartList[i].props.children[0].props.ID)
-    } 
+    }
     // orderObject.push({orderIDs})
     // orderObject.push({userID})
     // orderObject.push({AddressID})
 
     let orderObject = {orderObject: {productIDs: productIDs, userID: userID, AddressID: AddressID}}
     console.log(orderObject)
-    // console.log(this.state.cartList[2].props.children[0].props.ID)
-    // let checkOutCartArray = {this.state.cartList[0].props.children[0].props.ID}
-    // console.log(checkOutCartArray)
-    let checkoutCart = 10;
-    console.log(checkoutCart)
-    const headers = new Headers();
-    headers.append('content-type', 'application/json');
-    const options = {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(checkoutCart)
 
-    }
+    localStorage.setItem('cartforcheckout', JSON.stringify(orderObject));
 
-    fetch('API', options).then(function(pas) {console.log(pas)}).catch(function(error) {console.log(error)})
+
+
+
+    // // console.log(this.state.cartList[2].props.children[0].props.ID)
+    // // let checkOutCartArray = {this.state.cartList[0].props.children[0].props.ID}
+    // // console.log(checkOutCartArray)
+    // let checkoutCart = 10;
+    // console.log(checkoutCart)
+    // const headers = new Headers();
+    // headers.append('content-type', 'application/json');
+    // const options = {
+    //   method: "POST",
+    //   headers: headers,
+    //   body: JSON.stringify(checkoutCart)
+    //
+    // }
+
+    // fetch('API', options).then(function(pas) {console.log(pas)}).catch(function(error) {console.log(error)})
   }
 
   deleteFromWishlist(h) {
@@ -147,7 +155,7 @@ class Cart extends Component {
           {this.listView()}
           <div className="row">
             <div className="col-md-12 text-right">
-              <button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button>
+              <Link to="/checkoutlogin"><button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
               <p>Totaal: {this.state.totalPrice +  ",-"}</p>
             </div>
           </div>

@@ -60,7 +60,7 @@ class ProductInfoPage extends Component {
   render() {
 
     return(
-      <div className="container-fluid" id="productitempage"  style={{marginTop: "80px"}}>
+      <div className="container-fluid" id="productitempage"  style={{marginTop: "130px"}}>
         <div className="row">
           <div className="col-md-5 text-center" id="picturePP">
             <img src={this.state.item.images[0] } style={{marginTop: "30px"}} width="300px"></img>
