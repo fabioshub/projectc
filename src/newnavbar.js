@@ -53,14 +53,14 @@ class Navigationbar extends Component {
       <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                 <ul className="nav navbar-nav navbar-left" id="selection">
-                  <li><a href="#">Tassen</a></li>
-                  <li><a href="#">Reistassen</a></li>
-                  <li><a href="#">Schooltassen</a></li>
-                  <li><a href="#">Werktassen</a></li>
-                  <li><a href="#">Rugzakken</a></li>
-                  <li><a href="#">Portemonnees</a></li>
-                  <li><a href="#">Koffers</a></li>
-                  <li><a href="#">Overig</a></li>
+                <li><a href="#"> <Link to='/browse'>Tassen</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Reistassen</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Schooltassen</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Werktassen</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Rugzakken</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Portemonnees</Link></a></li>
+                <li><a href="#"> <Link to='/browse'>Koffers</Link></a></li>
+               <li><a href="#"> <Link to='/browse'>Overig</Link></a></li>
                 </ul>
       </div>
   </div>
