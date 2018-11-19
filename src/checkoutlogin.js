@@ -11,7 +11,7 @@ class Checkoutlogin extends Component {
 
   render() {
     return(
-      <div class="container login-container">
+      <div class="container login-container" style={{marginTop: "130px"}}>
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3>Inloggen</h3>
@@ -52,7 +52,7 @@ class Checkoutlogin extends Component {
             <br/>
             <h3>of</h3>
             <br/>
-            <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(45, 82, 163)", border: "none"}} type="button" id="addtocartbtn" class="btn"> ga door als gast</button></Link>
+            <Link to="/payscreen"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(45, 82, 163)", border: "none"}} type="button" id="addtocartbtn" class="btn"> ga door als gast</button></Link>
         </div>
     );
   }

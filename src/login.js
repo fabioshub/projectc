@@ -6,7 +6,8 @@ class Login extends Component {
 
   render() {
     return(
-      <div class="container login-container">
+      <div class="container login-container" style={{    marginTop: "130px"
+}}>
             <div class="row">
                 <div class="col-md-6 login-form-1">
                     <h3>Inloggen</h3>

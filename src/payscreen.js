@@ -74,32 +74,73 @@ class Payscreen extends Component {
     return this.state.listViewList1;
   }
 
+
+  pushorder() {
+    let jsonorder = JSON.parse(localStorage.getItem('cartforcheckout'))
+    const headers = new Headers();
+    headers.append('content-type', 'application/json');
+    const options = {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(jsonorder)
+
+    }
+
+    fetch('localhost:5000', options).then(function(pas) {console.log(pas)}).catch(function(error) {console.log(error)})
+  }
+
   render() {
     return(
       <div id="paginaCart" style={{marginTop: "120px"}}>
-        <div className="row text-center" style={{minHeight: "100px"}}>
-          <div className="col-sm-12">
-            <h1  style={{margin: '30px 0', fontWeight: "700"}}>Uw laatste gegevens</h1>
+        <div className="container">
+        <div className="row" style={{minHeight: "100px"}}>
+          <div className="col-sm-12 text-center" style={{marginBottom: "100px"}}>
+            <h1  style={{margin: '30px 0', fontWeight: "700"}}>Betalen</h1>
             <hr style={{border: "0px",
               height: "8px",
               width: "200px",
               backgroundColor: "rgb(69, 69, 69)"}} />
           </div>
-        </div>
 
-        <div className="container">
+        <div className="col-sm-6">
+          <h1 style={{marginBottom: "40px"}}>Opsomming:</h1>
           <ul>
             {this.listView()}
           </ul>
-          <div className="row">
-            <div className="col-md-12 text-right">
-              <Link to="/checkoutlogin"><button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
-              <p>Totaal: {this.state.totalPrice +  ",-"}</p>
-            </div>
-          </div>
         </div>
+            <div className="col-md-6 text-right">
+              <div class="container login-container">
+                    <div class="row">
+                        <div class="col-md-6 login-form-1">
+                            <h3>Je laatste gegevens</h3>
+                            <form>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="je email *"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" placeholder="je naam *"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="adres *"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="huisnummer *"/>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="woonplaats *"/>
+                                </div>
+                                <Link to="/checkoutlogin"><button onClick={() => {this.pushorder()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
+                                <p>Totaal: {this.state.totalPrice +  ",-"}</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
 
+            </div>
       </div>
+    </div>
+    </div>
+
     )
   }
 }
