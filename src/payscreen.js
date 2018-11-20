@@ -75,19 +75,17 @@ class Payscreen extends Component {
   }
 
 
-  pushorder() {
-    let jsonorder = JSON.parse(localStorage.getItem('cartforcheckout'))
-    const headers = new Headers();
-    headers.append('content-type', 'application/json');
-    const options = {
-      method: "POST",
-      headers: headers,
-      body: JSON.stringify(jsonorder)
-
-    }
-
-    fetch('localhost:5000', options).then(function(pas) {console.log(pas)}).catch(function(error) {console.log(error)})
-  }
+  pushorder(){
+  let  jsoncart = JSON.parse(localStorage.getItem('cartforcheckout'));
+fetch('http://localhost:5000/api/order/MakeOrder', {
+      method: 'POST',
+      body: JSON.stringify(jsoncart),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+    console.log("cart added to database")
+ };
 
   render() {
     return(
@@ -103,7 +101,7 @@ class Payscreen extends Component {
           </div>
 
         <div className="col-sm-6">
-          <h1 style={{marginBottom: "40px"}}>Opsomming:</h1>
+          <h1 style={{marginBottom: "40px"}}>Selectie:</h1>
           <ul>
             {this.listView()}
           </ul>
@@ -113,23 +111,26 @@ class Payscreen extends Component {
                     <div class="row">
                         <div class="col-md-6 login-form-1">
                             <h3>Je laatste gegevens</h3>
-                            <form>
+                            <form onSubmit={() => {this.pushorder()}}>
                                 <div class="form-group">
-                                    <input type="email" class="form-control" placeholder="je email *"/>
+                                    <input type="email" class="form-control" placeholder="je email *" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="je naam *"/>
+                                    <input type="name" class="form-control" placeholder="je naam *" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="adres *"/>
+                                    <input type="text" class="form-control" placeholder="adres *" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="huisnummer *"/>
+                                    <input type="text" class="form-control" placeholder="huisnummer *" required/>
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="woonplaats *"/>
+                                    <input type="text" class="form-control" placeholder="woonplaats *" required/>
                                 </div>
-                                <Link to="/checkoutlogin"><button onClick={() => {this.pushorder()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
+                                <div class="form-group">
+                                    <input  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="submit" class="btnSubmit" value="Afrekenen" />
+                                </div>
+
                                 <p>Totaal: {this.state.totalPrice +  ",-"}</p>
                             </form>
                         </div>

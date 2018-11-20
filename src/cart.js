@@ -78,7 +78,7 @@ class Cart extends Component {
     // orderObject.push({userID})
     // orderObject.push({AddressID})
 
-    let orderObject = {orderObject: {productIDs: productIDs, userID: userID, AddressID: AddressID}}
+    let orderObject = {productIDs: productIDs, userID: userID, AddressID: AddressID}
     console.log(orderObject)
 
     localStorage.setItem('cartforcheckout', JSON.stringify(orderObject));
