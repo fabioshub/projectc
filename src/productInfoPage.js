@@ -77,7 +77,7 @@ class ProductInfoPage extends Component {
                 </div>
                 <div className="col-md-6">
                   <button  type="button" id="instock">Op voorraad</button>
-                  <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.product.productPrice + ',-'}</h3>
+                  <h3 style={{color: 'grey', fontWeight: "300"}} >{"€" + this.state.item.product.productPrice/100 + ',-'}</h3>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
                   <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '17px', fontWeight: "300", padding: "10px", marginRight: "10px"}} type="button" id="addtocartbtn" class="btn"><i class="fas fa-plus"></i> cart  <i className="fas fa-shopping-cart"></i></button>
