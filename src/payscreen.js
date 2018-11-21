@@ -85,6 +85,7 @@ fetch('http://localhost:5000/api/order/MakeOrder', {
       },
     })
     console.log("cart added to database")
+    localStorage.removeItem('arrayInLocalStorage')
  };
 
   render() {
@@ -131,7 +132,7 @@ fetch('http://localhost:5000/api/order/MakeOrder', {
                                     <input  style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="submit" class="btnSubmit" value="Afrekenen" />
                                 </div>
 
-                                <p>Totaal: {this.state.totalPrice +  ",-"}</p>
+                                <p>Totaal: {this.state.totalPrice/100 +  ",-"}</p>
                             </form>
                         </div>
                     </div>
