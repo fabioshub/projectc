@@ -15,7 +15,6 @@ class Browse extends Component {
   constructor(props){
     super(props);
 
-    this.buttonClicked = this.buttonClicked.bind(this);
     this.filterList = this.filterList.bind(this);
     this.resetItemsInBrowse = this.resetItemsInBrowse.bind(this);
     this.addToCartClicked = this.addToCartClicked.bind(this);
@@ -34,117 +33,79 @@ class Browse extends Component {
       arrayInLocalStorage: [],
       arrayInLocalStorageWishlist: [],
       item: [],
+      pagina: 1,
+      hoeveelheid: 9
 
 
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     window.scrollTo(0, 0)
     this.fetchData()
     this.loaderFunction()
   }
 
-   fetchData() {
+  fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+      $(".spinner").show()
+      $(".browsegridder").hide()
 
-//      fetch('http://localhost:5000/api/product/1/10',{
-//       host: 'localhost',
-//       // port: 5000,
-//       // path: '/',
-//       method: 'GET',
-//       type: 'application/json',
-//       // rejectUnauthorized: false,
-//       // requestCert: false,
-//       mode: "no-cors",
-// headers:{
-// "Access-Control-Allow-Credentials" : true},
-//       agent: false
-//     }).then(result => {return result.json()}).then(data => {let items = data.products.map((pic) => {console.log(pic)})})
+      fetch(`http://localhost:5000/api/product/${pagina}/${hoeveelheid}`,{
+        host: 'localhost',
+        port: 5000,
+        path: '/',
+        method: 'GET',
+        type: 'application/json',
 
-  if(true){
-    fetch('http://localhost:5000/api/product/1/70',{
-      host: 'localhost',
-      port: 5000,
-      path: '/',
-      method: 'GET',
-      type: 'application/json',
+        rejectUnauthorized: false,
+        requestCert: true,
+        mode: "no-cors",
+        headers:{
+          "Access-Control-Allow-Credentials" : true},
+          agent: false
+        }).then(results => {
+          console.log("RETRIEVED ITEMS SUCCES!")
+          return results.json();
+        }).then(data => {
+          let items = data.products.map((pic) => {
+            return(
+              <div>
+                <div style={{
+                    boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
+                    <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
+                    <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
+                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
+                      <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
+                    </div>
+                  </div>
+                </div>
+              )
+            })
 
-      rejectUnauthorized: false,
-      requestCert: true,
-      mode: "no-cors",
-headers:{
-"Access-Control-Allow-Credentials" : true},
-      agent: false
-    }).then(results => {
-      console.log("RETRIEVED ITEMS SUCCES!")
-      return results.json();
-    }).then(data => {
-      let items = data.products.map((pic) => {
-        return(
-          <div>
-            <div style={{
-                boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
-            <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
-            <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-              <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
-              <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
-            </div>
-          </div>
-          </div>
-        )
-      })
+            this.setState({items: items})
+            this.setState({itemsClean: items})
 
-      this.setState({items: items})
-      this.setState({itemsClean: items})
+            $(".spinner").fadeOut("fast");
+            $(".browsegridder").fadeIn("fast");
+            // console.log("ITEM SET IN STATE")
+          })
+      }
 
-      $(".spinner").fadeOut("fast");
-
-      // localStorage.setItem('allproductsfromfetch', JSON.stringify(items));
-      // console.log(JSON.stringify(this.state.items))
-      // console.log(localStorage.getItem('allproductsfromfetch'))
-      // console.log(JSON.parse(localStorage.getItem('allproductsfromfetch')))
-      console.log(items)
-
-    })
-  }
-    // else {
-    //   let emptyThing = []
-    //
-    //   let items = JSON.parse(localStorage.getItem('allproductsfromfetch'))
-    //   items.map((pic) => {
-    //     emptyThing.push(pic)
-    //
-    //   })
-    //   console.log(emptyThing)
-    //   this.setState({item: emptyThing})
-    //
-    //   console.log(this.state.item)
-    //   // this.state.items = emptyThing
-    //   // this.setState({itemsClean: emptyThing})
-    // }
-
-
-  }
-
-  browseGrid(h, p) {
+  browseGrid() {
     let table = []
-    for (let j = h * p; j < h * (p + 1); j++) {
+    for (let j = 0; j < this.state.hoeveelheid; j++) {
       // var randomnbr = Math.floor((Math.random() * 10) + 1);
       table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
     }
+    console.log("browseGRID LOADED")
     return table;
   }
 
-  buttonClicked(h) {
-
-    if (this.state.itemsInBrowse = h) {
-      this.state.itemsInBrowse = h - 1;
-    } else {
-      this.state.itemsInBrowse = h ;
-    }
-
-    window.scrollTo(0, 0)
-
+  goToPage(h) {
+    console.log("go to page" + h)
+    this.state.pagina = h;
+    window.scrollTo(0, 0);
+    this.fetchData()
     this.forceUpdate();
   }
 
@@ -167,6 +128,7 @@ headers:{
     window.alert("Item added to cart!");
 
   }
+//TODO
 
   addToWishlistClicked(pic) {
 
@@ -187,39 +149,29 @@ headers:{
     window.alert("Item added to Wishlist!");
 
   }
+//TODO
 
-
-  navigator(h)  {
+  pagination()  {
     let navigatorArray = []
-    let totalPages = Math.ceil(this.state.items.length / this.state.itemAmount);
-    // for (let j = 1; j < totalPages + 1; j++){
-    //   navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(j)}} >{j}</a></li>)
-    // }
-    console.log(totalPages)
-    h = h + 1;
+    let totalPages = Math.ceil(100);
 
-    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h )}} >{h }</a></li>)
-    if (h !== totalPages) {
-      navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 1)}} >{h + 1}</a></li>)
-      if (h + 1 !== totalPages) {
-        navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 2)}} >{h + 2}</a></li>)
-        if (h + 2 !== totalPages) {
-          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h + 3)}} >{h + 3}</a></li>)
-        }
+    navigatorArray.push(<li className="active" style={{cursor: "pointer"}}><a style={{color: 'white'}} onClick={() => {this.goToPage(this.state.pagina )}} >{this.state.pagina }</a></li>)
+    if(this.state.pagina >= 2) {
+      navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina - 1 )}} >{this.state.pagina - 1 }</a></li>)
+      if(this.state.pagina >= 3) {
+        navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina - 2 )}} >{this.state.pagina - 2 }</a></li>)
       }
     }
-    if (h - 1 !== 0) {
-      navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 1)}} >{h - 1}</a></li>)
-      if (h - 2 !== 0) {
-        navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 2)}} >{h - 2}</a></li>)
-        if (h - 3 !== 0) {
-          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(h - 3)}} >{h - 3}</a></li>)
-        }
+    if(this.state.pagina <= 99) {
+      navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 1 )}} >{this.state.pagina + 1 }</a></li>)
+      if(this.state.pagina <= 98) {
+        navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 2)}} >{this.state.pagina + 2 }</a></li>)
       }
     }
-    navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(1)}} >Eerste pagina ...</a></li>)
-    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.buttonClicked(totalPages)}} >... Laaste pagina</a></li>)
-
+    navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage( this.state.pagina - 1)}} >&laquo;</a></li>)
+    navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(1)}} >Eerste</a></li>)
+    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 1)}} >&raquo;</a></li>)
+    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(100)}} >Laatste</a></li>)
 
     return navigatorArray;
   }
@@ -247,6 +199,8 @@ headers:{
     this.state.items = filteredArray;
     this.buttonClicked(1)
   }
+//TODO
+
 
   resetItemsInBrowse() {
     let resetArray = [];
@@ -278,10 +232,10 @@ headers:{
     // $(".browsercontent").fadeIn(1000)
 
     var executed = false;
-var loaded = function () {
+    var loaded = function () {
 
-};
-$(window).on('load', loaded);
+    };
+    $(window).on('load', loaded);
 
 
   }
@@ -314,14 +268,13 @@ $(window).on('load', loaded);
               </ul>
 
             </div>
-
-            <div className="col-sm-9 text-right" style={{}}>
-              {this.browseGrid(this.state.itemAmount , this.state.itemsInBrowse)}
+            <div className="col-sm-9 text-right browsegridder" style={{}}>
+              {this.browseGrid()}
             </div>
             <div className="col-sm-12 text-center" style={{}}>
               <nav aria-label="Page navigation">
                 <ul className="pagination" id="pagination">
-                  {this.navigator(this.state.itemsInBrowse)}
+                  {this.pagination()}
                 </ul>
               </nav>
             </div>
@@ -330,6 +283,8 @@ $(window).on('load', loaded);
       </div>
     )
   }
-}
+
+
+ }
 
 export default Browse;

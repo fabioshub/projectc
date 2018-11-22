@@ -49,7 +49,7 @@ class Footer extends Component {
 
        </div>
 
-       <div className="row">
+       <div className="row text-right">
            <div className="col-sm-12 cl-copyright">
                <span>
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved
