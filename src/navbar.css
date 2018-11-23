@@ -12,7 +12,7 @@
 }
 
 #logo {
-  color: black;
+  color: brown;
   margin-top: 5px;
   font-size: 40px;
 }
@@ -42,7 +42,7 @@
 }
 
 #wishlistbutton i {
-  color: black;
+  color: rgb(80, 80, 80);
   font-size: 2.3rem;
   padding: 15px;
 }
@@ -54,7 +54,7 @@
 }
 
 #cartbutton i {
-  color: black;
+  color: rgb(80, 80, 80);
   font-size: 2.3rem;
   padding: 15px;
 }

@@ -79,7 +79,7 @@ carousel() {
       </div>
 
         </Link>
-        <Link to="/browse"><button style={{margin: "50px 0 0 0", fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(254, 111, 66)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link>
+        <Link to="/browse"><button style={{margin: "50px 0 0 0", fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link>
         </div>
       </div>
 

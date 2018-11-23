@@ -22,9 +22,9 @@
 
 .tocontactbtn{
     margin-top: 25px;
-    background: rgba(249, 168, 46, 0.99);
+    background: rgb(80, 80, 80);
     color: white;
-    border: 2px solid rgba(249, 168, 46, 0.99);
+    border: 2px solid rgb(80, 80, 80);
     margin-bottom: 10px;
     font-size: 17px;
     font-weight: 300;

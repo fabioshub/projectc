@@ -15,7 +15,7 @@ class Cart extends Component {
 
     this.state = {
       cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div> <br/>
-                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(45, 82, 163)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       totalPrice: 0,
       listViewList1: [],
@@ -45,8 +45,8 @@ class Cart extends Component {
       // this.setState({totalPrice: totalPrice});
       return(
         <div>
-          <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice/100 + ",-"} image={pic.images[0]}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(237, 86, 65)"}} className="far fa-times-circle"></i> </button>
+          <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
+            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
               <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
         </div>
       )
@@ -156,7 +156,7 @@ class Cart extends Component {
           <div className="row">
             <div className="col-md-12 text-right">
               <Link to="/checkoutlogin"><button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
-              <p>Totaal: {this.state.totalPrice/100 +  ",-"}</p>
+              <p>Totaal: {this.state.totalPrice +  ",-"}</p>
             </div>
           </div>
         </div>
