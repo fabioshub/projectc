@@ -26,7 +26,6 @@
   font-size: 3rem;
   line-height: 1.222;
   color: white;
-  padding-top: 7rem;
   position: relative;
 }
 .contact-email::before {
@@ -46,6 +45,7 @@
   line-height: 1.7;
   display: block;
   color: white;
+  padding-top: 7rem;
 }
 
 .contact-address {

@@ -13,7 +13,6 @@ class Footer extends Component {
 
            <div className="col-sm-12 contact-main" data-aos="fade-up">
                <p>
-               <a href="mailto:#0" className="contact-email">info@backtobag.nl</a>
                <span className="contact-number">+31 (0) 6 45 74 70 32</span>
                </p>
            </div>

@@ -145,8 +145,7 @@ class Browse extends Component {
       temparray.push(pic)
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
-    }
-    window.alert("Item added to cart!");
+    };
 
   }
 //TODO
@@ -167,8 +166,7 @@ class Browse extends Component {
       temparray.push(pic)
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
-    }
-    window.alert("Item added to Wishlist!");
+    };
 
   }
 //TODO
