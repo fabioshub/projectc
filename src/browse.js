@@ -34,7 +34,8 @@ class Browse extends Component {
       arrayInLocalStorageWishlist: [],
       item: [],
       pagina: 1,
-      hoeveelheid: 9
+      hoeveelheid: 9,
+      // token: "string"
 
 
     }
@@ -111,6 +112,26 @@ class Browse extends Component {
 
   addToCartClicked(pic) {
 
+
+
+    //if token present
+    //
+    // fetch(api/cart)
+    //   body: {id: pic.id}
+    //   header: {this.state.token}
+    //   POST
+
+
+
+
+
+
+
+
+
+
+
+    //if user is not logged in
     if(localStorage.getItem('arrayInLocalStorage')) {
       let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
       console.log(temparray)
@@ -132,6 +153,7 @@ class Browse extends Component {
 
   addToWishlistClicked(pic) {
 
+    //if token is present in localstrage
     if(localStorage.getItem('arrayInLocalStorageWishlist')) {
       let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
       console.log(temparray)
@@ -175,6 +197,7 @@ class Browse extends Component {
 
     return navigatorArray;
   }
+
 
   filterList(n = '') {
     // console.log(this.state.name)

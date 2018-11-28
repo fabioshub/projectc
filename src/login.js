@@ -4,6 +4,15 @@ import Product from './product'
 
 class Login extends Component {
 
+  //
+
+  //submit()
+  //fetch(api/account)
+  //body: {email: email, password: password}
+  //post.response(token)
+  //setlocalstorage: token
+
+
   render() {
     return(
       <div class="container login-container" style={{    marginTop: "130px"

@@ -34,6 +34,15 @@ class Cart extends Component {
 
     window.scrollTo(0, 0)
 
+    //if logged in
+    // fetch(api/cart).foreach => map(item) id
+    //header: token
+    // get
+
+
+
+
+    //if not logged in
 
     if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
 

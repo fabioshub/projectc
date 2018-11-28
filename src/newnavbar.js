@@ -4,6 +4,14 @@ import { Link } from 'react-router-dom';
 
 class Navigationbar extends Component {
 
+  // state: user: null
+  //checklocalstarage for token
+  //if present
+  //show acc button
+  //else
+  //show login
+  //
+
   backupcode() {
     [
       <div className="container-fluid" style={{margin: "20px 0"}}>
