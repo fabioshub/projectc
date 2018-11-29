@@ -43,7 +43,7 @@ class Wishlist extends Component {
       return(
         <div>
           <CartWLI name={pic.product.productName} price={"€" + pic.product.productPrice/100 + ",-"} image={pic.images[0]}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from cart <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from wishlist<i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
               <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
         </div>
       )

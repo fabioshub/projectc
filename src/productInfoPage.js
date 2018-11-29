@@ -30,8 +30,7 @@ class ProductInfoPage extends Component {
       console.log(temparray)
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
-    }
-    window.alert("Item added to cart!");
+    };
 
   }
 
@@ -51,8 +50,7 @@ class ProductInfoPage extends Component {
       console.log(temparray)
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
-    }
-    window.alert("Item added to Wishlist!");
+    };
 
   }
 
