@@ -63,7 +63,7 @@
   padding: 16px;
 }
 
-#browsebutton #browsetext {
+#browsebutton #browsetext, #accSymbol{
   color: white;
   /* background: black; */
   font-family: 'Open Sans', serif;

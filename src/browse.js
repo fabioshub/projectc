@@ -35,6 +35,7 @@ class Browse extends Component {
       item: [],
       pagina: 1,
       hoeveelheid: 9,
+      pagesintotal: 100,
       // token: "string"
 
 
@@ -68,6 +69,7 @@ class Browse extends Component {
           console.log("RETRIEVED ITEMS SUCCES!")
           return results.json();
         }).then(data => {
+          this.setState({pagesintotal: data.totalpages})
           let items = data.products.map((pic) => {
             return(
               <div>
@@ -113,39 +115,32 @@ class Browse extends Component {
   addToCartClicked(pic) {
 
 
+if(localStorage.getItem("auth_token")) {
 
-    //if token present
-    //
-    // fetch(api/cart)
-    //   body: {id: pic.id}
-    //   header: {this.state.token}
-    //   POST
+}
+
+else {
+  //if user is not logged in
+  if(localStorage.getItem('arrayInLocalStorage')) {
+    let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
+    console.log(temparray)
+    temparray.push(pic)
+    console.log(temparray)
+    // this.setState({arrayInLocalStorage: temparray})
+    localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+  }
+  else {
+    let temparray = this.state.arrayInLocalStorage;
+    temparray.push(pic)
+    // this.setState({arrayInLocalStorage: temparray})
+    localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+  };
+
+}
 
 
 
 
-
-
-
-
-
-
-
-    //if user is not logged in
-    if(localStorage.getItem('arrayInLocalStorage')) {
-      let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-      console.log(temparray)
-      temparray.push(pic)
-      console.log(temparray)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
-    }
-    else {
-      let temparray = this.state.arrayInLocalStorage;
-      temparray.push(pic)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
-    };
 
   }
 //TODO
@@ -191,7 +186,7 @@ class Browse extends Component {
     navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage( this.state.pagina - 1)}} >&laquo;</a></li>)
     navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(1)}} >Eerste</a></li>)
     navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 1)}} >&raquo;</a></li>)
-    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(100)}} >Laatste</a></li>)
+    navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagesintotal)}} >Laatste</a></li>)
 
     return navigatorArray;
   }

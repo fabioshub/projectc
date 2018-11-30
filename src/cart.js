@@ -34,39 +34,36 @@ class Cart extends Component {
 
     window.scrollTo(0, 0)
 
-    //if logged in
-    // fetch(api/cart).foreach => map(item) id
-    //header: token
-    // get
-
-
-
-
-    //if not logged in
-
-    if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
-
-
-    let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-    let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
-    let cartList = arrayInLocalStorage.map((pic) => {
-      this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
-      // this.setState({totalPrice: totalPrice});
-      return(
-        <div>
-          <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
-              <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
-        </div>
-      )
-    })
-    // this.setState({cartify: cartify})
-    this.setState({cartList: cartList})
-
-
-  } else{
-    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
+  if (localStorage.getItem("auth_token")) {
+    
   }
+
+ else{
+   if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
+
+
+   let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
+   let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
+   let cartList = arrayInLocalStorage.map((pic) => {
+     this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
+     // this.setState({totalPrice: totalPrice});
+     return(
+       <div>
+         <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
+           <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+             <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+       </div>
+     )
+   })
+   // this.setState({cartify: cartify})
+   this.setState({cartList: cartList})
+
+
+ } else{
+   this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
+ }
+ }
+
 
   }
 
@@ -145,6 +142,22 @@ class Cart extends Component {
     this.state.listViewList1 = listViewList;
 
     return this.state.listViewList1;
+  }
+
+  debuguser() {
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+    console.log(authstring)
+    fetch("http://localhost:5000/api/userinfo/user",{
+      host: 'localhost',
+      port: 5000,
+      method: 'GET',
+      type: 'application/json',
+      headers:{
+        'Authorization' : authstring},
+      }).then(function(response) {
+      return response.json();
+      }).then(function(myJson) {
+    console.log(myJson)});
   }
 
   render() {

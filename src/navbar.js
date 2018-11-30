@@ -3,6 +3,26 @@ import './navbar.css'
 import { Link } from 'react-router-dom';
 
 class Navbarcomplete extends Component {
+
+  componentWillMount() {
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+    console.log(authstring)
+    fetch("http://localhost:5000/api/userinfo/user",{
+      host: 'localhost',
+      port: 5000,
+      method: 'GET',
+      type: 'application/json',
+      headers:{
+        'Authorization' : authstring},
+      }).then(function(response) {
+      return response.json();
+      }).then(function(myJson) {
+    console.log(myJson)});
+
+    this.forceUpdate();
+  }
+
+
   render() {
     return(
       <nav className="navbar navbar-default navbar-fixed-top" id="Navbar">
