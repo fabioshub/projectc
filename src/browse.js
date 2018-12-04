@@ -274,6 +274,13 @@ class Browse extends Component {
                 width: "200px",
                 backgroundColor: "rgb(69, 69, 69)"}} />
             </div>
+            <div className="col-sm-12 text-center" style={{}}>
+              <nav aria-label="Page navigation">
+                <ul className="pagination" id="pagination">
+                  {this.pagination()}
+                </ul>
+              </nav>
+            </div>
           </div>
           <div className="container">
             <div className="spinner"></div>

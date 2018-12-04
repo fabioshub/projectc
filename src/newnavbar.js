@@ -47,7 +47,13 @@ class Navigationbar extends Component {
     <div className="navbar-header" id="headernav">
       <Link to="/pagina1"><i id="logo" className="fab fa-html5"></i></Link>
     </div>
-
+      
+    <form className="navbar-form navbar-left hidden-xs">
+      <div className="form-group" id="search">
+        <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
+      </div>
+      <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
+    </form>
 
     <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
       <li   style={{background: "brown"}}  id="browsebutton"><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
