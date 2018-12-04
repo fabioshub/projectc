@@ -286,9 +286,9 @@ class Browse extends Component {
             <div className="spinner"></div>
           </div>
           <div className="row text-center browsercontent" style={{height: "500px"}}>
-            <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
+            <div className="col-sm-3 hidden-xs" style={{marginTop:"70px", cursor: "not-allowed"}}>
               <ul style={{
-                  boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
+                  boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", cursor: "not-allowed"}} className="list-group">
                 <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Alle tassen weergeven</li>
                   <li onClick={() => {this.filterList("Halstas")}} style={{cursor: "pointer"}} className="list-group-item">Halster tassen</li>
                 <li onClick={() => {this.filterList("Heren ")}} style={{cursor: "pointer"}} className="list-group-item">Portemonnees</li>

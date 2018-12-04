@@ -46,7 +46,7 @@
 }
 
 #wishlistbutton i {
-  color: rgb(80, 80, 80);
+  color: rgb(45, 45, 45);
   font-size: 2.3rem;
   padding: 15px;
 }
@@ -58,7 +58,7 @@
 }
 
 #cartbutton i {
-  color: rgb(80, 80, 80);
+  color: rgb(45, 45, 45);
   font-size: 2.3rem;
   padding: 15px;
 }
