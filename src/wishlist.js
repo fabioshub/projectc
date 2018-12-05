@@ -93,10 +93,10 @@ class Wishlist extends Component {
 
   render() {
     return(
-      <div id="paginaCart" style={{marginTop: "120px"}}>
+      <div id="paginaCart" style={{marginTop: "150px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-heart" style={{color: "rgb(244, 78, 78)"}}></i></h1>
+            <h1  style={{margin: '50px 0'}}><i className="fas fa-heart" style={{color: "brown"}}></i></h1>
               <hr style={{border: "0px",
                 height: "8px",
                 width: "200px",

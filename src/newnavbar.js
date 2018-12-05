@@ -47,6 +47,7 @@ class Navigationbar extends Component {
       localStorage.removeItem("auth_token");
       window.location.reload();
 
+
     }
     // backupcode() {
     //   [
@@ -73,6 +74,7 @@ class Navigationbar extends Component {
       {return "personal"}
 
     }
+
 
     render() {
       return(

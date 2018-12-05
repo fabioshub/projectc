@@ -37,8 +37,12 @@
 }
 
 #search input {
-  padding-right: 30px;
-  width: 262px;
+  width: 260px;
+  margin-left: 512px;
+}
+
+#searchsubmitbutton{
+  color: rgb(80, 80, 80);
 }
 
 #wishlistbutton i {
