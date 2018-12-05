@@ -94,6 +94,65 @@ class Browse extends Component {
           })
       }
 
+fetchDataFilter() {
+    $(".spinner").show()
+    $(".browsegridder").hide()
+
+    let filters =
+    {
+	filter1 : "Eastpak",
+	filter2 : "padded-pakr",
+	filter3 : "rugzakken",
+	filter4 : "schooltassen",
+	filter5 : "grijs"
+}
+
+    fetch(`http://localhost:5000/api/product/filter/1/9`,{
+      host: 'localhost',
+      port: 5000,
+      method: 'GET',
+      mode: "no-cors",
+      body: JSON.stringify(filters),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+        // agent: false
+      })
+    //   .then(function(b) {
+    //     console.log(b);
+    // }).catch(function(a) {
+    //     console.log(a);
+    // });
+      .then(results => {
+        console.log("RETRIEVED ITEMS SUCCES!")
+        return results.json();
+      }).then(data => {
+        this.setState({pagesintotal: data.totalpages})
+        let items = data.products.map((pic) => {
+          return(
+            <div>
+              <div style={{
+                  boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
+                  <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
+                  <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
+                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
+                    <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
+                  </div>
+                </div>
+              </div>
+            )
+          })
+
+          this.setState({items: items})
+          this.setState({itemsClean: items})
+
+          $(".spinner").fadeOut("fast");
+          $(".browsegridder").fadeIn("fast");
+          // console.log("ITEM SET IN STATE")
+          this.forceUpdate()
+        })
+    }
+
   browseGrid() {
     let table = []
     for (let j = 0; j < this.state.hoeveelheid; j++) {
@@ -116,7 +175,10 @@ class Browse extends Component {
 
 
 if(localStorage.getItem("auth_token")) {
-
+  // fetch(api/cart)
+  // post
+  // body: {Id: currentIteminLoop.props.children.props.children[0].props.children[1].props.id, amount: 1}
+  // header: {auth: token}
 }
 
 else {

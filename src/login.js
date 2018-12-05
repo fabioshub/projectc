@@ -14,6 +14,8 @@ class Login extends Component {
     this.onChangeName = this.onChangeName.bind(this);
     this.onChangeLastname = this.onChangeLastname.bind(this);
     this.onChangePhone = this.onChangePhone.bind(this);
+    this.onChangeBirthdate = this.onChangeBirthdate.bind(this);
+
 
     this.state = {
       username: '',
@@ -22,7 +24,7 @@ class Login extends Component {
       lastname: '',
       gender: '',
       birthdate: '',
-      phone: '',
+      phone: 0,
       redirect: false
     };
   }
@@ -34,7 +36,7 @@ class Login extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    let userobject = {UserName: this.state.username, Password: this.state.password}
+    let userobject = {EmailAddress: this.state.username, UserPassword: this.state.password}
     fetch('http://localhost:5000/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(userobject),
@@ -42,23 +44,27 @@ class Login extends Component {
         'Content-Type': 'application/json'
       },
     }).then(function(response) {
+      console.log(response)
       return response.json();
     })
-    .then(function(myJson) {
-      localStorage.setItem('auth_token', myJson.auth_token);
+    .then(myJson => {
+      if (myJson.auth_token) {
+        localStorage.setItem('auth_token', myJson.auth_token);
+        this.setState({redirect: true})
+      }
       window.location.reload();
 
     });
-    this.setState({redirect: true})
 
   }
 
   handleSubmitRegister(event) {
-    console.log(this.state.username)
-    console.log(this.state.password)
 
     event.preventDefault();
-    let registerobject = {UserName: this.state.username, UserPassword: this.state.password}
+    let registerobject = {"EmailAddress": this.state.username, "UserPassword": this.state.password, "FirstName": this.state.firstname, "LastName": this.state.lastname, "BirthDate": this.state.birthdate, "Gender": this.state.gender, "Phone": this.state.phone}
+
+
+
     fetch('http://localhost:5000/api/user/registration', {
       method: 'POST',
       body: JSON.stringify(registerobject),
@@ -69,7 +75,7 @@ class Login extends Component {
       console.log(response)
     })
 
-    let userobject = {UserName: this.state.username, Password: this.state.password}
+    let userobject = {EmailAddress: this.state.username, UserPassword: this.state.password}
     fetch('http://localhost:5000/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(userobject),
@@ -80,9 +86,11 @@ class Login extends Component {
       return response.json();
     })
     .then(myJson => {
-      localStorage.setItem('auth_token', myJson.auth_token);
+      if (myJson.auth_token) {
+        localStorage.setItem('auth_token', myJson.auth_token);
+      }
       this.setState({redirect: true})
-      this.forceUpdate()
+      // this.forceUpdate()
       window.location.reload();
 
     });
@@ -92,24 +100,25 @@ class Login extends Component {
   }
 
   onChangeUsername = (e) => {
-    console.log(this.state.username)
     this.setState({ username: e.target.value });
   }
   onChangePassword = (e) => {
-    console.log(this.state.password)
     this.setState({ password: e.target.value });
   }
   onChangeName = (e) => {
-    console.log(this.state.firstname)
-    this.setState({ password: e.target.value });
+    this.setState({ firstname: e.target.value });
   }
   onChangeLastname = (e) => {
-    console.log(this.state.lastname)
-    this.setState({ password: e.target.value });
+    this.setState({ lastname: e.target.value });
   }
   onChangePhone = (e) => {
-    console.log(this.state.phone)
-    this.setState({ password: e.target.value });
+    this.setState({ phone: e.target.value });
+  }
+  onChangeBirthdate = (e) => {
+    this.setState({ birthdate: e.target.value });
+  }
+  onChangeGender = (e) => {
+    this.setState({ gender: e.target.value });
   }
 
 
@@ -132,7 +141,7 @@ class Login extends Component {
             <h3>Inloggen</h3>
             <form onSubmit={this.handleSubmit} >
               <div class="form-group">
-                <input type="username" class="form-control" placeholder="Vul je email in *" onChange={this.onChangeUsername} />
+                <input type="email" class="form-control" placeholder="Vul je email in *" onChange={this.onChangeUsername} />
               </div>
               <div class="form-group">
                 <input type="password" class="form-control" placeholder="Vul je wachtwoord in *" onChange={this.onChangePassword}/>
@@ -149,19 +158,22 @@ class Login extends Component {
             <h3>Registreren</h3>
             <form onSubmit={this.handleSubmitRegister} >
               <div class="form-group">
-                <input type="email" class="form-control" placeholder="Vul je email in *" onChange={this.onChangeUsername}/>
+                <input type="email" class="form-control" placeholder="Email *" onChange={this.onChangeUsername}/>
               </div>
               <div class="form-group">
-                <input type="password" class="form-control" placeholder="Vul je wachtwoord in *" onChange={this.onChangePassword}/>
+                <input type="password" class="form-control" placeholder="Wachtwoord *" onChange={this.onChangePassword}/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Vul je naam in *" onChange={this.onChangeName}/>
+                <input type="text" class="form-control" placeholder="Naam *" onChange={this.onChangeName}/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Vul je achternaam in *" onChange={this.onChangeLastname}/>
+                <input type="text" class="form-control" placeholder="Achternaam *" onChange={this.onChangeLastname}/>
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Vul je telefoonnummer in *" onChange={this.onChangephone}/>
+                <input type="text" class="form-control" placeholder="Geboortedatum *" onChange={this.onChangeBirthdate}/>
+              </div>
+              <div class="form-group">
+                <input type="number" class="form-control" placeholder="Telefoonnummer" onChange={this.onChangePhone}/>
               </div>
               <div class="form-group">
                 <input type="submit" class="btnSubmit" value="Registreer" />

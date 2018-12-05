@@ -35,7 +35,9 @@ class Cart extends Component {
     window.scrollTo(0, 0)
 
   if (localStorage.getItem("auth_token")) {
-    
+    // fetch(api/cart)
+    // get
+    // header: {auth: token)}
   }
 
  else{

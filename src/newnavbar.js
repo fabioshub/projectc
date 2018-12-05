@@ -29,7 +29,7 @@ class Navigationbar extends Component {
         }).then(response => {
           return response.json();
         }).then(myJson => {
-          let acciconupdate = myJson[0].userName;
+          let acciconupdate = myJson[0].firstName;
           this.setState({accSymbol: acciconupdate})
           $("#wishlistbutton").show()
           $("#loguitbutton").show()
