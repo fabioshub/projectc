@@ -94,15 +94,15 @@ class Navigationbar extends Component {
 
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
-              <li style={{background: 'brown'}}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
+              <li style={{background: 'black'}}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
               <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i className="fas fa-shopping-cart"></i></Link></li>
-              <li style={{background: "brown"}}  id="browsebutton"><Link style={{padding: "0"}} to={"/" + this.personalclicker() }><a id="accSymbol">{this.state.accSymbol}</a></Link></li>
-              <li style={{}}  id="loguitbutton" style={{padding: "0"}}><a id="accSymbol" style={{color: "brown", cursor: "pointer"}} onClick={this.resettokentonull}>log uit</a></li>
+              <li style={{background: "black"}}  id="browsebutton"><Link style={{padding: "0"}} to={"/" + this.personalclicker() }><a id="accSymbol">{this.state.accSymbol}</a></Link></li>
+              <li style={{}}  id="loguitbutton" style={{padding: "0"}}><a id="accSymbol" style={{color: "black", cursor: "pointer"}} onClick={this.resettokentonull}>log uit</a></li>
             </ul>
           </div>
 
-          <div className="container-fluid" style={{background: "brown"}}>
+          <div className="container-fluid" style={{background: "black"}}>
             <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
               <ul className="nav navbar-nav navbar-left" id="selection">
