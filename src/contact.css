@@ -1,6 +1,45 @@
 
-.contact-container{
-    margin-top: 190px;
+
+h3{
+  font-family: "Calibri";
+  font-weight: bold;
+  font-size: 40px;
+}
+
+h4{
+  font-family: "Calibri";
+  font-weight: bold;
+  font-size: 25px;
+}
+
+
+.h3Space{
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+/* .emailSpace{
+  padding-bottom: 15%;
+} */
+
+body{
+    margin: 200px 0px; padding:0px;
+    text-align:center;
+    align:center;
+    font-family: "Calibri";
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.space{
+  padding-top: 7%;
+  padding-bottom: 10%;
+}
+
+
+
+/* .contact-container{
+    margin-top: 100;
 }
 
 .contact-form{
@@ -40,4 +79,4 @@
     font-weight: 600;
     color: #333;
     background-color: #666;
-}
+} */
