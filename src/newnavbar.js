@@ -93,6 +93,13 @@ class Navigationbar extends Component {
             </div>
 
 
+            <form className="navbar-form navbar-left hidden-xs">
+              <div className="form-group" id="search">
+                <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
+              </div>
+              <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
+            </form>
+
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
               <li style={{background: 'black'}}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
               <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i className='fas fa-heart' ></i> </Link></li>

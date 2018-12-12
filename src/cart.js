@@ -167,7 +167,7 @@ class Cart extends Component {
       <div id="paginaCart" style={{marginTop: "150px", marginBottom: "150 px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-shopping-cart" style={{color: "brown"}}></i></h1>
+            <h1  style={{margin: '50px 0'}}><i className="fas fa-shopping-cart" style={{color: "rgb(69, 69, 69)"}}></i></h1>
             <hr style={{border: "0px",
               height: "8px",
               width: "200px",
