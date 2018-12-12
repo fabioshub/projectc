@@ -23,12 +23,13 @@ h4{
 } */
 
 body{
-    margin: 200px 0px; padding:0px;
+    margin: 200px 0px 0px ;
+    padding:0px;
     text-align:center;
     align:center;
     font-family: "Calibri";
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .space{
