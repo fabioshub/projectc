@@ -36,6 +36,7 @@ class Browse extends Component {
       pagina: 1,
       hoeveelheid: 9,
       pagesintotal: 100,
+      filters: []
       // token: "string"
 
 
@@ -69,8 +70,10 @@ class Browse extends Component {
           console.log("RETRIEVED ITEMS SUCCES!")
           return results.json();
         }).then(data => {
+          console.log(data)
           this.setState({pagesintotal: data.totalpages})
           let items = data.products.map((pic) => {
+            console.log(pic)
             return(
               <div>
                 <div style={{
@@ -94,25 +97,31 @@ class Browse extends Component {
           })
       }
 
-fetchDataFilter() {
+
+fetchDataFilter(filterarray) {
     $(".spinner").show()
     $(".browsegridder").hide()
 
-    let filters =
-    {
-	filter1 : "Eastpak",
-	filter2 : "padded-pakr",
-	filter3 : "rugzakken",
-	filter4 : "schooltassen",
-	filter5 : "grijs"
-}
+    this.state.filters.unshift(filterarray)
+    let filterstring = ""
+    this.state.filters.map(filter => {
 
-    fetch(`http://localhost:5000/api/product/filter/1/9`,{
+      if (filterstring == "") {
+        filterstring = filterstring + "?" +filter;
+      } else {
+        filterstring = filterstring + "&" +filter;
+
+      }
+
+    })
+    console.log(filterstring)
+
+
+    fetch(`http://localhost:5000/api/product/filter/1/10${filterstring}`,{
       host: 'localhost',
       port: 5000,
       method: 'GET',
       mode: "no-cors",
-      body: JSON.stringify(filters),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -124,10 +133,11 @@ fetchDataFilter() {
     //     console.log(a);
     // });
       .then(results => {
-        console.log("RETRIEVED ITEMS SUCCES!")
+        console.log("RETRIEVED ITEMS SUCCES!FILTERED")
         return results.json();
       }).then(data => {
         this.setState({pagesintotal: data.totalpages})
+          console.log(data.totalpages)
         let items = data.products.map((pic) => {
           return(
             <div>
@@ -171,14 +181,26 @@ fetchDataFilter() {
     this.forceUpdate();
   }
 
+
   addToCartClicked(pic) {
 
 
 if(localStorage.getItem("auth_token")) {
-  // fetch(api/cart)
-  // post
-  // body: {Id: currentIteminLoop.props.children.props.children[0].props.children[1].props.id, amount: 1}
-  // header: {auth: token}
+
+  // console.log(pic.product.id)
+  let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+  // console.log(authstring)
+  let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": "1"}
+  console.log(JSON.stringify(cartitem))
+  fetch('http://localhost:5000/api/cart', {
+        method: 'POST',
+        body: JSON.stringify(cartitem),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      })
 }
 
 else {
@@ -209,21 +231,19 @@ else {
 
   addToWishlistClicked(pic) {
 
-    //if token is present in localstrage
-    if(localStorage.getItem('arrayInLocalStorageWishlist')) {
-      let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
-      console.log(temparray)
-      temparray.push(pic)
-      console.log(temparray)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
-    }
-    else {
-      let temparray = this.state.arrayInLocalStorageWishlist;
-      temparray.push(pic)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
-    };
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+    // console.log(authstring)
+    let cartitem = {"ProductId" : `${pic.product.id}`}
+    console.log(JSON.stringify(cartitem))
+    fetch('http://localhost:5000/api/wishlist', {
+          method: 'POST',
+          body: JSON.stringify(cartitem),
+          type: 'application/json',
+          headers: {
+            "Content-Type" : 'application/json',
+            'Authorization' : authstring
+          },
+        })
 
   }
 //TODO
@@ -276,6 +296,11 @@ else {
 
     this.state.items = filteredArray;
     this.buttonClicked(1)
+  }
+
+  filtersUpdated() {
+    this.resetItemsInBrowse();
+
   }
 //TODO
 
@@ -346,10 +371,10 @@ else {
             <div className="col-sm-3 hidden-xs" style={{marginTop:"70px", cursor: "not-allowed"}}>
               <ul style={{
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", cursor: "not-allowed"}} className="list-group">
-                <li onClick={this.resetItemsInBrowse} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Alle tassen weergeven</li>
-                  <li onClick={() => {this.filterList("Halstas")}} style={{cursor: "pointer"}} className="list-group-item">Halster tassen</li>
-                <li onClick={() => {this.filterList("Heren ")}} style={{cursor: "pointer"}} className="list-group-item">Portemonnees</li>
-                <li onClick={() => {this.filterList("Dames ")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Koffer</li>
+                <li onClick={() => {this.fetchData()}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Alle tassen weergeven</li>
+                <li onClick={() => {this.fetchDataFilter("BrandId=2")}} style={{cursor: "pointer"}} className="list-group-item">eastpack</li>
+                <li onClick={() => {this.fetchDataFilter("BrandId=3")}} style={{cursor: "pointer"}} className="list-group-item">Gucci</li>
+                <li onClick={() => {this.fetchDataFilter("BrandId=4 ")}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item">Rains</li>
               </ul>
 
             </div>

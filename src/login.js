@@ -131,8 +131,7 @@ class Login extends Component {
       return <Redirect to="/pagina1"></Redirect>
     } else {
       return(
-        <div class="container login-container" style={{    marginTop: "130px"
-        }}>
+        <div class="container login-container" style={{marginTop: "130px"}}>
 
         <div class="row">
 

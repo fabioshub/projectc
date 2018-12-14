@@ -3,8 +3,6 @@ import './browse.css'
 import Product from './product'
 import { Link } from 'react-router-dom';
 import CartWLI from './cartwishlistitem';
-import $ from 'jquery';
-
 
 class Cart extends Component {
 
@@ -32,89 +30,40 @@ class Cart extends Component {
 
   }
 
-  fetchCartData() {
-
-
-      $(".spinner").show()
-      $(".browsegridder").hide()
-
-      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
-      fetch(`http://localhost:5000/api/cart/`,{
-        host: 'localhost',
-        port: 5000,
-        // path: '/',
-        method: 'GET',
-
-        // rejectUnauthorized: false,
-        // requestCert: true,
-        // mode: "no-cors",
-        headers:{
-          // "Access-Control-Allow-Credentials" : true,
-          'Authorization' : authstring
-        },
-          agent: false
-        })
-        .then(results => {
-          console.log("RETRIEVED ITEMS SUCCES!")
-          console.log(results)
-          return results.json();
-        }).then(data => {
-          console.log(data)
-          this.setState({totalPrice: data.totalPrice})
-          let cartList = data.products.map((pic) => {
-            console.log(pic)
-            return(
-                <div>
-                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
-                      <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
-                </div>
-              )
-            })
-
-            this.setState({cartList: cartList})
-
-
-            $(".spinner").fadeOut("fast");
-            $(".browsegridder").fadeIn("fast");
-            // console.log("ITEM SET IN STATE")
-          })
-    }
-
   componentDidMount() {
 
     window.scrollTo(0, 0)
 
   if (localStorage.getItem("auth_token")) {
-    console.log("LOGINCART")
-    this.fetchCartData()
+    // fetch(api/cart)
+    // get
+    // header: {auth: token)}
   }
 
  else{
-       if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
+   if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
 
 
-       let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-       let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
-       let cartList = arrayInLocalStorage.map((pic) => {
-         this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
-         // this.setState({totalPrice: totalPrice});
-         return(
-           <div>
-             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
-                 <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
-           </div>
-         )
-       })
-       // this.setState({cartify: cartify})
-       this.setState({cartList: cartList})
+   let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
+   let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
+   let cartList = arrayInLocalStorage.map((pic) => {
+     this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
+     // this.setState({totalPrice: totalPrice});
+     return(
+       <div>
+         <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
+           <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+             <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+       </div>
+     )
+   })
+   // this.setState({cartify: cartify})
+   this.setState({cartList: cartList})
 
 
-     } else{
-       console.log("WHAT?")
-       this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
-     }
+ } else{
+   this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
+ }
  }
 
 
@@ -163,29 +112,7 @@ class Cart extends Component {
   }
 
   deleteFromWishlist(h) {
-    console.log(h)
-    if (localStorage.getItem("auth_token")) {
 
-      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
-      // console.log(authstring)
-      let cartitem = {"ProductId" : h}
-      // console.log(JSON.stringify(cartitem))
-      fetch('http://localhost:5000/api/cart', {
-            method: 'DELETE',
-            body: JSON.stringify(cartitem),
-            type: 'application/json',
-            headers: {
-              "Content-Type" : 'application/json',
-              'Authorization' : authstring
-            },
-          }).then(results => console.log(results))
-          this.fetchCartData();
-          this.forceUpdate();
-          window.location.reload();
-
-
-
-    } else {
     let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'));
     let tempDeleteArray = [];
 
@@ -204,7 +131,6 @@ class Cart extends Component {
       window.location.reload();
 
   }
-}
 
 
   listView() {

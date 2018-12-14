@@ -19,7 +19,7 @@ class Navigationbar extends Component {
     if (localStorage.getItem("auth_token")) {
       let authstring = `Bearer ${localStorage.getItem("auth_token")}`
       console.log(authstring)
-      fetch("http://localhost:5000/api/userinfo/user",{
+      fetch("http://localhost:5000/api/user/user",{
         host: 'localhost',
         port: 5000,
         method: 'GET',
@@ -93,14 +93,17 @@ class Navigationbar extends Component {
             </div>
 
 
-            <form className="navbar-form navbar-left hidden-xs">
-              <div className="form-group" id="search">
-                <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
-              </div>
-              <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
-            </form>
+
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
+              <li>
+                <form className="navbar-form hidden-xs">
+                  <div className="form-group" id="search">
+                    <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
+                  </div>
+                  <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
+                </form>
+              </li>
               <li style={{background: 'black'}}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
               <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i className="fas fa-shopping-cart"></i></Link></li>

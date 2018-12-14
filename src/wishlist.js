@@ -3,6 +3,8 @@ import './browse.css'
 import Product from './product'
 import { Link } from 'react-router-dom';
 import CartWLI from './cartwishlistitem';
+import $ from 'jquery';
+
 
 class Wishlist extends Component {
 
@@ -11,13 +13,16 @@ class Wishlist extends Component {
 
     this.listView = this.listView.bind(this);
     this.deleteFromWishlist = this.deleteFromWishlist.bind(this);
+    this.addtowishtocart = this.addtowishtocart.bind(this);
+
 
 
     this.state = {
       cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je verlanglijstje is leeg :(</div> <br/>
                 <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Breng me naar de tassen! <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
-      listViewList1: []
+      listViewList1: [],
+      wishlisttocart: [100]
     }
 
   }
@@ -27,54 +32,107 @@ class Wishlist extends Component {
 
 
   }
+  fetchCartData() {
+
+
+      $(".spinner").show()
+      $(".browsegridder").hide()
+
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+      fetch(`http://localhost:5000/api/wishlist/`,{
+        host: 'localhost',
+        port: 5000,
+        // path: '/',
+        method: 'GET',
+
+        // rejectUnauthorized: false,
+        // requestCert: true,
+        // mode: "no-cors",
+        headers:{
+          // "Access-Control-Allow-Credentials" : true,
+          'Authorization' : authstring
+        },
+          agent: false
+        })
+        .then(results => {
+          console.log("RETRIEVED ITEMS SUCCES!")
+          console.log(results)
+          return results.json();
+        }).then(data => {
+          console.log(data)
+          // this.setState({totalPrice: data.totalPrice})
+          let cartList = data.products.map((pic) => {
+            console.log(pic)
+            return(
+                <div>
+                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.product.images}></CartWLI>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+                    <button onClick={()=>this.addtowishtocart(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Voeg toe aan winkelmandje  </button>
+                      <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+                </div>
+              )
+            })
+
+            this.setState({cartList: cartList})
+
+
+            $(".spinner").fadeOut("fast");
+            $(".browsegridder").fadeIn("fast");
+            // console.log("ITEM SET IN STATE")
+          })
+        }
 
   componentDidMount() {
 
     window.scrollTo(0, 0)
+    this.fetchCartData();
 
-
-    if(localStorage.getItem('arrayInLocalStorageWishlist') && localStorage.getItem('arrayInLocalStorageWishlist').length > 2) {
-
-
-    let arrayInLocalStorageWishlist = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
-    let cartList = arrayInLocalStorageWishlist.map((pic) => {
-      this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
-      // this.setState({totalPrice: totalPrice});
-      return(
-        <div>
-          <CartWLI name={pic.product.productName} price={"€" + pic.product.productPrice/100 + ",-"} image={pic.images[0]}></CartWLI>
-            <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Delete from wishlist<i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
-              <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
-        </div>
-      )
-    })
-    this.setState({cartList: cartList})
-
-  } else{
-    this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je verlanglijstje is leeg :(</div>]
   }
 
+  addtowishtocart(h) {
+    console.log("ID IS" + h)
+    this.state.wishlisttocart.unshift(h)
+    console.log(this.state.wishlisttocart)
   }
 
   deleteFromWishlist(h) {
 
-    let arrayInLocalStorageWishlist = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'));
-    let tempDeleteArray = [];
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+    // console.log(authstring)
+    let cartitem = {"ProductId" : h}
+    // console.log(JSON.stringify(cartitem))
+    fetch('http://localhost:5000/api/wishlist', {
+          method: 'DELETE',
+          body: JSON.stringify(cartitem),
+          type: 'application/json',
+          headers: {
+            "Content-Type" : 'application/json',
+            'Authorization' : authstring
+          },
+        }).then(results => console.log(results))
+        this.fetchCartData();
+        this.forceUpdate();
+        window.location.reload();
 
 
-      for (let b = 0; b < arrayInLocalStorageWishlist.length; b++) {
-        const crrentItem = arrayInLocalStorageWishlist[b]
-        if(arrayInLocalStorageWishlist[b].product.productName !== h) {
-          tempDeleteArray.push(crrentItem)
-        } else {
-          console.log("discard " + arrayInLocalStorageWishlist[b].product.productName)
-        }
+  }
 
-      }
-      localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(tempDeleteArray));
-      this.forceUpdate();
-      window.location.reload();
+  convertWtoC() {
+    let cartitem = {"ProductId" : this.state.wishlisttocart}
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
 
+    fetch('http://localhost:5000/api/wishlist/tocart', {
+          method: 'POST',
+          body: JSON.stringify(cartitem),
+          type: 'application/json',
+          headers: {
+            "Content-Type" : 'application/json',
+            'Authorization' : authstring
+          },
+        }).then(results => console.log(results))
+        this.fetchCartData();
+        this.forceUpdate();
+        window.location.reload();
   }
 
 
@@ -105,6 +163,8 @@ class Wishlist extends Component {
         </div>
 
         <div className="container">
+          <button onClick={()=>this.convertWtoC()} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Voeg toe aan winkelmandje  </button>
+
           {this.listView()}
         </div>
 
