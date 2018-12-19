@@ -122,6 +122,9 @@ class Cart extends Component {
 
   checkOut() {
 
+    if (JSON.parse(localStorage.getItem('arrayInLocalStorage')).length > 2) {
+
+
     localStorage.removeItem('cartforcheckout');
     // let res = fetch('tester.json').then(results => {return results.json()})
     // console.log(res)
@@ -143,7 +146,7 @@ class Cart extends Component {
     localStorage.setItem('cartforcheckout', JSON.stringify(orderObject));
 
 
-
+  }
 
     // // console.log(this.state.cartList[2].props.children[0].props.ID)
     // // let checkOutCartArray = {this.state.cartList[0].props.children[0].props.ID}

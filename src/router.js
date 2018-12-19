@@ -16,6 +16,7 @@ import Contact from './contact';
 import Terms from './termsandconditions'
 import Privacy from './privacy';
 import Faq from './faq';
+import userPanelNew from './userPanelNew'
 
 
 
@@ -35,6 +36,8 @@ const Router = () => (
     <Route path='/privacy' component={Privacy} />
     <Route path='/faq' component={Faq} />
     <Route path="/productinfopage" component={ProductInfoPage} />
+    <Route path="/userpanelnew" component={userPanelNew} />
+
 
   </Switch>
 )

@@ -71,7 +71,7 @@ class Navigationbar extends Component {
       if(this.state.accSymbol == "login")
       {return "login"}
       else
-      {return "personal"}
+      {return "login"}
 
     }
 
@@ -96,14 +96,6 @@ class Navigationbar extends Component {
 
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
-              <li>
-                <form className="navbar-form hidden-xs">
-                  <div className="form-group" id="search">
-                    <input type="text" className="form-control border " placeholder="Zoeken naar tassen, merken, etc. "/>
-                  </div>
-                  <button id="searchsubmitbutton" type="submit" className="btn btn-default"><i className="fas fa-search"></i></button>
-                </form>
-              </li>
               <li style={{background: 'black'}}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext">browse</a></Link></li>
               <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i className="fas fa-shopping-cart"></i></Link></li>
