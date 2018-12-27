@@ -1,0 +1,30 @@
+.admin-container{
+    margin-bottom: 5%;
+}
+
+.admin-form{
+    padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 260x 0 rgba(0, 0, 0, 0.19);
+}
+
+.admin-form h4{
+    text-align: center;
+    color: #333;
+}
+
+.admin-form h5{
+    text-align: center;
+    color: #333;
+}
+
+.admin-container form{
+    padding: 10%;
+}
+
+.btnSubmit{
+    width: 50%;
+    border-radius: 1rem;
+    padding: 1.5%;
+    border: none;
+    cursor: pointer;
+}
