@@ -101,7 +101,7 @@ class AdminPanel extends Component {
         let updatedproduct = {"ProductName": this.state.productName, "ProductNumber": this.state.productNumber, "ProductEAN": this.state.productEan, "ProductInfo": this.state.productInfo, "ProductDescription": this.state.productDesc, "ProductSpecification": this.state.productSpec, "ProductPrice": this.state.price, "ProductColor": this.state.color, "ImageURL": this.state.image, "Stock": this.state.stock, "BrandId": this.state.brandId, "BrandName": this.state.brandName, "TypeName": this.state.typeName, "TypeId": this.state.typeId, "CategoryId": this.state.categoryId, "CategoryName": this.state.categoryName, "CollectionId": this.state.collectionId, "CollectionName": this.state.collectionName}
 
         fetch(`http://localhost:3000/api/product/${id}`, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(updatedproduct),
             headers: {
                 'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ class AdminPanel extends Component {
         let deletedproduct = {"ProductId": this.state.productId}
 
         fetch(`http://localhost:3000/api/product/${id}`, {
-            method: 'POST',
+            method: 'PUT',
             body: JSON.stringify(deletedproduct),
             headers: {
                 'Content-Type': 'application/json'
