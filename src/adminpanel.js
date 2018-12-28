@@ -11,6 +11,7 @@ class AdminPanel extends Component {
         this.loadProduct = this.loadProduct.bind(this);
         this.updateProduct = this.updateProduct.bind(this);
         // this.deleteProduct = this.deleteProduct.bind(this);
+        this.onChangeProductId = this.onChangeProductId.bind(this);
         this.onChangeProductName = this.onChangeProductName.bind(this);
         this.onChangeProductNumber = this.onChangeProductNumber.bind(this);
         this.onChangeProductEAN = this.onChangeProductEAN.bind(this);
@@ -30,6 +31,7 @@ class AdminPanel extends Component {
         this.onChangeCollectionName = this.onChangeCollectionName.bind(this);
 
         this.state = {
+            productId: 0,
             productName: '',
             productNumber: '',
             productEan: '',
@@ -74,7 +76,7 @@ class AdminPanel extends Component {
         })
     }
 
-    loadProduct(id = this.state.productNumber) {
+    loadProduct(id = this.state.productId) {
 
         fetch(`http://localhost:3000/api/product/${id}`, {
            host: 'localhost',
@@ -94,7 +96,7 @@ class AdminPanel extends Component {
         })
     }
 
-    updateProduct(id = this.state.productNumber, event) {
+    updateProduct(id = this.state.productId, event) {
         event.preventDefault()
         let updatedproduct = {"ProductName": this.state.productName, "ProductNumber": this.state.productNumber, "ProductEAN": this.state.productEan, "ProductInfo": this.state.productInfo, "ProductDescription": this.state.productDesc, "ProductSpecification": this.state.productSpec, "ProductPrice": this.state.price, "ProductColor": this.state.color, "ImageURL": this.state.image, "Stock": this.state.stock, "BrandId": this.state.brandId, "BrandName": this.state.brandName, "TypeName": this.state.typeName, "TypeId": this.state.typeId, "CategoryId": this.state.categoryId, "CategoryName": this.state.categoryName, "CollectionId": this.state.collectionId, "CollectionName": this.state.collectionName}
 
@@ -109,17 +111,24 @@ class AdminPanel extends Component {
         })
     }
 
-    // deleteProduct(id = this.state.productNumber, event) {
-    //     event.preventDefault()
+    deleteProduct(id = this.state.productId, event) {
+        event.preventDefault()
+        let deletedproduct = {"ProductId": this.state.productId}
 
-    //     fetch(`http://localhost:3000/api/product/${id}`, {
-    //         host: 'localhost',
-    //         port: 5000,
-    //         path: '/',
-    //         method: 'POST'
-    //     })
-    // }
+        fetch(`http://localhost:3000/api/product/${id}`, {
+            method: 'POST',
+            body: JSON.stringify(deletedproduct),
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(function(response) {
+            console.log(response)
+        })
+    }
 
+    onChangeProductId = (p) => {
+        this.setState({ productId: p.target.value });
+    }
     onChangeProductName = (p) => {
         this.setState({ productName: p.target.value });
     }
@@ -244,12 +253,22 @@ class AdminPanel extends Component {
                                 <input type="submit" class="btnSubmit" value="Creëer" />
                             </div>
                         </form>
+
+                        <h4>Delete product</h4>
+                        <form onSubmit={this.deleteProduct}>
+                        <div class='form-group'>
+                                <input type="number" min="0" class="form-control" placeholder="Product-ID" />
+                            </div>
+                            <div class='form-group'>
+                                <input type="submit" class="btnSubmit" value="Verwijderen" />
+                            </div>
+                        </form>
                     </div>
                     <div class ="col-md-6 admin-form">
                         <h4>Update product</h4>
                         <form onSubmit={this.loadProduct}>
                             <div class='form-group'>
-                                <input type="number" class="form-control" placeholder="Productnummer" />
+                                <input type="number" min="0" class="form-control" placeholder="Product-ID" onChange={this.onChangeProductID} />
                             </div>
                             <div class='form-group'>
                                 <input type="submit" class="btnSubmit" value="Laden" />
@@ -257,8 +276,11 @@ class AdminPanel extends Component {
                         </form>
 
                         <form onSubmit={this.updateProduct}>
-                        <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Productnaam" onChange={this.onChangeProductName}>{this.productName}</input>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Productnummer *" onChange={this.onChangeProductNumber}>{this.productNumber}</input>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Productnaam" onChange={this.onChangeProductName} />
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Product-EAN *" onChange={this.onChangeProductEAN} />

@@ -22,9 +22,11 @@
 }
 
 .btnSubmit{
-    width: 50%;
+    width: 33%;
     border-radius: 1rem;
     padding: 1.5%;
     border: none;
     cursor: pointer;
+    color: #fff;
+    background-color: rgb(150, 150, 150);
 }
