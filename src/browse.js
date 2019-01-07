@@ -24,6 +24,7 @@ class Browse extends Component {
 
 
 
+
     this.state = {
       items: [],
       itemsInBrowse: 0,
@@ -36,7 +37,8 @@ class Browse extends Component {
       pagina: 1,
       hoeveelheid: 9,
       pagesintotal: 100,
-      filters: []
+      filters: [],
+      filterarraylist: []
       // token: "string"
 
 
@@ -54,12 +56,16 @@ class Browse extends Component {
     $(".filter-bra").hide()
     $(".filter-col").hide()
     $(".filter-typ").hide()
+    $(".stickything2").hide()
+    $(".stickything3").hide()
+
 
 
 
   }
 
   fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+    this.setState({filterarraylist: []})
 
     $(".spinner").show()
     $(".browsegridder").hide()
@@ -81,28 +87,29 @@ class Browse extends Component {
         console.log("RETRIEVED ITEMS SUCCES!")
         return results.json();
       }).then(data => {
-        console.log(data)
+        // console.log(data)
+        let startvalue = 0
         this.setState({pagesintotal: data.totalpages})
         let items = data.products.map((pic) => {
-          console.log(pic)
+          startvalue = startvalue + 1
           return(
             <div>
               <div style={{
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                   <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                   <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
-                    <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
+                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" ><i className="fas fa-heart"></i></button>
+                    <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic); }} id="addtocartbtn" class={"btn " +"addtocartbutton"+startvalue} ><i className="fas fa-shopping-cart"></i></button>
                   </div>
                 </div>
               </div>
             )
           })
 
-
           this.setState({items: items})
           this.setState({itemsClean: items})
 
+          // $(".turnedon").hide()
           $("#searchinput").val("")
           $(".spinner").fadeOut("fast");
           $(".browsegridder").fadeIn("fast");
@@ -110,6 +117,7 @@ class Browse extends Component {
           this.state.filters = []
         })
       }
+
 
 
       fetchDataFilter(filterkeyword, pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
@@ -146,7 +154,7 @@ class Browse extends Component {
         let filterstring = ""
 
         this.state.filters.map(filter => {
-          console.log()
+          // console.log()
           if (filterstring == "") {
             filterstring = filterstring + "?" +filter;
           } else {
@@ -155,7 +163,7 @@ class Browse extends Component {
           }
 
         })
-        console.log(filterstring)
+        // console.log(filterstring)
 
         if (this.state.filters.length > 0) {
         fetch(`http://localhost:5000/api/product/filter/${pagina}/${hoeveelheid}${filterstring}`,{
@@ -174,20 +182,27 @@ class Browse extends Component {
         //     console.log(a);
         // });
         .then(results => {
-          console.log("RETRIEVED ITEMS SUCCES!FILTERED")
+          // console.log("RETRIEVED ITEMS SUCCES!FILTERED")
           return results.json();
         }).then(data => {
-          this.setState({pagesintotal: data.totalpages})
-          console.log(data.totalpages)
-          let items = data.products.map((pic) => {
+          let temparray = []
+          let filtershit = data.filtersList.map((filters) => {
+            temparray.push(Object.values(filters[0])[0])
+          })
+          this.setState({filterarraylist: temparray})
+
+
+          this.setState({pagesintotal: data.page.totalpages})
+          let items = data.page.products.map((pic) => {
+
             return(
               <div>
                 <div style={{
                     boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                     <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                     <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
-                      <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
+                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn " >  <i className="fas fa-heart" ></i></button>
+                      <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn " ><i className="fas fa-shopping-cart"></i></button>
                     </div>
                   </div>
                 </div>
@@ -242,13 +257,15 @@ class Browse extends Component {
         addToCartClicked(pic) {
 
 
+
+
           if(localStorage.getItem("auth_token")) {
 
             // console.log(pic.product.id)
             let authstring = `Bearer ${localStorage.getItem("auth_token")}`
             // console.log(authstring)
             let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": "1"}
-            console.log(JSON.stringify(cartitem))
+            // console.log(JSON.stringify(cartitem))
             fetch('http://localhost:5000/api/cart', {
               method: 'POST',
               body: JSON.stringify(cartitem),
@@ -264,9 +281,9 @@ class Browse extends Component {
             //if user is not logged in
             if(localStorage.getItem('arrayInLocalStorage')) {
               let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-              console.log(temparray)
+              // console.log(temparray)
               temparray.push(pic)
-              console.log(temparray)
+              // console.log(temparray)
               // this.setState({arrayInLocalStorage: temparray})
               localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
             }
@@ -279,8 +296,9 @@ class Browse extends Component {
 
           }
 
-
-
+          $('.stickything2').show(0).delay(2000).fadeOut(500);
+          console.log(pic.images[0])
+          this.setState({lastitemaddtocart: pic.images[0]})
 
 
         }
@@ -291,7 +309,7 @@ class Browse extends Component {
           let authstring = `Bearer ${localStorage.getItem("auth_token")}`
           // console.log(authstring)
           let cartitem = {"ProductId" : `${pic.product.id}`}
-          console.log(JSON.stringify(cartitem))
+          // console.log(JSON.stringify(cartitem))
           fetch('http://localhost:5000/api/wishlist', {
             method: 'POST',
             body: JSON.stringify(cartitem),
@@ -301,6 +319,10 @@ class Browse extends Component {
               'Authorization' : authstring
             },
           })
+
+          $('.stickything3').show(0).delay(2000).fadeOut(500);
+          console.log(pic.images[0])
+          this.setState({lastitemaddtowishtlist: pic.images[0]})
 
         }
         //TODO
@@ -359,7 +381,7 @@ class Browse extends Component {
             }
           }
           this.state.itemAmount = this.state.initialPageAmount;
-          console.log(filteredArray.length)
+          // console.log(filteredArray.length)
 
           this.state.items = filteredArray;
           this.buttonClicked(1)
@@ -379,7 +401,7 @@ class Browse extends Component {
           }
 
           this.state.itemAmount = this.state.initialPageAmount;
-          console.log(this.state.initialPageAmount)
+          // console.log(this.state.initialPageAmount)
 
           this.state.items = resetArray;
           this.buttonClicked(1)
@@ -431,7 +453,7 @@ class Browse extends Component {
             return results.json();
           }).then(data => {
             this.setState({pagesintotal: data.totalpages})
-            console.log(data.totalpages)
+            // console.log(data.totalpages)
             let items = data.products.map((pic) => {
               return(
                 <div>
@@ -457,6 +479,15 @@ class Browse extends Component {
 
               this.forceUpdate()
             })
+        }
+
+        printFilters() {
+          let filtersOnlinestring = ""
+          this.state.filterarraylist.map((filteroption) => {
+            filtersOnlinestring = filteroption  + "  " +  filtersOnlinestring
+          })
+          // console.log(filtersOnlinestring)
+          return (filtersOnlinestring);
         }
 
 
@@ -486,6 +517,7 @@ class Browse extends Component {
                 </div>
                 <div className="row text-center browsercontent" style={{height: "500px"}}>
                   <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
+                    {this.printFilters()}
                         <form className="navbar-form hidden-xs">
                           <div className="form-group" id="search">
                             <input type="text" className="form-control border " id="searchinput" placeholder="Zoeken naar tassen, merken, etc. "/>
@@ -496,31 +528,31 @@ class Browse extends Component {
                         boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
                         <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"black"}}>RESET FILTERS</li>
                         <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"black"}}>CATEGORIEN</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Tassen</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Portemonnees</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Tassen</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Portemonnees</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
                         <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"500", "color":"black"}}>MERKEN</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">By lin</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Castelijn en Beerens</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Brics</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Leonhard Heyden</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Dakine</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=9"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Eastpak</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=10"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Gabol</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=11"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Senz</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=12"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra"> Kipling</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=13"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">The Bridge</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
-                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">By lin</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Castelijn en Beerens</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=6"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Brics</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Leonhard Heyden</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=8 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Dakine</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=9"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Eastpak</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=10"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Gabol</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=11"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Senz</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=12"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra"> Kipling</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=13"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">The Bridge</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
+                        <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
                         <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"500", "color":"black"}}>KLEUR</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=goud"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Goud</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=oranje"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Oranje</li>
@@ -547,6 +579,30 @@ class Browse extends Component {
                           {this.pagination()}
                         </ul>
                       </nav>
+                    </div>
+                  </div>
+                </div>
+                <div className=" stickything2 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
+                  <div className="container-fluid" >
+                    <div className="row">
+                      <div className="col-sm-12" style={{background: "black"}}>
+                        <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan cart!</p>
+                      </div>
+                      <div className="col-sm-12" style={{background: "white"}}>
+                        <img style={{margin: "5px"}} src={this.state.lastitemaddtocart}></img>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className=" stickything3 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
+                  <div className="container-fluid" >
+                    <div className="row">
+                      <div className="col-sm-12" style={{background: "black"}}>
+                        <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan wishlist!</p>
+                      </div>
+                      <div className="col-sm-12" style={{background: "white"}}>
+                        <img style={{margin: "5px"}} src={this.state.lastitemaddtowishtlist}></img>
+                      </div>
                     </div>
                   </div>
                 </div>

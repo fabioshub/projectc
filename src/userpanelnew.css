@@ -1,0 +1,8 @@
+.moblist_prf{ width:100%; padding:0;}
+
+.moblist_prf li{floath:left; list-style:none; display:inline;}
+
+.panel-default>.panel-heading {
+  background: white;
+  border: none;
+}

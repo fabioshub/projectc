@@ -71,7 +71,7 @@ class Navigationbar extends Component {
       if(this.state.accSymbol == "login")
       {return "login"}
       else
-      {return "login"}
+      {return "userpanelnew"}
 
     }
 

@@ -60,13 +60,13 @@ class Cart extends Component {
           return results.json();
         }).then(data => {
           console.log(data)
-          this.setState({totalPrice: data.totalPrice})
+          this.setState({totalPrice: data.totalPrice / 100})
           let cartList = data.products.map((pic) => {
             console.log(pic)
             return(
                 <div>
-                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice / 100} image={pic.product.images}></CartWLI>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
                       <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
                 </div>
               )
@@ -97,12 +97,12 @@ class Cart extends Component {
        let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
        let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
        let cartList = arrayInLocalStorage.map((pic) => {
-         this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
+         this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice /100;
          // this.setState({totalPrice: totalPrice});
          return(
            <div>
-             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
+             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice /100} image={pic.images[0]}></CartWLI>
+               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
                  <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
            </div>
          )
@@ -257,7 +257,7 @@ class Cart extends Component {
           <div className="row">
             <div className="col-md-12 text-right">
               <Link to="/checkoutlogin"><button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
-              <p>Totaal: {this.state.totalPrice +  ",-"}</p>
+              <p>Totaal: {"€" + this.state.totalPrice}</p>
             </div>
           </div>
         </div>

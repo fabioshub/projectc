@@ -66,8 +66,7 @@ class Wishlist extends Component {
             return(
                 <div>
                   <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Verwijder uit winkelmandje <i style={{color: "rgb(80, 80, 80)"}} className="far fa-times-circle"></i> </button>
-                    <button onClick={()=>this.addtowishtocart(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn">Voeg toe aan winkelmandje  </button>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
                       <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
                 </div>
               )
@@ -163,7 +162,6 @@ class Wishlist extends Component {
         </div>
 
         <div className="container">
-          <button onClick={()=>this.convertWtoC()} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Voeg toe aan winkelmandje  </button>
 
           {this.listView()}
         </div>
