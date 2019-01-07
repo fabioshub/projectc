@@ -17,6 +17,7 @@ import Terms from './termsandconditions'
 import Privacy from './privacy';
 import Faq from './faq';
 import userPanelNew from './userPanelNew'
+import AdminPanel from './adminpanel';
 
 
 
@@ -37,6 +38,7 @@ const Router = () => (
     <Route path='/faq' component={Faq} />
     <Route path="/productinfopage" component={ProductInfoPage} />
     <Route path="/userpanelnew" component={userPanelNew} />
+    <Route path="/adminpanel" component={AdminPanel} />
 
 
   </Switch>
