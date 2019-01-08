@@ -1,7 +1,7 @@
 .s-contact {
   margin-top: 7rem;
   padding-bottom: 1.2rem;
-  background-color: rgb(43, 43, 43);
+  background-color: rgba(0, 0, 0, 0.925);
   color: rgba(0, 0, 0, 0.3);
   position: relative;
   color: white;
@@ -166,3 +166,75 @@
 .cl-copyright span:last-child::after {
   display: none;
 }
+
+.social li {
+	background: none repeat scroll 0 0 #B5B5B5;
+	border: 2px solid #B5B5B5;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+	-o-border-radius: 50%;
+	-ms-border-radius: 50%;
+	border-radius: 50%;
+	float: left;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 8px 0 0;
+	padding: 0;
+	text-align: center;
+	width: 36px;
+	transition: all 0.5s ease 0s;
+	-moz-transition: all 0.5s ease 0s;
+	-webkit-transition: all 0.5s ease 0s;
+	-ms-transition: all 0.5s ease 0s;
+	-o-transition: all 0.5s ease 0s;
+}
+.social li:hover {
+	transform: scale(1.15) rotate(360deg);
+	-webkit-transform: scale(1.1) rotate(360deg);
+	-moz-transform: scale(1.1) rotate(360deg);
+	-ms-transform: scale(1.1) rotate(360deg);
+	-o-transform: scale(1.1) rotate(360deg);
+}
+.social li a {
+	color: #EDEFF1;
+}
+.social li:hover {
+	border: 2px solid #2c3e50;
+	background: #2c3e50;
+}
+.social li a i {
+	font-size: 16px;
+	margin: 0 0 0 5px;
+	color: #EDEFF1 !important;
+}
+
+.volgOns{
+  margin-left: 40px;
+}
+
+.foot{
+  padding: 40px 0px 80px 30px;
+}
+
+.winkels{
+  margin-right: 30px;
+}
+
+.winkel{
+  margin-left: 100px;
+}
+
+.icns{
+  margin-left: 20px;
+}
+
+.spaceBtMenu{
+  margin-right: 60px;
+}
+
+h4{
+  margin-bottom: 20px;
+}
+
+
+
