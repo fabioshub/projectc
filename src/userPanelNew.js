@@ -44,7 +44,7 @@ class userPanelNew extends Component {
         this.setState({gender: gender})
       });
 
-      fetch("http://localhost:5000/api/address/getaddress",{
+      fetch("http://localhost:5000/api/address/",{
         host: 'localhost',
         port: 5000,
         method: 'GET',
@@ -56,13 +56,13 @@ class userPanelNew extends Component {
         }).then(myJson => {
           console.log(myJson)
           // let street = myJson[0].Street;
-          this.setState({street: "street"})
+          this.setState({street: myJson.street})
           // let city = myJson[0].City;
-          this.setState({city: "city"})
+          this.setState({city: myJson.city})
           // let zipcode = myJson[0].ZipCode;
-          this.setState({zipcode: "zipcode"})
+          this.setState({zipcode: myJson.zipCode})
           // let housenumber  = myJson[0].HouseNumber;
-          this.setState({housenumber: "housenumber"})
+          this.setState({housenumber: myJson.houseNumber})
         });
 
         fetch("http://localhost:5000/api/order/GetOrderOfTheUser",{
@@ -103,14 +103,7 @@ class userPanelNew extends Component {
                   <td>Email</td>
                   <td>{this.state.email}</td>
                 </tr>
-                <tr><td>Gender</td>
-                <td>{this.state.gender}</td>
-              </tr>
-              <tr>
-                <td>Telefoonnummer</td>
-                <td> {this.state.tel}
-                </td>
-              </tr>
+                
               <tr>
                 <td>Geboortedatum</td>
                 <td> {this.state.birth}

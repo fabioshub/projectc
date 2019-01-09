@@ -21,7 +21,8 @@ class Cart extends Component {
                 ],
       totalPrice: 0,
       listViewList1: [],
-      cartify : []
+      cartify : [],
+      Doorgaanis: "/cart"
     }
 
   }
@@ -66,13 +67,22 @@ class Cart extends Component {
             return(
                 <div>
                   <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice / 100} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
                       <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
                 </div>
               )
             })
 
             this.setState({cartList: cartList})
+
+            if (this.state.cartList.length > 0) {
+              this.setState({"Doorgaanis": "/checkoutlogin"})
+            }
+
+            // if(this.state.cartList.length = 0) {
+            //   this.setState({totalPrice: "0"})
+            //
+            // }
 
 
             $(".spinner").fadeOut("fast");
@@ -93,6 +103,7 @@ class Cart extends Component {
  else{
        if(localStorage.getItem('arrayInLocalStorage') && localStorage.getItem('arrayInLocalStorage').length > 2) {
 
+         this.setState({"Doorgaanis": "/checkoutlogin"})
 
        let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
        let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
@@ -102,7 +113,7 @@ class Cart extends Component {
          return(
            <div>
              <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice /100} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtowishlist" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
+               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
                  <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
            </div>
          )
@@ -169,9 +180,10 @@ class Cart extends Component {
     console.log(h)
     if (localStorage.getItem("auth_token")) {
 
+
       let authstring = `Bearer ${localStorage.getItem("auth_token")}`
       // console.log(authstring)
-      let cartitem = {"ProductId" : h}
+      let cartitem = {"ProductId" : h, "CartQuantity": "1"}
       // console.log(JSON.stringify(cartitem))
       fetch('http://localhost:5000/api/cart', {
             method: 'DELETE',
@@ -256,7 +268,7 @@ class Cart extends Component {
           {this.listView()}
           <div className="row">
             <div className="col-md-12 text-right">
-              <Link to="/checkoutlogin"><button onClick={() => {this.checkOut()}}style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
+              <Link onClick={() => {this.checkOut()}} to={this.state.Doorgaanis}><button style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
               <p>Totaal: {"€" + this.state.totalPrice}</p>
             </div>
           </div>

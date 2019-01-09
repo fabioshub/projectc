@@ -49,6 +49,8 @@ class Browse extends Component {
     window.scrollTo(0, 0)
     this.fetchData()
     this.loaderFunction()
+
+
   }
 
   componentDidMount() {
@@ -98,7 +100,7 @@ class Browse extends Component {
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                   <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                   <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" ><i className="fas fa-heart"></i></button>
+                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli" ><i className="fas fa-heart"></i></button>
                     <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic); }} id="addtocartbtn" class={"btn " +"addtocartbutton"+startvalue} ><i className="fas fa-shopping-cart"></i></button>
                   </div>
                 </div>
@@ -113,6 +115,10 @@ class Browse extends Component {
           $("#searchinput").val("")
           $(".spinner").fadeOut("fast");
           $(".browsegridder").fadeIn("fast");
+
+          if(!localStorage.getItem("auth_token")) {
+            $(".hidethisbtnwhennogli").hide()
+          }
           // console.log("ITEM SET IN STATE")
           this.state.filters = []
         })
@@ -201,7 +207,7 @@ class Browse extends Component {
                     boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                     <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                     <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn " >  <i className="fas fa-heart" ></i></button>
+                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn hidethisbtnwhennogli" >  <i className="fas fa-heart" ></i></button>
                       <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn " ><i className="fas fa-shopping-cart"></i></button>
                     </div>
                   </div>
@@ -333,21 +339,21 @@ class Browse extends Component {
 
           navigatorArray.push(<li className="active" style={{cursor: "pointer"}}><a style={{color: 'white'}} onClick={() => {this.goToPage(this.state.pagina )}} >{this.state.pagina }</a></li>)
           if(this.state.pagina >= 2) {
-            navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina - 1 )}} >{this.state.pagina - 1 }</a></li>)
+            navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagina - 1 )}} >{this.state.pagina - 1 }</a></li>)
             if(this.state.pagina >= 3) {
-              navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina - 2 )}} >{this.state.pagina - 2 }</a></li>)
+              navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagina - 2 )}} >{this.state.pagina - 2 }</a></li>)
             }
           }
           if(this.state.pagina <= this.state.pagesintotal -1) {
-            navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 1 )}} >{this.state.pagina + 1 }</a></li>)
+            navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagina + 1 )}} >{this.state.pagina + 1 }</a></li>)
             if(this.state.pagina <= this.state.pagesintotal -2) {
-              navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 2)}} >{this.state.pagina + 2 }</a></li>)
+              navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagina + 2)}} >{this.state.pagina + 2 }</a></li>)
             }
           }
-          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage( this.state.pagina - 1)}} >&laquo;</a></li>)
-          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(1)}} >Eerste</a></li>)
-          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagina + 1)}} >&raquo;</a></li>)
-          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'black'}} onClick={() => {this.goToPage(this.state.pagesintotal)}} >Laatste</a></li>)
+          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {if(this.state.pagina <= 1) {} else {this.goToPage( this.state.pagina - 1)}}} >&laquo;</a></li>)
+          navigatorArray.unshift(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(1)}} >Eerste</a></li>)
+          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagina + 1)}} >&raquo;</a></li>)
+          navigatorArray.push(<li style={{cursor: "pointer"}}><a style={{color: 'rgba(71, 73, 88, 0.93)'}} onClick={() => {this.goToPage(this.state.pagesintotal)}} >Laatste</a></li>)
 
           return navigatorArray;
         }
@@ -498,11 +504,11 @@ class Browse extends Component {
               <div className="container-fluid ">
                 <div className="row text-center" style={{height: "100px"}}>
                   <div className="col-sm-12">
-                    <h1  style={{margin: '30px 0', fontWeight: "700"}}>Tassen browsen</h1>
+                    <h1  style={{margin: '30px 0', fontWeight: "700", color: "rgba(71, 73, 88, 0.93)"}}>Tassen browsen</h1>
                     <hr style={{border: "0px",
                       height: "8px",
                       width: "200px",
-                      backgroundColor: "rgb(69, 69, 69)"}} />
+                      backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
                   </div>
                   <div className="col-sm-12 text-center" style={{}}>
                     <nav aria-label="Page navigation">
@@ -526,8 +532,8 @@ class Browse extends Component {
                         </form>
                     <ul  style={{
                         boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
-                        <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"black"}}>RESET FILTERS</li>
-                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"black"}}>CATEGORIEN</li>
+                        <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
+                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Categorien</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
@@ -536,7 +542,7 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
-                        <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"500", "color":"black"}}>MERKEN</li>
+                        <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Merken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
@@ -553,7 +559,7 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
-                        <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"500", "color":"black"}}>KLEUR</li>
+                        <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Kleur</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=goud"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Goud</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=oranje"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Oranje</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=geel"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Geel</li>
@@ -585,7 +591,7 @@ class Browse extends Component {
                 <div className=" stickything2 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                     <div className="row">
-                      <div className="col-sm-12" style={{background: "black"}}>
+                      <div className="col-sm-12" style={{background: "rgba(71, 73, 88, 0.93)"}}>
                         <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan cart!</p>
                       </div>
                       <div className="col-sm-12" style={{background: "white"}}>
@@ -597,7 +603,7 @@ class Browse extends Component {
                 <div className=" stickything3 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                     <div className="row">
-                      <div className="col-sm-12" style={{background: "black"}}>
+                      <div className="col-sm-12" style={{background: "rgba(71, 73, 88, 0.93)"}}>
                         <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan wishlist!</p>
                       </div>
                       <div className="col-sm-12" style={{background: "white"}}>
