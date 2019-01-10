@@ -6,3 +6,32 @@
   background: white;
   border: none;
 }
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 2px solid white;
+  width: 100%;
+  box-shadow: none;
+}
+
+#customers td, #customers th {
+  border: none;
+  padding: 8px;
+  color: rgba(71, 73, 88, 0.93);
+  box-shadow: none;
+
+}
+
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+/* #customers tr:hover {background-color: #ddd;} */
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(71, 73, 88, 0.93);
+  color: white;
+}

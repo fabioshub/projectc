@@ -100,7 +100,7 @@ class Browse extends Component {
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                   <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                   <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli" ><i className="fas fa-heart"></i></button>
+                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli " style={{border: "none"}} ><i style={{fontSize: "20px", color: "rgba(255, 86, 75, 0.933333);"}} className="fas fa-heart"></i></button>
                     <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic); }} id="addtocartbtn" class={"btn " +"addtocartbutton"+startvalue} ><i className="fas fa-shopping-cart"></i></button>
                   </div>
                 </div>
@@ -207,7 +207,7 @@ class Browse extends Component {
                     boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                     <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
                     <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn hidethisbtnwhennogli" >  <i className="fas fa-heart" ></i></button>
+                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn hidethisbtnwhennogli" style={{border: "none"}} ><i style={{fontSize: "20px", color: "rgba(255, 86, 75, 0.933333);"}} className="fas fa-heart" ></i></button>
                       <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn " ><i className="fas fa-shopping-cart"></i></button>
                     </div>
                   </div>
@@ -240,7 +240,7 @@ class Browse extends Component {
           let table = []
           for (let j = 0; j < this.state.hoeveelheid; j++) {
             // var randomnbr = Math.floor((Math.random() * 10) + 1);
-            table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
+            table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "230px"}}>{this.state.items[j]}</div>)
           }
           console.log("browseGRID LOADED")
           return table;
@@ -502,38 +502,49 @@ class Browse extends Component {
           return(
             <div id="paginaBrowse" style={{marginTop: "120px"}}>
               <div className="container-fluid ">
-                <div className="row text-center" style={{height: "100px"}}>
-                  <div className="col-sm-12">
-                    <h1  style={{margin: '30px 0', fontWeight: "700", color: "rgba(71, 73, 88, 0.93)"}}>Tassen browsen</h1>
+                <div className="row " style={{height: "100px"}}>
+                  <div className="col-sm-12 ">
+                    <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}>Tassen browsen</h1>
                     <hr style={{border: "0px",
-                      height: "8px",
-                      width: "200px",
+                      height: "15px",
+                      width: "50px",
                       backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
                   </div>
                   <div className="col-sm-12 text-center" style={{}}>
+                    <div className="col-sm-4 text-center">
+
+                    </div>
+                    <div className="col-sm-4 text-center">
                     <nav aria-label="Page navigation">
                       <ul className="pagination" id="pagination">
                         {this.pagination()}
+
                       </ul>
                     </nav>
+                    </div>
+                    <div className="col-sm-4" style={{height: "100%"}}>
+
+                  </div>
+
                   </div>
                 </div>
                 <div className="container">
                   <div className="spinner"></div>
                 </div>
-                <div className="row text-center browsercontent" style={{height: "500px"}}>
-                  <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
+                <div className="row  browsercontent" style={{height: "500px"}}>
+
+                  <div className="col-sm-2 hidden-xs" style={{marginTop:"70px"}}>
                     {this.printFilters()}
-                        <form className="navbar-form hidden-xs">
-                          <div className="form-group" id="search">
-                            <input type="text" className="form-control border " id="searchinput" placeholder="Zoeken naar tassen, merken, etc. "/>
-                          </div>
-                          <button id="searchsubmitbutton" type="button" onClick={()=>{this.state.pagina = 1; this.formSubmitting();}} className="btn btn-default"><i className="fas fa-search"></i></button>
-                        </form>
+                    <form className="navbar-form hidden-xs text-left" style={{margin: "0", padding: "0", width: "100%"}}>
+                      <div className="form-group" id="search" >
+                        <input type="text" className="form-control border " style={{width: "100%"}} id="searchinput" placeholder="Zoeken... "/>
+                      </div>
+                      <button id="searchsubmitbutton" type="button" onClick={()=>{this.state.pagina = 1; this.formSubmitting();}} className="btn btn-default"><i className="fas fa-search"></i></button>
+                    </form>
                     <ul  style={{
-                        boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
-                        <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
-                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Categorien</li>
+                        boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group text-left">
+                        <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
+                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Categorien</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
@@ -542,7 +553,7 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
-                        <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Merken</li>
+                        <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Merken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
@@ -559,7 +570,7 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
-                        <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Kleur</li>
+                        <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Kleur</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=goud"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Goud</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=oranje"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Oranje</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=geel"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Geel</li>
@@ -576,7 +587,7 @@ class Browse extends Component {
                       </ul>
 
                     </div>
-                    <div className="col-sm-9 text-right browsegridder" style={{}}>
+                    <div className="col-sm-10 text-right browsegridder" style={{}}>
                       {this.browseGrid()}
                     </div>
                     <div className="col-sm-12 text-center" style={{}}>

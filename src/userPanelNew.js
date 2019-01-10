@@ -83,14 +83,14 @@ class userPanelNew extends Component {
     render() {
       return(
         <div className="container-fluid" style={{marginTop: "130px"}}  >
-          <h3 style={{margin: "40px 0"}} className="text-left">{"Hallo, "+this.state.name+"."}</h3>
+          <h3 style={{margin: "40px 0", color: "rgba(71, 73, 88, 0.93)"}} className="text-left">{"Hallo, "+this.state.name+"."}</h3>
 
           <div className="panel panel-default" >
-            <div className="col-xs-12 text-center">
+            <div className="col-xs-12 text-left">
             </div>
-            <table className="table table-bordered">
+            <table className="table table-bordered text-left" id="customers" >
               <tbody>
-
+                
                 <tr>
                   <td>Voornaam</td>
                   <td>{this.state.name}</td>
@@ -103,7 +103,7 @@ class userPanelNew extends Component {
                   <td>Email</td>
                   <td>{this.state.email}</td>
                 </tr>
-                
+
               <tr>
                 <td>Geboortedatum</td>
                 <td> {this.state.birth}

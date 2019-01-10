@@ -97,10 +97,10 @@ class Navigationbar extends Component {
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
               <li style={{background: 'rgba(71, 73, 88, 0.93)', borderRadius: "0 0px 7px 7px" }}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext" style={{color: "white"}}>browse</a></Link></li>
-              <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i className='fas fa-heart' ></i> </Link></li>
+              <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i style={{color: "rgba(255, 86, 75, 0.93)"}} className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i style={{color: "rgba(71, 73, 88, 0.93)"}} className="fas fa-shopping-cart"></i></Link></li>
               <li style={{background: "white"}}  id="browsebutton"><Link style={{padding: "0"}} to={"/" + this.personalclicker() }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >{this.state.accSymbol}</a></Link></li>
-              <li style={{}}  id="loguitbutton" style={{padding: "16px"}}><Link style={{padding: "0"}} to={"/pagina1" } onClick={this.resettokentonull}><a id="accSymbol" style={{color: "black", cursor: "pointer"}} >log uit</a></Link></li>
+              <li style={{}}  id="loguitbutton" style={{padding: "16px"}}><Link style={{padding: "0"}} to={"/pagina1" } onClick={this.resettokentonull}><a id="accSymbol" style={{color: "rgba(71, 73, 88, 0.93)", cursor: "pointer"}} >log uit</a></Link></li>
             </ul>
           </div>
 

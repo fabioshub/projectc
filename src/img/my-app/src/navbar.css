@@ -30,7 +30,11 @@ margin: 10px 10px 0px 10px;
 }
 
 #search input {
-  padding-right: 30px;
+  /* padding-right: 30px; */
+  width: 100%;
+  border: none;
+  box-shadow: none;
+  /* border-bottom: 4px solid black; */
 }
 
 #wishlistbutton i {

@@ -16,8 +16,8 @@ class Cart extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div> <br/>
-                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+      cartList: [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je winkelmandje is leeg :(</div> <br/>
+                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       totalPrice: 0,
       listViewList1: [],
@@ -67,8 +67,7 @@ class Cart extends Component {
             return(
                 <div>
                   <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice / 100} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
-                      <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
                 </div>
               )
             })
@@ -113,8 +112,8 @@ class Cart extends Component {
          return(
            <div>
              <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice /100} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
-                 <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
+
            </div>
          )
        })
@@ -124,7 +123,9 @@ class Cart extends Component {
 
      } else{
        console.log("WHAT?")
-       this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
+       this.state.cartList = [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je winkelmandje is leeg :(</div> <br/>
+                 <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+                 ]
      }
  }
 
@@ -256,11 +257,11 @@ class Cart extends Component {
       <div id="paginaCart" style={{marginTop: "150px", marginBottom: "150 px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-shopping-cart" style={{color: "rgb(69, 69, 69)"}}></i></h1>
+            <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}>winkelmandje</h1>
             <hr style={{border: "0px",
-              height: "8px",
-              width: "200px",
-              backgroundColor: "rgb(69, 69, 69)"}} />
+              height: "15px",
+              width: "50px",
+              backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
           </div>
         </div>
 
@@ -268,8 +269,8 @@ class Cart extends Component {
           {this.listView()}
           <div className="row">
             <div className="col-md-12 text-right">
-              <Link onClick={() => {this.checkOut()}} to={this.state.Doorgaanis}><button style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
-              <p>Totaal: {"€" + this.state.totalPrice}</p>
+              <Link onClick={() => {this.checkOut()}} to={this.state.Doorgaanis}><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", marginTop: "40px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
+              <p style={{marginTop: "10px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Totaal: {"€" + this.state.totalPrice}</p>
             </div>
           </div>
         </div>

@@ -18,8 +18,8 @@ class Wishlist extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je verlanglijstje is leeg :(</div> <br/>
-                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Breng me naar de tassen! <i className="fas fa-shopping-cart"></i></button></Link></div>
+      cartList: [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je verlanglijstje is leeg :(</div> <br/>
+                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       listViewList1: [],
       wishlisttocart: [100]
@@ -63,16 +63,29 @@ class Wishlist extends Component {
           // this.setState({totalPrice: data.totalPrice})
           let cartList = data.products.map((pic) => {
             console.log(pic)
+            // if(false) {
+            //   this.state.cartList = [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je verlanglijstje is leeg :(</div> <br/>
+            //             <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+            //             ]
+            // } else {
+            //
+            //
+            // }
+
             return(
                 <div>
-                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice + ",-"} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
-                      <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice/100 } image={pic.product.images}></CartWLI>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
                 </div>
               )
+              console.log(cartList)
+              console.log(this.state.cartList)
+
             })
 
+
             this.setState({cartList: cartList})
+
 
 
             $(".spinner").fadeOut("fast");
@@ -137,7 +150,7 @@ class Wishlist extends Component {
 
   listView() {
     let listViewList = []
-                                                                                                                                                                                                                                                                                                                                                                                                            for (let j = 0; j < this.state.cartList.length; j++) {
+    for (let j = 0; j < this.state.cartList.length; j++) {
       // var randomnbr = Math.floor((Math.random() * 10) + 1);
       listViewList.push(<div className="col-xs-12  text-right" style={{padding: "0px", margin: "0px"}}>{this.state.cartList[j]}</div>)
     }
@@ -153,11 +166,12 @@ class Wishlist extends Component {
       <div id="paginaCart" style={{marginTop: "150px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-heart" style={{color: "rgb(69, 69, 69)"}}></i></h1>
-              <hr style={{border: "0px",
-                height: "8px",
-                width: "200px",
-                backgroundColor: "rgb(69, 69, 69)"}} />
+
+                <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}><i className="fas fa-heart" style={{color: "rgba(255, 86, 75, 0.93)"}}></i></h1>
+                <hr style={{border: "0px",
+                  height: "15px",
+                  width: "50px",
+                  backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
           </div>
         </div>
 

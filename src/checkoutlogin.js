@@ -179,7 +179,7 @@ class Checkoutlogin extends Component {
 		{"ProductId": "1", "CartQuantity": "1"},
 	{"ProductId": "2", "CartQuantity": "1"},
 	{"ProductId": "2531", "CartQuantity": "1"},
-	{"ProductId": "2531", "CartQuantity": "1"},
+	{"ProductId": "5", "CartQuantity": "1"},
 	{"ProductId": "3", "CartQuantity": "1"}	],
             "FirstName" : this.state.firstname,
             "LastName" : this.state.lastname,
@@ -191,14 +191,10 @@ class Checkoutlogin extends Component {
         fetch('http://localhost:5000/api/order', {
           method: 'POST',
           body: JSON.stringify(cartitem2),
-          rejectUnauthorized: false,
-          requestCert: true,
-          mode: "no-cors",
-          type: "application/json",
-          headers:{
-            "Access-Control-Allow-Credentials" : true},
-            agent: false,
-
+          type: 'application/json',
+          headers: {
+            "Content-Type" : 'application/json'
+          },
         })
 
       }
