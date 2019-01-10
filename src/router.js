@@ -17,6 +17,8 @@ import Terms from './termsandconditions'
 import Privacy from './privacy';
 import Faq from './faq';
 import userPanelNew from './userPanelNew'
+import AdminpanelNew from './AdminPanelNew'
+
 import AdminPanel from './adminpanel';
 
 
@@ -26,6 +28,8 @@ const Router = () => (
   <Switch>
     <Route exact path="/" component={Pagina1} />
     <Route path="/pagina1" component={Pagina1} />
+      <Route path="/adminpanelnew" component={AdminpanelNew} />
+
     <Route path="/login" component={Login} />
       <Route path="/payscreen" component={Payscreen} />
       <Route path="/checkoutlogin" component={Checkoutlogin} />

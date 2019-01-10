@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import './userpanelnew.css'
+import './userpanelnew.css';
+import Product from './product'
+import { Link } from 'react-router-dom';
+import HistoryItemHolder from './historyitem';
+import $ from 'jquery';
+
 
 
 class userPanelNew extends Component {
@@ -8,6 +13,7 @@ class userPanelNew extends Component {
     this.fetchUserData = this.fetchUserData.bind(this);
 
     this.state = {
+      cartList: [],
     }
   }
 
@@ -65,20 +71,77 @@ class userPanelNew extends Component {
           this.setState({housenumber: myJson.houseNumber})
         });
 
-        fetch("http://localhost:5000/api/order/GetOrderOfTheUser",{
-          host: 'localhost',
-          port: 5000,
-          method: 'GET',
-          type: 'application/json',
-          headers:{
-            'Authorization' : authstring},
-          }).then(response => {
-            return response.json();
-          }).then(orderhis => {
-            console.log(orderhis)
 
-          });
+          fetch(`http://localhost:5000/api/order/`,{
+            host: 'localhost',
+            port: 5000,
+            // path: '/',
+            method: 'GET',
+
+            // rejectUnauthorized: false,
+            // requestCert: true,
+            // mode: "no-cors",
+            headers:{
+              // "Access-Control-Allow-Credentials" : true,
+              'Authorization' : authstring
+            },
+              agent: false
+            })
+            .then(results => {
+              console.log("RETRIEVED ITEMS SUCCES!")
+              console.log(results)
+              return results.json();
+            }).then(data => {
+              console.log(data)
+              this.setState({totalPrice: data.totalPrice})
+              let cartList = data.products.map((pic) => {
+                console.log(pic)
+                // if(false) {
+                //   this.state.cartList = [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je verlanglijstje is leeg :(</div> <br/>
+                //             <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+                //             ]
+                // } else {
+                //
+                //
+                // }
+
+                return(
+                    <div>
+                      <HistoryItemHolder orderid={pic.product.orderid} orderdatum={pic.product.orderDate} methode={pic.product.orderPayment} status={pic.product.orderStatus} name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice/100 } image={pic.product.images}></HistoryItemHolder>
+                    </div>
+                  )
+                  console.log(cartList)
+                  console.log(this.state.cartList)
+
+                })
+
+
+                this.setState({cartList: cartList})
+
+
+
+                $(".spinner").fadeOut("fast");
+                $(".browsegridder").fadeIn("fast");
+                // console.log("ITEM SET IN STATE")
+              })
+
+
+
     }
+
+    listView() {
+      let listViewList = []
+      for (let j = 0; j < this.state.cartList.length; j++) {
+        // var randomnbr = Math.floor((Math.random() * 10) + 1);
+        listViewList.push(<div className="col-xs-12  text-right" style={{padding: "0px", margin: "0px"}}>{this.state.cartList[j]}</div>)
+      }
+
+      console.log(listViewList)
+      this.state.listViewList1 = listViewList;
+
+      return this.state.listViewList1;
+    }
+
 
     render() {
       return(
@@ -90,7 +153,7 @@ class userPanelNew extends Component {
             </div>
             <table className="table table-bordered text-left" id="customers" >
               <tbody>
-                
+
                 <tr>
                   <td>Voornaam</td>
                   <td>{this.state.name}</td>
@@ -129,6 +192,11 @@ class userPanelNew extends Component {
 
             </tbody>
           </table>
+        </div>
+        <div className="container">
+          <h3 style={{margin: "40px 0", color: "rgba(71, 73, 88, 0.93)"}} className="text-left">Bestel geschiedenis</h3>
+
+          {this.listView()}
         </div>
       </div>
     );

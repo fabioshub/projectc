@@ -240,7 +240,7 @@ class Login extends Component {
                         </div>
                         </div>
 
-                          <button type="submit" value="register" name="submit" className="btn btn-success btn-block">Register</button>
+                          <button type="submit" value="register" name="submit" className="btn btn-success btn-block">Registeer</button>
                       </form>
                   </div>
                 </div>

@@ -623,6 +623,57 @@ class Browse extends Component {
                     </div>
                   </div>
                 </div>
+                <div className=" stickything3 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
+                  <div className="container-fluid" >
+                    <div className="row">
+                      <div className="col-sm-12" style={{background: "rgba(71, 73, 88, 0.93)"}}>
+                        <ul  style={{
+                            boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group text-left">
+                            <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
+                            <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Categorien</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Tassen</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Portemonnees</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
+                            <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Merken</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=4"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">By lin</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=5"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Castelijn en Beerens</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=6"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Brics</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Leonhard Heyden</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=8 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Dakine</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=9"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Eastpak</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=10"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Gabol</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=11"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Senz</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=12"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra"> Kipling</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=13"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">The Bridge</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
+                            <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"300", "color":"rgba(71, 73, 88, 0.93)"}}>Kleur</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=goud"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Goud</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=oranje"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Oranje</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=geel"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Geel</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=taupe"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Taupe</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=grijs"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Grijs</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=rose"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Rose</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=cognac"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Cognac</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=rood"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Rood</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=print"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Print</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=bruin"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Bruin</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=brons"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Brons</li>
+                            <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=beige"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Beige</li>
+
+                          </ul>                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )
           }

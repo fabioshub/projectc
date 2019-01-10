@@ -5,18 +5,14 @@
 .panel-default>.panel-heading {
   background: white;
   border: none;
-  border: none !important;
-
 }
 
 #customers {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
-  /* border: 2px solid white; */
+  border: 2px solid white;
   width: 100%;
   box-shadow: none;
-  border: none !important;
-
 }
 
 #customers td, #customers th {
@@ -24,11 +20,12 @@
   padding: 8px;
   color: rgba(71, 73, 88, 0.93);
   box-shadow: none;
-  border: none !important;
-
 
 }
 
+canvas#myChart.chartjs-render-monitor {
+  width: 200px;
+}
 
 #customers tr:nth-child(even){background-color: #f2f2f2;}
 
@@ -40,4 +37,8 @@
   text-align: left;
   background-color: rgba(71, 73, 88, 0.93);
   color: white;
+}
+
+.adminfilter li:hover {
+  background-color: rgb(218, 218, 218)
 }
