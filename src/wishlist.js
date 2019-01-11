@@ -163,7 +163,7 @@ class Wishlist extends Component {
 
   render() {
     return(
-      <div id="paginaCart" style={{marginTop: "150px"}}>
+      <div id="paginaCart" style={{marginTop: "100px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
 

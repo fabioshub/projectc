@@ -66,6 +66,13 @@ class Login extends Component {
         localStorage.setItem('auth_token', myJson.auth_token);
         this.setState({redirect: true})
       }
+
+      if (myJson.role == "Admin") {
+        localStorage.setItem('role', "Admin");
+      } else {
+        localStorage.removeItem('role')
+
+      }
       window.location.reload();
 
     });
@@ -77,7 +84,7 @@ class Login extends Component {
     event.preventDefault();
     let registerobject = {"EmailAddress": this.state.username, "UserPassword": this.state.password, "FirstName": this.state.firstname, "LastName": this.state.lastname, "BirthDate": this.state.birthdate, "Gender": this.state.gender, "Phone": this.state.phone, "Street": this.state.straat, "City": this.state.stad, "ZipCode": this.state.postcode, "HouseNumber": this.state.huis}
 
-
+    console.log(registerobject)
 
     fetch('http://localhost:5000/api/user/registration', {
       method: 'POST',
@@ -89,25 +96,10 @@ class Login extends Component {
       console.log(response)
     })
 
-    let userobject = {EmailAddress: this.state.username, UserPassword: this.state.password}
-    fetch('http://localhost:5000/api/auth/login', {
-      method: 'POST',
-      body: JSON.stringify(userobject),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(response => {
-      return response.json();
-    })
-    .then(myJson => {
-      if (myJson.auth_token) {
-        localStorage.setItem('auth_token', myJson.auth_token);
-      }
-      // this.setState({redirect: true})
-      // this.forceUpdate()
-      window.location.reload();
+    window.location.reload();
 
-    });
+
+  
 
 
 
@@ -166,7 +158,7 @@ class Login extends Component {
       return(
 
 
-        <div  style={{marginTop: "130px"}}>
+        <div  style={{marginTop: "100px"}}>
 
 
 

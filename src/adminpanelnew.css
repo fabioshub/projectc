@@ -42,3 +42,35 @@ canvas#myChart.chartjs-render-monitor {
 .adminfilter li:hover {
   background-color: rgb(218, 218, 218)
 }
+
+.list-group li {
+  cursor: pointer;
+  border: none;
+  font-weight: 400;
+}
+
+#pagination li a{
+  border: none;
+  font-weight: 400;
+}
+
+
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background-color: rgba(71, 73, 88, 0.93);
+  border-color: rgba(71, 73, 88, 0.93);
+  border-radius: 6px
+}
+
+#searchinput1 {
+  border: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  box-shadow: none;
+}
+
+#searchsubmitbutton1, #searchsubmitbutton {
+/* border: 1px solid black; */
+  box-shadow: none;
+  color: white;
+  background-color:rgb(254, 198, 101)
+}

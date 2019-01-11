@@ -10,7 +10,7 @@ class Navigationbar extends Component {
     super(props);
 
     this.state = {
-      accSymbol : "login"
+      accSymbol : "login | Registreren"
     }
 
   }
@@ -41,10 +41,18 @@ class Navigationbar extends Component {
         $("#loguitbutton").hide()
 
       }
+
+      if(localStorage.getItem("role")) {
+        $("#adminbutton").show()
+      } else {
+        $("#adminbutton").hide()
+      }
     }
 
     resettokentonull() {
       localStorage.removeItem("auth_token");
+      localStorage.removeItem("role")
+
       window.location.reload();
 
 
@@ -68,7 +76,7 @@ class Navigationbar extends Component {
     //     </div>
     //   ]
     personalclicker() {
-      if(this.state.accSymbol == "login")
+      if(this.state.accSymbol == "login | Registreren")
       {return "login"}
       else
       {return "userpanelnew"}
@@ -96,7 +104,9 @@ class Navigationbar extends Component {
 
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
-              <li style={{background: 'rgb(254, 198, 101)', borderRadius: "0 0px 7px 7px" }}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext" style={{color: "white"}}>browse</a></Link></li>
+              <li style={{background: "white"}}  id="adminbutton"><Link style={{padding: "0"}} to={"/adminpanelnew" }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >Adminpanel</a></Link></li>
+
+              <li style={{background: 'rgb(254, 198, 101)' }}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext" style={{color: "white"}}>browse</a></Link></li>
               <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i style={{color: "rgba(71, 73, 88, 0.93)"}} className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i style={{color: "rgb(254, 198, 101)"}} className="fas fa-shopping-cart"></i></Link></li>
               <li style={{background: "white"}}  id="browsebutton"><Link style={{padding: "0"}} to={"/" + this.personalclicker() }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >{this.state.accSymbol}</a></Link></li>
@@ -104,21 +114,7 @@ class Navigationbar extends Component {
             </ul>
           </div>
 
-          <div className="container-fluid" style={{background: "white"}}>
-            <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
-              <ul className="nav navbar-nav navbar-left" id="selection">
-                <li><a href="#"> <Link to='/browse'>Tassen</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Reistassen</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Schooltassen</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Werktassen</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Rugzakken</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Portemonnees</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Koffers</Link></a></li>
-                <li><a href="#"> <Link to='/browse'>Overig</Link></a></li>
-              </ul>
-            </div>
-          </div>
 
         </nav>
       )

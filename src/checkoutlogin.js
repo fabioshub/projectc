@@ -74,9 +74,17 @@ class Checkoutlogin extends Component {
 
     window.scrollTo(0, 0)
 
+    if(localStorage.getItem("auth_token")) {
+      $(".hidetoo").hide()
+
+}
+
+  $(".stepwizard-row .btn-primary").on("click", function(){
+
+  })
 
 
-    var navListItems = $('div.setup-panel div a'),
+    var navListItems = $('div.setup-panel div a '),
             allWells = $('.setup-content'),
             allNextBtn = $('.nextBtn');
 
@@ -150,6 +158,7 @@ class Checkoutlogin extends Component {
             'Authorization' : authstring
           },
         })
+
 
       } else {
 
@@ -262,7 +271,7 @@ class Checkoutlogin extends Component {
 
                     <div className="container text-left">
             <div className="stepwizard">
-                <div className="stepwizard-row setup-panel">
+                <div className="stepwizard-row setup-panel" style={{cursor: "not-allowed"}}>
                     <div className="stepwizard-step removethisifli">
                         <a href="#step-1" type="button" disabled="disabled" className="btn btn-primary btn-circle step-1-round">1</a>
                         <p>Gegevens</p>
@@ -351,16 +360,16 @@ class Checkoutlogin extends Component {
                         <div className="col-md-12 payingoption">
                           <table className="table table-bordered" style={{marginTop: "40px"}}>
                             <tbody>
-                              <tr>
+                              <tr className="hidetoo">
                               <td>Naam</td>
                               <td>{this.state.firstname}</td>
                             </tr>
-                            <tr>
-                            <td>Achternaam</td>
+                            <tr className="hidetoo">
+                            <td >Achternaam</td>
                             <td>{this.state.lastname}</td>
                           </tr>
-                          <tr>
-                          <td>e-mailadres</td>
+                          <tr className="hidetoo">
+                          <td >e-mailadres</td>
                           <td>{this.state.username}</td>
                         </tr>
                               <tr>

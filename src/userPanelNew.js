@@ -145,7 +145,7 @@ class userPanelNew extends Component {
 
     render() {
       return(
-        <div className="container-fluid" style={{marginTop: "130px"}}  >
+        <div className="container-fluid" style={{marginTop: "100px"}}  >
           <h3 style={{margin: "40px 0", color: "rgba(71, 73, 88, 0.93)"}} className="text-left">{"Hallo, "+this.state.name+"."}</h3>
 
           <div className="panel panel-default" >
