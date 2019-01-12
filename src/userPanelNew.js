@@ -107,7 +107,7 @@ class userPanelNew extends Component {
 
                 return(
                     <div>
-                      <HistoryItemHolder orderid={pic.product.orderid} orderdatum={pic.product.orderDate} methode={pic.product.orderPayment} status={pic.product.orderStatus} name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice/100 } image={pic.product.images}></HistoryItemHolder>
+                      <HistoryItemHolder orderid={pic.product.orderid} orderdatum={pic.product.orderDate} methode={pic.product.orderPayment} status={pic.product.orderStatus} name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100/100 } image={pic.product.images}></HistoryItemHolder>
                     </div>
                   )
                   console.log(cartList)

@@ -48,10 +48,10 @@ class Login extends Component {
 
   }
 
-  handleSubmit(event) {
+  async handleSubmit(event) {
     event.preventDefault();
     let userobject = {EmailAddress: this.state.username, UserPassword: this.state.password}
-    fetch('http://localhost:5000/api/auth/login', {
+    await fetch('http://localhost:5000/api/auth/login', {
       method: 'POST',
       body: JSON.stringify(userobject),
       headers: {
@@ -79,14 +79,14 @@ class Login extends Component {
 
   }
 
-  handleSubmitRegister(event) {
+  async handleSubmitRegister(event) {
 
     event.preventDefault();
     let registerobject = {"EmailAddress": this.state.username, "UserPassword": this.state.password, "FirstName": this.state.firstname, "LastName": this.state.lastname, "BirthDate": this.state.birthdate, "Gender": this.state.gender, "Phone": this.state.phone, "Street": this.state.straat, "City": this.state.stad, "ZipCode": this.state.postcode, "HouseNumber": this.state.huis}
 
     console.log(registerobject)
 
-    fetch('http://localhost:5000/api/user/registration', {
+    await fetch('http://localhost:5000/api/user/registration', {
       method: 'POST',
       body: JSON.stringify(registerobject),
       headers: {
@@ -99,7 +99,7 @@ class Login extends Component {
     window.location.reload();
 
 
-  
+
 
 
 

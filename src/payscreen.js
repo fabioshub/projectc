@@ -38,9 +38,9 @@ class Payscreen extends Component {
 
 
     let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-    let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
+    let cartify = (arrayInLocalStorage.map((pic) => {return Math.round(pic.product.productPrice * 100) / 100}))
     let cartList = arrayInLocalStorage.map((pic) => {
-      this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice;
+      this.state.totalPrice  = this.state.totalPrice + Math.round(pic.product.productPrice * 100) / 100;
       // this.setState({totalPrice: totalPrice});
       return(
         <div>

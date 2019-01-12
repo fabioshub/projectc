@@ -260,10 +260,10 @@ class adminPanelNew extends Component {
       }
 
 
-      fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+      async fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
         let authstring = `Bearer ${localStorage.getItem("auth_token")}`
 
-        fetch(`http://localhost:5000/api/admin/users/${pagina}/${hoeveelheid}`,{
+        await fetch(`http://localhost:5000/api/admin/users/${pagina}/${hoeveelheid}`,{
           host: 'localhost',
           port: 5000,
           method: 'GET',
@@ -296,7 +296,7 @@ class adminPanelNew extends Component {
 
         })
 
-        fetch(`http://localhost:5000/api/admin/orders/1/1`,{
+        await fetch(`http://localhost:5000/api/admin/orders/1/1`,{
           host: 'localhost',
           port: 5000,
           // path: '/',
@@ -476,7 +476,7 @@ class adminPanelNew extends Component {
 // });
 //       }
 
-postnewinfo() {
+async postnewinfo() {
   //console.log($("#valueid").val())
   // console.log($("#valuekeyselect").val())
   //console.log($("#valuenew").val())
@@ -491,7 +491,7 @@ postnewinfo() {
 console.log(putobject)
 
 
-  fetch(`http://localhost:5000/api/admin/userid=${useridb}`, {
+  await fetch(`http://localhost:5000/api/admin/userid=${useridb}`, {
     method: 'PUT',
     body: JSON.stringify(putobject),
     type: 'application/json',

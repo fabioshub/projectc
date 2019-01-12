@@ -206,6 +206,7 @@ class Checkoutlogin extends Component {
           },
         })
 
+        localStorage.removeItem("arrayInLocalStorage")
       }
 
 

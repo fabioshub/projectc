@@ -68,6 +68,25 @@ class ProductInfoPage extends Component {
 
   addToWishlistClicked(pic) {
 
+    if(localStorage.getItem("auth_token")) {
+
+      // console.log(pic.product.id)
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+      // console.log(authstring)
+      let cartitem = {"ProductId" : `${pic.product.id}`}
+      // console.log(JSON.stringify(cartitem))
+      fetch('http://localhost:5000/api/wishlist', {
+        method: 'POST',
+        body: JSON.stringify(cartitem),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      })
+    } else {
+
+
     if(localStorage.getItem('arrayInLocalStorageWishlist')) {
       let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
       console.log(temparray)
@@ -83,6 +102,8 @@ class ProductInfoPage extends Component {
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
     };
+
+  }
 
     $('.stickything3').show(0).delay(2000).fadeOut(500);
 
