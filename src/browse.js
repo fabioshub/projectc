@@ -533,7 +533,7 @@ class Browse extends Component {
                     <ul  style={{
                         boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
                         <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
-                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Categorien</li>
+                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Categorieën</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
