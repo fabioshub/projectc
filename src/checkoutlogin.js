@@ -189,7 +189,8 @@ class Checkoutlogin extends Component {
 	{"ProductId": "2", "CartQuantity": "1"},
 	{"ProductId": "2531", "CartQuantity": "1"},
 	{"ProductId": "5", "CartQuantity": "1"},
-	{"ProductId": "3", "CartQuantity": "1"}	],
+	{"ProductId": "3", "CartQuantity": "1"}
+],
             "FirstName" : this.state.firstname,
             "LastName" : this.state.lastname,
             "EmailAddress" : this.state.username

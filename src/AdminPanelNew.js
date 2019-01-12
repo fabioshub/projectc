@@ -31,9 +31,13 @@ class adminPanelNew extends Component {
       pagina: 1,
       hoeveelheid: 1,
       CategoryId: "",
+      CategoryName: "",
       TypeId: "",
       BrandId: "",
       CollectionId: "",
+      TypeName: "",
+      BrandName: "",
+      CollectionName: "",
       Stock: "",
       ProductName: "",
       ProductNumber: "",
@@ -49,6 +53,9 @@ class adminPanelNew extends Component {
   onChangeCategoryId = (e) => {
     this.setState({ CategoryId: e.target.value });
   }
+  onChangeCategoryName = (e) => {
+    this.setState({ CategoryName: e.target.value });
+  }
   onChangeTypeId = (e) => {
     this.setState({ TypeId: e.target.value });
   }
@@ -57,6 +64,15 @@ class adminPanelNew extends Component {
   }
   onChangeCollectionId = (e) => {
     this.setState({ CollectionId: e.target.value });
+  }
+  onChangeTypeName = (e) => {
+    this.setState({ TypeName: e.target.value });
+  }
+  onChangeBrandName = (e) => {
+    this.setState({ BrandName: e.target.value });
+  }
+  onChangeCollectionName = (e) => {
+    this.setState({ CollectionName: e.target.value });
   }
   onChangeStock = (e) => {
     this.setState({ Stock: e.target.value });
@@ -71,7 +87,7 @@ class adminPanelNew extends Component {
     this.setState({ ProductEAN: e.target.value });
   }
   onChangeProductInfo = (e) => {
-    this.setState({ productInfo: e.target.value });
+    this.setState({ ProductInfo: e.target.value });
   }
   onChangeProductDescription = (e) => {
     this.setState({ ProductDescription: e.target.value });
@@ -575,11 +591,29 @@ console.log(putobject)
 
 }
 
-handlePostNewItem() {
+handlePostNewItem = (e) => {
 
-  let postobject = {"ProductName": this.state.ProductName, "ProductId": this.state.ProductId, "ProductInfo": this.state.ProductInfo, "ProductDescription": this.state.ProductDescription, "productSpecification": this.state.ProductSpecification, "ProductPrice": this.state.ProductPrice, "ProductEAN": this.state.ProductEAN, "Stock": this.state.Stock,
-    "ProductColor": this.state.ProductColor, "ProductNumber": this.state.ProductNumber, "CategoryId": this.state.CategoryId, "CollectionId": this.state.CollectionId, "BrandId": this.state.brandId, "TypeName": this.state.TypeName, }
+  e.preventDefault()
 
+  let postobject = {
+    "ProductName": this.state.ProductName,
+     "ProductInfo": this.state.ProductInfo,
+     "ProductDescription": this.state.ProductDescription,
+     "ProductSpecification": this.state.ProductSpecification,
+      "ProductPrice": this.state.ProductPrice,
+      "ProductEAN": this.state.ProductEAN,
+      "Stock": this.state.Stock,
+    "ProductColor": this.state.ProductColor,
+    "ProductNumber": this.state.ProductNumber,
+    "CategoryId": this.state.CategoryId,
+      "TypeName": this.state.TypeName,
+      "TypeId": this.state.TypeId,
+
+      "CollectionName": this.state.CollectionName,
+      "BrandName": this.state.BrandName,
+     }
+
+    console.log(postobject)
   let authstring = `Bearer ${localStorage.getItem("auth_token")}`
 
   fetch('http://localhost:5000/api/product/create', {
@@ -589,7 +623,7 @@ handlePostNewItem() {
       'Content-Type': 'application/json',
       'Authorization' : authstring},
 
-    },)
+    })
   }
 
 
@@ -639,16 +673,23 @@ handlePostNewItem() {
                       <input type="text" class="form-control " placeholder="Kleur" onChange={this.onChangeProductColor} required/>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control " placeholder="Type" onChange={this.onChangeTypeId} required/>
+                      <input type="text" class="form-control " placeholder="voorraad" onChange={this.onChangeStock} required/>
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control " placeholder="Categorie" onChange={this.onChangeCategoryId} required/>
+                      <input type="text" class="form-control " placeholder="Type id" onChange={this.onChangeTypeId} />
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control " placeholder="Merk" onChange={this.onChangeBrandId} required/>
+                      <input type="text" class="form-control " placeholder="Type naam" onChange={this.onChangeTypeName} />
                     </div>
                     <div class="form-group">
-                      <input type="text" class="form-control " placeholder="Collectie" onChange={this.onChangeCollectionId} required/>
+                      <input type="text" class="form-control " placeholder="Categorie id" onChange={this.onChangeCategoryId} />
+                    </div>
+                    <div class="form-group">
+                      <input type="text" class="form-control " placeholder="Merk naam" onChange={this.onChangeBrandName} />
+                    </div>
+
+                    <div class="form-group">
+                      <input type="text" class="form-control " placeholder="Collectie naam" onChange={this.onChangeCollectionName} />
                     </div>
                     </div>
 
