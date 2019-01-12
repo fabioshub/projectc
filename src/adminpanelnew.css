@@ -1,0 +1,76 @@
+.moblist_prf{ width:100%; padding:0;}
+
+.moblist_prf li{floath:left; list-style:none; display:inline;}
+
+.panel-default>.panel-heading {
+  background: white;
+  border: none;
+}
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  border: 2px solid white;
+  width: 100%;
+  box-shadow: none;
+}
+
+#customers td, #customers th {
+  border: none;
+  padding: 8px;
+  color: rgba(71, 73, 88, 0.93);
+  box-shadow: none;
+
+}
+
+canvas#myChart.chartjs-render-monitor {
+  width: 200px;
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+/* #customers tr:hover {background-color: #ddd;} */
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: rgba(71, 73, 88, 0.93);
+  color: white;
+}
+
+.adminfilter li:hover {
+  background-color: rgb(218, 218, 218)
+}
+
+.list-group li {
+  cursor: pointer;
+  border: none;
+  font-weight: 400;
+}
+
+#pagination li a{
+  border: none;
+  font-weight: 400;
+}
+
+
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+  background-color: rgba(71, 73, 88, 0.93);
+  border-color: rgba(71, 73, 88, 0.93);
+  border-radius: 6px
+}
+
+#searchinput1 {
+  border: 1px solid black;
+  /* border-bottom: 1px solid black; */
+  box-shadow: none;
+}
+
+#searchsubmitbutton1, #searchsubmitbutton {
+/* border: 1px solid black; */
+  box-shadow: none;
+  color: white;
+  background-color:rgb(254, 198, 101)
+}

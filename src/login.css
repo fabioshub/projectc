@@ -4,7 +4,7 @@
 }
 .login-form-1{
     padding: 5%;
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19); */
 }
 .login-form-1 h3{
     text-align: center;
@@ -13,7 +13,7 @@
 .login-form-2{
     padding: 5%;
     background: rgb(80, 80, 80);
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    /* box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19); */
 }
 .login-form-2 h3{
     text-align: center;
@@ -22,6 +22,30 @@
 .login-container form{
     padding: 10%;
 }
+
+.modal-content {
+  box-shadow: none;
+  border: none;
+}
+
+.btn-success {
+  background-color: rgb(254, 198, 101);
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: rgb(255, 230, 187);
+  border: none;
+}
+
+.well {
+  border-radius: 2px 2px 2px 2px;
+  background-color: white;
+  border: none;
+}
+
+
+
 .btnSubmit
 {
     width: 50%;
@@ -72,7 +96,7 @@
 }
 .hover_bkgr_fricc > div {
     background-color: #fff;
-    box-shadow: 10px 10px 60px #555;
+    /* box-shadow: 10px 10px 60px #555; */
     display: inline-block;
     height: auto;
     max-width: 551px;

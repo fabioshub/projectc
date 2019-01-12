@@ -1,6 +1,6 @@
 .list-group-item {
 
-    padding: 20px 15px;
+    padding: 12px 15px;
 
 }
 
@@ -47,21 +47,35 @@
 .list-group li {
   cursor: pointer;
   border: none;
-  font-weight: 400
-
+  font-weight: 400;
 }
 
-#paginaion li {
+#pagination li a{
   border: none;
+  font-weight: 400;
 }
+
+
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
   background-color: rgba(71, 73, 88, 0.93);
   border-color: rgba(71, 73, 88, 0.93);
+  border-radius: 6px
 }
 
 .ATCCLICKACTIVATED {
   background-color: green;
+}
+
+#searchinput {
+  border: none;
+  /* border-bottom: 1px solid black; */
+  box-shadow: none;
+}
+
+#searchsubmitbutton {
+  border: none;
+  box-shadow: none;
 }
 
 .stickything {
@@ -72,4 +86,35 @@
   /* Set the fixed height of the footer here */
   line-height: 60px;
 
+}
+
+
+
+.filterfloat, .filterfloatfilters{
+
+  -webkit-user-select: none; /* Safari 3.1+ */
+  -moz-user-select: none; /* Firefox 2+ */
+  -ms-user-select: none; /* IE 10+ */
+  user-select: none; /* Standard syntax */
+
+}
+
+.filterfloat li {
+  text-transform: uppercase;
+  font-family: 'Open Sans', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+  background-Color: rgb(254, 198, 101);
+  padding: 20px 15px
+}
+
+.filterfloat li:hover {
+  color: rgb(254, 198, 101);
+  background-Color: white;
+}
+
+.filterfloatfilters li:hover {
+  color: white;
+  background-Color: rgb(254, 198, 101);
 }

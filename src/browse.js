@@ -66,13 +66,13 @@ class Browse extends Component {
 
   }
 
-  fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+  async fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
     this.setState({filterarraylist: []})
 
     $(".spinner").show()
     $(".browsegridder").hide()
 
-    fetch(`http://localhost:5000/api/product/${pagina}/${hoeveelheid}`,{
+    await fetch(`http://localhost:5000/api/product/${pagina}/${hoeveelheid}`,{
       host: 'localhost',
       port: 5000,
       path: '/',
@@ -98,9 +98,9 @@ class Browse extends Component {
             <div>
               <div style={{
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
-                  <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
+                  <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +Math.round(pic.product.productPrice / 100 * 100) /100} image={pic.images[0]}/></Link>
                   <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli" ><i className="fas fa-heart"></i></button>
+                    <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli " style={{border: "none"}} ><i style={{fontSize: "20px", color: "rgba(255, 86, 75, 0.933333);"}} className="fas fa-heart"></i></button>
                     <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic); }} id="addtocartbtn" class={"btn " +"addtocartbutton"+startvalue} ><i className="fas fa-shopping-cart"></i></button>
                   </div>
                 </div>
@@ -122,6 +122,7 @@ class Browse extends Component {
           // console.log("ITEM SET IN STATE")
           this.state.filters = []
         })
+
       }
 
 
@@ -205,9 +206,9 @@ class Browse extends Component {
               <div>
                 <div style={{
                     boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
-                    <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
+                    <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +Math.round(pic.product.productPrice * 100) / 100/100 } image={pic.images[0]}/></Link>
                     <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
-                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn hidethisbtnwhennogli" >  <i className="fas fa-heart" ></i></button>
+                      <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn hidethisbtnwhennogli" style={{border: "none"}} ><i style={{fontSize: "20px", color: "rgba(255, 86, 75, 0.933333);"}} className="fas fa-heart" ></i></button>
                       <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn " ><i className="fas fa-shopping-cart"></i></button>
                     </div>
                   </div>
@@ -240,7 +241,7 @@ class Browse extends Component {
           let table = []
           for (let j = 0; j < this.state.hoeveelheid; j++) {
             // var randomnbr = Math.floor((Math.random() * 10) + 1);
-            table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "300px"}}>{this.state.items[j]}</div>)
+            table.push(<div className="col-xs-12 col-sm-6 col-md-4" style={{padding: "0px", margin: "0px", height: "230px"}}>{this.state.items[j]}</div>)
           }
           console.log("browseGRID LOADED")
           return table;
@@ -436,8 +437,9 @@ class Browse extends Component {
           $(window).on('load', loaded);
         }
 
-        formSubmitting(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+        formSubmitting(e, pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
           var searchvalue = $("#searchinput").val()
+          e.preventDefault()
 
           fetch(`http://localhost:5000/api/product/search/${pagina}/${hoeveelheid}/${searchvalue}`,{
             host: 'localhost',
@@ -465,7 +467,7 @@ class Browse extends Component {
                 <div>
                   <div style={{
                       boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
-                      <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +pic.product.productPrice/100 + ",-"} image={pic.images[0]}/></Link>
+                      <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +Math.round(Math.round(pic.product.productPrice * 100) / 100 * 100) / 100 /100 } image={pic.images[0]}/></Link>
                       <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
                         <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" class="btn" >  <i className="fas fa-heart" ></i></button>
                         <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic)}} id="addtocartbtn" class="btn" ><i className="fas fa-shopping-cart"></i></button>
@@ -500,40 +502,79 @@ class Browse extends Component {
 
         render() {
           return(
-            <div id="paginaBrowse" style={{marginTop: "120px"}}>
+            <div id="paginaBrowse" style={{marginTop: "100px"}}>
               <div className="container-fluid ">
-                <div className="row text-center" style={{height: "100px"}}>
-                  <div className="col-sm-12">
-                    <h1  style={{margin: '30px 0', fontWeight: "700", color: "rgba(71, 73, 88, 0.93)"}}>Tassen browsen</h1>
+                <div className="row " style={{height: "100px"}}>
+                  <div className="col-sm-12 ">
+                    <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}>Tassen browsen</h1>
                     <hr style={{border: "0px",
-                      height: "8px",
-                      width: "200px",
+                      height: "15px",
+                      width: "50px",
                       backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
                   </div>
                   <div className="col-sm-12 text-center" style={{}}>
+                    <div className="col-sm-4 text-center">
+
+                    </div>
+                    <div className="col-sm-4 text-center">
                     <nav aria-label="Page navigation">
                       <ul className="pagination" id="pagination">
                         {this.pagination()}
+
                       </ul>
                     </nav>
+                    </div>
+                    <div className="col-sm-4" style={{height: "100%"}}>
+
+                  </div>
+
                   </div>
                 </div>
                 <div className="container">
                   <div className="spinner"></div>
                 </div>
-                <div className="row text-center browsercontent" style={{height: "500px"}}>
+                <div className="row  browsercontent" style={{height: "500px"}}>
+
                   <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
                     {this.printFilters()}
-                        <form className="navbar-form hidden-xs">
-                          <div className="form-group" id="search">
-                            <input type="text" className="form-control border " id="searchinput" placeholder="Zoeken naar tassen, merken, etc. "/>
-                          </div>
-                          <button id="searchsubmitbutton" type="button" onClick={()=>{this.state.pagina = 1; this.formSubmitting();}} className="btn btn-default"><i className="fas fa-search"></i></button>
-                        </form>
+                    <form className="navbar-form hidden-xs text-left" style={{margin: "0", padding: "0", width: "100%"}}>
+                      <div className="form-group" id="search" >
+                        <input type="text" className="form-control border " style={{width: "100%"}} id="searchinput" placeholder="Zoeken... "/>
+                      </div>
+                      <button id="searchsubmitbutton" type="button" onClick={(e)=>{this.state.pagina = 1; this.formSubmitting(e);}} className="btn btn-default"><i className="fas fa-search"></i></button>
+                    </form>
+
+
+                    </div>
+                    <div className="col-sm-9 text-right browsegridder" style={{}}>
+                      {this.browseGrid()}
+                    </div>
+                    <div className="col-sm-12 text-center" style={{}}>
+                      <nav aria-label="Page navigation">
+                        <ul className="pagination" id="pagination">
+                          {this.pagination()}
+                        </ul>
+                      </nav>
+                    </div>
+                  </div>
+                </div>
+                <div className=" stickything4 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
+                  <div className="container-fluid" >
+                        <ul  style={{
+                            boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group filterfloat text-left">
+                            <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"600", color: "rgb(254, 198, 101)", backgroundColor: "white"}}>Reset filters</li>
+                            <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"600"}}>Categorien</li>
+                            <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"600"}}>Merken</li>
+                            <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"600"}}>Kleur</li>
+                          </ul>
+                  </div>
+                </div>
+                <div className=" stickything4 footer navbar-fixed-bottom content-center text-right" style={{width: "20%", maxHeight: "80vh"}}>
+                  <div className="container-fluid" >
+                    <span onClick={()=>{ $( ".filter-col" ).hide(); $( ".filter-bra" ).hide(); $( ".filter-cat" ).hide(); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px', border: "none"}} className="list-group-item text-left filter-cat filter-bra filter-col"><i style={{color: "rgb(254, 198, 101)", fontSize: "20px"}} className="far fa-times-circle"></i> </span>
+
                     <ul  style={{
-                        boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group">
-                        <li onClick={() => {$("#searchinput").val(""); this.fetchData();  this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Reset filters</li>
-                        <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Categorieën</li>
+                        boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.1)", backgroundColor: "rgb(254, 198, 101)"}} className="list-group filterfloatfilters text-left">
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=1"); this.state.pagina = 1}} className="list-group-item filter-cat">Koffers</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Reistassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Werktassen</li>
@@ -542,7 +583,6 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=7"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Rugzakken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=8"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-cat">Schooltassen</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("CategoryId=6 "); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-cat">Overig</li>
-                        <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Merken</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=1"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">dR Amsterdam</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=2"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Rimowa</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=3"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Tumi</li>
@@ -559,7 +599,6 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=14"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">My Lady</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=15"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-bra">Knirps</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("BrandId=16"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-bra">Samsonite</li>
-                        <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"500", "color":"rgba(71, 73, 88, 0.93)"}}>Kleur</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=goud"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Goud</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=oranje"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Oranje</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=geel"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Geel</li>
@@ -572,26 +611,13 @@ class Browse extends Component {
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=bruin"); this.state.pagina = 1}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item filter-col">Bruin</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=brons"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Brons</li>
                         <li onClick={() => {$("#searchinput").val("");this.fetchDataFilter("ProductColor=beige"); this.state.pagina = 1}} style={{cursor: "pointer"}} className="list-group-item filter-col">Beige</li>
-
                       </ul>
-
-                    </div>
-                    <div className="col-sm-9 text-right browsegridder" style={{}}>
-                      {this.browseGrid()}
-                    </div>
-                    <div className="col-sm-12 text-center" style={{}}>
-                      <nav aria-label="Page navigation">
-                        <ul className="pagination" id="pagination">
-                          {this.pagination()}
-                        </ul>
-                      </nav>
-                    </div>
                   </div>
                 </div>
                 <div className=" stickything2 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                     <div className="row">
-                      <div className="col-sm-12" style={{background: "rgba(71, 73, 88, 0.93)"}}>
+                      <div className="col-sm-12" style={{background: "rgb(254, 198, 101)"}}>
                         <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan cart!</p>
                       </div>
                       <div className="col-sm-12" style={{background: "white"}}>
@@ -603,7 +629,7 @@ class Browse extends Component {
                 <div className=" stickything3 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                     <div className="row">
-                      <div className="col-sm-12" style={{background: "rgba(71, 73, 88, 0.93)"}}>
+                      <div className="col-sm-12" style={{background: "rgb(254, 198, 101)"}}>
                         <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan wishlist!</p>
                       </div>
                       <div className="col-sm-12" style={{background: "white"}}>

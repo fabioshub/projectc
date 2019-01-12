@@ -64,7 +64,7 @@ class AdminPanel extends Component {
     createProduct(event) {
         event.preventDefault()
         let newproduct = {"ProductName": this.state.productName, "ProductNumber": this.state.productNumber, "ProductEAN": this.state.productEan, "ProductInfo": this.state.productInfo, "ProductDescription": this.state.productDesc, "ProductSpecification": this.state.productSpec, "ProductPrice": this.state.price, "ProductColor": this.state.color, "ImageURL": this.state.image, "Stock": this.state.stock, "BrandId": this.state.brandId, "BrandName": this.state.brandName, "TypeName": this.state.typeName, "TypeId": this.state.typeId, "CategoryId": this.state.categoryId, "CategoryName": this.state.categoryName, "CollectionId": this.state.collectionId, "CollectionName": this.state.collectionName}
-    
+
         fetch(`http://localhost:3000/api/product/create`, {
             method: 'POST',
             body: JSON.stringify(newproduct),
@@ -186,7 +186,7 @@ class AdminPanel extends Component {
 
     render() {
         return(
-            <div class="container admin-container" style={{marginTop: "130px"}}>
+            <div class="container admin-container" style={{marginTop: "100px"}}>
                 <h1>Admin Panel</h1>
                 <div class="row">
                     <div class ="col-md-6 admin-form">

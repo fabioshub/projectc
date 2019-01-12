@@ -50,16 +50,17 @@ carousel() {
       <div id="pagina1">
       <div id="jumbotron" className="jumbotron jumbotron-fluid">
           <div className="container-fluid text-center">
-          <h1 id="btb" className="display-4">Back to Bag.</h1>
+          <h1 id="btb" style={{color:"rgb(65, 65, 65)"}} className="display-4">Back <span  >to</span> Bag.</h1>
         </div>
       </div>
       <div className="container-fluid text-center">
         <div className="row">
           <div className="col-sm-12">
-            <h1 id="trending">Populair</h1>
-          </div>
-          <div className="col-sm-12">
-<hr style={{border: "0px", height: "8px", width: "200px", backgroundColor: "rgb(69, 69, 69)"}}/>
+            <h1  style={{margin: '30px 0', fontWeight: "600", color: "rgba(71, 73, 88, 0.93)"}}>Populair</h1>
+            <hr style={{border: "0px",
+              height: "15px",
+              width: "50px",
+              backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
           </div>
 
         </div>
@@ -79,7 +80,7 @@ carousel() {
       </div>
 
         </Link>
-        <Link to="/browse"><button style={{margin: "50px 0 0 0", fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link>
+        <Link to="/browse"><button style={{margin: "50px 0 0 0", fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(254, 198, 101);", border: "none", fontWeight: "600", fontSize: "1.4rem", padding: "15px 10px"}} type="button" id="addtocartbtn" class="btn">Browse</button></Link>
         </div>
       </div>
 

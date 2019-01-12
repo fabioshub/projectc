@@ -16,8 +16,8 @@ class Cart extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div> <br/>
-                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgb(80, 80, 80)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+      cartList: [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je winkelmandje is leeg :(</div> <br/>
+                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
                 ],
       totalPrice: 0,
       listViewList1: [],
@@ -33,14 +33,14 @@ class Cart extends Component {
 
   }
 
-  fetchCartData() {
+  async fetchCartData() {
 
 
       $(".spinner").show()
       $(".browsegridder").hide()
 
       let authstring = `Bearer ${localStorage.getItem("auth_token")}`
-      fetch(`http://localhost:5000/api/cart/`,{
+      await fetch(`http://localhost:5000/api/cart/`,{
         host: 'localhost',
         port: 5000,
         // path: '/',
@@ -66,9 +66,8 @@ class Cart extends Component {
             console.log(pic)
             return(
                 <div>
-                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice / 100} image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
-                      <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 / 100} image={pic.product.images}></CartWLI>
+                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
                 </div>
               )
             })
@@ -106,15 +105,15 @@ class Cart extends Component {
          this.setState({"Doorgaanis": "/checkoutlogin"})
 
        let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-       let cartify = (arrayInLocalStorage.map((pic) => {return pic.product.productPrice}))
+       let cartify = (arrayInLocalStorage.map((pic) => {return Math.round(pic.product.productPrice * 100) / 100}))
        let cartList = arrayInLocalStorage.map((pic) => {
-         this.state.totalPrice  = this.state.totalPrice + pic.product.productPrice /100;
+         this.state.totalPrice  = this.state.totalPrice + Math.round(pic.product.productPrice * 100) / 100 /100;
          // this.setState({totalPrice: totalPrice});
          return(
            <div>
-             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + pic.product.productPrice /100} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="" class="btn"><i style={{}} className="far fa-times-circle"></i> </button>
-                 <hr style={{border: "0px", height: "1px", backgroundColor: "lightgrey"}} />
+             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 /100} image={pic.images[0]}></CartWLI>
+               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
+
            </div>
          )
        })
@@ -124,7 +123,9 @@ class Cart extends Component {
 
      } else{
        console.log("WHAT?")
-       this.state.cartList = [<div className="text-center" style={{fontSize: "20px"}}>Je winkelmandje is leeg :(</div>]
+       this.state.cartList = [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je winkelmandje is leeg :(</div> <br/>
+                 <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+                 ]
      }
  }
 
@@ -176,7 +177,7 @@ class Cart extends Component {
     // fetch('API', options).then(function(pas) {console.log(pas)}).catch(function(error) {console.log(error)})
   }
 
-  deleteFromWishlist(h) {
+  async deleteFromWishlist(h) {
     console.log(h)
     if (localStorage.getItem("auth_token")) {
 
@@ -185,7 +186,7 @@ class Cart extends Component {
       // console.log(authstring)
       let cartitem = {"ProductId" : h, "CartQuantity": "1"}
       // console.log(JSON.stringify(cartitem))
-      fetch('http://localhost:5000/api/cart', {
+      await fetch('http://localhost:5000/api/cart', {
             method: 'DELETE',
             body: JSON.stringify(cartitem),
             type: 'application/json',
@@ -235,10 +236,10 @@ class Cart extends Component {
     return this.state.listViewList1;
   }
 
-  debuguser() {
+  async debuguser() {
     let authstring = `Bearer ${localStorage.getItem("auth_token")}`
     console.log(authstring)
-    fetch("http://localhost:5000/api/userinfo/user",{
+    await fetch("http://localhost:5000/api/userinfo/user",{
       host: 'localhost',
       port: 5000,
       method: 'GET',
@@ -253,14 +254,14 @@ class Cart extends Component {
 
   render() {
     return(
-      <div id="paginaCart" style={{marginTop: "150px", marginBottom: "150 px"}}>
+      <div id="paginaCart" style={{marginTop: "100px", marginBottom: "150 px"}}>
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
-            <h1  style={{margin: '50px 0'}}><i className="fas fa-shopping-cart" style={{color: "rgb(69, 69, 69)"}}></i></h1>
+            <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}>winkelmandje</h1>
             <hr style={{border: "0px",
-              height: "8px",
-              width: "200px",
-              backgroundColor: "rgb(69, 69, 69)"}} />
+              height: "15px",
+              width: "50px",
+              backgroundColor: "rgba(71, 73, 88, 0.93)"}} />
           </div>
         </div>
 
@@ -268,8 +269,8 @@ class Cart extends Component {
           {this.listView()}
           <div className="row">
             <div className="col-md-12 text-right">
-              <Link onClick={() => {this.checkOut()}} to={this.state.Doorgaanis}><button style={{fontSize: '17px', fontWeight: "300", padding: "10px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
-              <p>Totaal: {"€" + this.state.totalPrice}</p>
+              <Link onClick={() => {this.checkOut()}} to={this.state.Doorgaanis}><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", marginTop: "40px"}} type="button" id="addtocartbtn" class="btn">Afrekenen</button></Link>
+              <p style={{marginTop: "10px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Totaal: {"€" +  Math.round(this.state.totalPrice * 100) / 100}</p>
             </div>
           </div>
         </div>

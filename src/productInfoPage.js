@@ -25,26 +25,67 @@ class ProductInfoPage extends Component {
 
   addToCartClicked(pic) {
 
-    if(localStorage.getItem('arrayInLocalStorage')) {
-      let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-      console.log(temparray)
-      temparray.push(pic)
-      console.log(temparray)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+    console.log(pic)
+    if(localStorage.getItem("auth_token")) {
+
+      // console.log(pic.product.id)
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+      // console.log(authstring)
+      let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": "1"}
+      // console.log(JSON.stringify(cartitem))
+      fetch('http://localhost:5000/api/cart', {
+        method: 'POST',
+        body: JSON.stringify(cartitem),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      })
+    } else {
+      if(localStorage.getItem('arrayInLocalStorage')) {
+        let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
+        console.log(temparray)
+        temparray.push(pic)
+        console.log(temparray)
+        // this.setState({arrayInLocalStorage: temparray})
+        localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+      }
+      else {
+        let temparray = [];
+        temparray.push(pic)
+        console.log(temparray)
+        // this.setState({arrayInLocalStorage: temparray})
+        localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+      };
     }
-    else {
-      let temparray = [];
-      temparray.push(pic)
-      console.log(temparray)
-      // this.setState({arrayInLocalStorage: temparray})
-      localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
-    };
+
+
+
     $('.stickything2').show(0).delay(2000).fadeOut(500);
 
   }
 
   addToWishlistClicked(pic) {
+
+    if(localStorage.getItem("auth_token")) {
+
+      // console.log(pic.product.id)
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+      // console.log(authstring)
+      let cartitem = {"ProductId" : `${pic.product.id}`}
+      // console.log(JSON.stringify(cartitem))
+      fetch('http://localhost:5000/api/wishlist', {
+        method: 'POST',
+        body: JSON.stringify(cartitem),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      })
+    } else {
+
 
     if(localStorage.getItem('arrayInLocalStorageWishlist')) {
       let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorageWishlist'))
@@ -61,6 +102,8 @@ class ProductInfoPage extends Component {
       // this.setState({arrayInLocalStorage: temparray})
       localStorage.setItem('arrayInLocalStorageWishlist', JSON.stringify(temparray));
     };
+
+  }
 
     $('.stickything3').show(0).delay(2000).fadeOut(500);
 
