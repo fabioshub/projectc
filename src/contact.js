@@ -19,7 +19,7 @@ class Contact extends Component {
                               <i class="fas fa-envelope fa-5x mb-3"></i>
                               <h4 class="mb-5">Stuur ons een bericht</h4>
                             </a>
-                              <p >meteen antwoord<br></br>op uw vraag</p>
+                              <p >Zo snel mogelijk<br></br>antwoord op uw vraag</p>
                           </div>
                         </div>
                      </div>
