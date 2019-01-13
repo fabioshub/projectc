@@ -9,7 +9,7 @@ class Privacy extends React.Component{
                 <div class='row'>
                     <div class='col-sm-6 col-sm-offset-1'>
                         <div class='well'>
-                            <h1>Privacy Statement</h1>
+                            <h1>Privacyverklaring</h1>
                             <div id='panel' className='panel privacy-panel'>
                                 <h5>Wanneer is dit privacybeleid van toepassing?</h5>
 <h6>Dit privacybeleid is van toepassing op alle persoonsgegevens die Back to Bag verwerkt van iedereen die weleens contact heeft (gehad) met Back to Bag, zoals onze bezoekers, klanten en zakelijke contactpersonen, op alle aan Back to Bag gerelateerde domeinen.</h6>
