@@ -34,13 +34,15 @@ class Login extends Component {
       postcode: '',
       huis: '',
       phone: 0,
-      redirect: false
+      redirect: false,
+      messagegoodrbad: []
     };
   }
 
   componentDidMount(){
     window.scrollTo(0, 0)
     $(".hiddenval").hide()
+    $(".stickything3").hide()
 
     $(".hiddenvaltrigger").on("click", function() {
       $(".hiddenval").slideDown(500);
@@ -62,9 +64,33 @@ class Login extends Component {
       return response.json();
     })
     .then(myJson => {
+
+      if(myJson.login_failure){
+
+        let newobect = [];
+
+        for (var key in myJson) {
+              if (myJson.hasOwnProperty(key)) {
+          // console.log(key + " -> " + testobject[key]);
+          newobect.push(myJson[key])
+
+              }
+        }
+        console.log(newobect)
+
+        this.setState({messagegoodrbad: newobect})
+        window.scrollTo(0, 0)
+
+        $(".ultimateform input").val("")
+        $(".hiddenval").slideUp()
+        $('.stickything3').show(0).delay(5000).fadeOut(500);
+      }
+
       if (myJson.auth_token) {
         localStorage.setItem('auth_token', myJson.auth_token);
         this.setState({redirect: true})
+        window.location.reload();
+
       }
 
       if (myJson.role == "Admin") {
@@ -73,7 +99,7 @@ class Login extends Component {
         localStorage.removeItem('role')
 
       }
-      window.location.reload();
+
 
     });
 
@@ -92,9 +118,42 @@ class Login extends Component {
       headers: {
         'Content-Type': 'application/json'
       },
-    }).then(function(response) {
-      console.log(response)
+    }).then(results => {
+
+      if(results.status == "200") {
+              $(".ultimateform input").val("")
+              $(".hiddenval").slideUp()
+      }
+
+      window.scrollTo(0, 0)
+
+      $('.stickything3').show(0).delay(5000).fadeOut(500);
+
+
+      return results.json();
+    }).then(data => {
+      console.log(data)
+
+      let newobect = [];
+
+      for (var key in data) {
+            if (data.hasOwnProperty(key)) {
+        // console.log(key + " -> " + testobject[key]);
+        newobect.push(data[key])
+
+            }
+      }
+      console.log(newobect)
+
+      this.setState({messagegoodrbad: newobect})
+
     })
+
+
+
+
+
+
 
     // window.location.reload();
 
@@ -147,6 +206,17 @@ class Login extends Component {
   }
 
 
+  messageHelper()  {
+    let messages = []
+
+    this.state.messagegoodrbad.forEach(essage => {
+      messages.push(<li style={{color: "white", margin: "5px 0"}}>{essage}</li>)
+    })
+
+    return messages;
+  }
+
+
 
 
   render() {
@@ -179,9 +249,9 @@ class Login extends Component {
                     <div className="well">
                       <h4 className="modal-title" id="myModalLabel">Login</h4>
 
-                        <form id="loginForm" method="POST" onSubmit={this.handleSubmit}>
+                        <form id="loginForm" method="POST" className="ultimateform" onSubmit={this.handleSubmit}>
                           <div class="form-group">
-                            <input type="email" class="form-control " placeholder="Email" onChange={this.onChangeUsername}/>
+                            <input type="text" class="form-control " placeholder="Email" onChange={this.onChangeUsername}/>
                           </div>
                           <div class="form-group">
                             <input type="password" class="form-control " placeholder="Wachtwoord" onChange={this.onChangePassword}/>
@@ -197,9 +267,9 @@ class Login extends Component {
                   <div className="well">
                     <h4 className="modal-title" id="myModalLabel">Registeer</h4>
 
-                    <form onSubmit={this.handleSubmitRegister} >
+                    <form onSubmit={this.handleSubmitRegister} className="ultimateform">
                         <div class="form-group">
-                          <input type="email" class="form-control hiddenvaltrigger" placeholder="Email" onChange={this.onChangeUsername} required/>
+                          <input type="text" class="form-control hiddenvaltrigger" placeholder="Email" onChange={this.onChangeUsername} required/>
                         </div>
                         <div class="form-group">
                           <input type="password" class="form-control hiddenvaltrigger" placeholder="Wachtwoord" onChange={this.onChangePassword} required/>
@@ -244,6 +314,16 @@ class Login extends Component {
 
 
 
+        </div>
+        <div className=" stickything3 footer navbar-fixed-top content-center" style={{width: "20%", top: "60px"}}>
+          <div className="container-fluid" >
+            <div className="row">
+
+              <div className="col-sm-12" style={{background: "rgb(254, 198, 101)"}}>
+                <ul style={{listStyle: "none", margin: "20px 0 ", padding: "0"}}>{this.messageHelper()}</ul>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>

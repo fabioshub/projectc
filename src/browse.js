@@ -51,6 +51,11 @@ class Browse extends Component {
     this.fetchData()
     this.loaderFunction()
 
+    if (localStorage.getItem('pagina')) {
+      let crrntpage = JSON.parse(localStorage.getItem('pagina'));
+      console.log(crrntpage)
+      this.setState({pagina: crrntpage})
+    }
 
   }
 
@@ -62,14 +67,30 @@ class Browse extends Component {
     $(".stickything2").hide()
     $(".stickything3").hide()
 
+    if(this.state.filters.length > 0) {
+      $(".superform").hide()
+    } else {
+      $(".superform").show()
+
+    }
+
+
 
 
 
   }
 
+  componentWillUnmount() {
+    // localStorage.setItem('filters', JSON.stringify(this.state.filters));
+    localStorage.setItem('pagina', JSON.stringify(this.state.pagina));
+
+  }
+
+
+
   async fetchData(pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
     this.setState({filterarraylist: []})
-
+    console.log(this.state.pagina)
     $(".spinner").show()
     $(".browsegridder").hide()
 
@@ -84,17 +105,21 @@ class Browse extends Component {
       requestCert: true,
       mode: "no-cors",
       headers:{
-        "Access-Control-Allow-Credentials" : true},
+        "Access-Control-Allow-Credentials" : true,
+      "Access-Control-Allow-Origin": true},
         agent: false
       }).then(results => {
         console.log("RETRIEVED ITEMS SUCCES!")
         return results.json();
       }).then(data => {
-        // console.log(data)
+        console.log(data)
         let startvalue = 0
         this.setState({pagesintotal: data.totalpages})
         let items = data.products.map((pic) => {
           startvalue = startvalue + 1
+
+
+
           return(
             <div>
               <div style={{
@@ -123,7 +148,7 @@ class Browse extends Component {
           }
           // console.log("ITEM SET IN STATE")
           this.state.filters = []
-        })
+        }).catch(error => {console.log(error)})
 
       }
 
@@ -217,6 +242,7 @@ class Browse extends Component {
                 </div>
               )
             })
+
 
             this.setState({items: items})
             this.setState({itemsClean: items})
@@ -518,6 +544,8 @@ class Browse extends Component {
               $(".browsegridder").fadeIn("fast");
 
 
+              this.state.filterarraylist = []
+              this.state.filters = []
 
               this.forceUpdate()
             })
@@ -571,7 +599,7 @@ class Browse extends Component {
 
                   <div className="col-sm-3 hidden-xs" style={{marginTop:"70px"}}>
                     {this.printFilters()}
-                    <form className="navbar-form hidden-xs text-left" style={{margin: "0", padding: "0", width: "100%"}}>
+                    <form className="navbar-form hidden-xs text-left superform" style={{margin: "0", padding: "0", width: "100%"}}>
                       <div className="form-group" id="search" >
                         <input type="text" className="form-control border " style={{width: "100%"}} id="searchinput" placeholder="Zoeken... "/>
                       </div>
