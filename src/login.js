@@ -108,7 +108,7 @@ class Login extends Component {
    handleSubmitRegister(event) {
 
     event.preventDefault();
-    let registerobject = {"EmailAddress": this.state.username, "UserPassword": this.state.password, "FirstName": this.state.firstname, "LastName": this.state.lastname, "BirthDate": this.state.birthdate, "Gender": this.state.gender, "Phone": this.state.phone, "Street": this.state.straat, "City": this.state.stad, "ZipCode": this.state.postcode, "HouseNumber": this.state.huis}
+    let registerobject = {"EmailAddress": this.state.username, "UserPassword": this.state.password, "FirstName": this.state.firstname, "LastName": this.state.lastname, "BirthDate": this.state.birthdate, "Gender": this.state.gender, "PhoneNumber": this.state.phone, "Street": this.state.straat, "City": this.state.stad, "ZipCode": this.state.postcode, "HouseNumber": this.state.huis}
 
     console.log(registerobject)
 
@@ -178,6 +178,9 @@ class Login extends Component {
   }
   onChangePhone = (e) => {
     this.setState({ phone: e.target.value });
+  }
+  onChangeGender = (e) => {
+    this.setState({ gender: e.target.value });
   }
   onChangeBirthdate = (e) => {
     this.setState({ birthdate: e.target.value });
@@ -282,6 +285,9 @@ class Login extends Component {
                           <input type="text" class="form-control " placeholder="Achternaam" onChange={this.onChangeLastname} required/>
                         </div>
                         <div class="form-group">
+                          <input type="text" class="form-control " placeholder="Man / vrouw" onChange={this.onChangeGender} required/>
+                        </div>
+                        <div class="form-group">
                           <input type="text" class="form-control " placeholder="Geboortedatum" onChange={this.onChangeBirthdate} required/>
                         </div>
                         <div class="form-group">
@@ -291,6 +297,7 @@ class Login extends Component {
                         <div class="form-group">
                           <input type="text" class="form-control " placeholder="Straat" onChange={this.onChangeStreet} required/>
                         </div>
+
                         <div class="form-group">
                           <input type="text" class="form-control " placeholder="Stad" onChange={this.onChangeCity} required/>
                         </div>

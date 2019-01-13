@@ -14,12 +14,20 @@ class userPanelNew extends Component {
 
     this.state = {
       cartList: [],
+      streetuser1: "",
+      cityuser1: "",
+      zipuser1: "",
+      houseuser1: ""
     }
   }
 
   componentWillMount() {
     window.scrollTo(0, 0)
     this.fetchUserData()
+  }
+
+  componentDidMount() {
+
   }
 
   fetchUserData() {
@@ -129,6 +137,112 @@ class userPanelNew extends Component {
 
     }
 
+    postnewinfoUser() {
+
+
+
+
+      let naamuser = $("#naamuser").val()
+      let achternaamuser = $("#achternaamuser").val()
+      let emailuser = $("#emailuser").val()
+      let teluser = $("#teluser").val()
+
+
+
+
+
+      let putobject =
+      {
+        "FirstName": naamuser,
+        "LastName":achternaamuser,
+        "EmailAddress": emailuser,
+        "PhoneNumber": teluser
+
+      }
+
+
+
+
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+
+      fetch(`http://localhost:5000/api/user/user/`, {
+        method: 'PUT',
+        body: JSON.stringify(putobject),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      }).then(function(response) {
+        //console.log(response)
+      })
+
+      this.forceUpdate();
+      window.location.reload();
+
+
+    }
+
+    postnewinfoUser2() {
+
+
+
+      if ($("#streetuser").val() == "" ) {
+        this.state.streetuser1 = this.state.street
+      } else {
+        this.state.streetuser1 = $("#streetuser").val()
+      }
+
+      if ($("#cityuser").val() == "" ) {
+        this.state.cityuser1 = this.state.city
+      } else {
+        this.state.cityuser1 = $("#cityuser").val()
+      }
+
+      if ($("#zipuser").val() == "" ) {
+        this.state.zipuser1 = this.state.zipcode
+      } else {
+        this.state.zipuser1 = $("#zipuser").val()
+      }
+
+      if ($("#houseuser").val() == "" ) {
+        this.state.houseuser1 = this.state.housenumber
+      } else {
+        this.state.houseuser1 = $("#houseuser").val()
+      }
+
+      let putobject =
+      {
+        "Street": this.state.streetuser1,
+        "City":this.state.cityuser1,
+        "ZipCode": this.state.zipuser1,
+        "HouseNumber": this.state.houseuser1
+
+      }
+
+
+
+
+      let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+
+      fetch(`http://localhost:5000/api/address/`, {
+        method: 'PUT',
+        body: JSON.stringify(putobject),
+        type: 'application/json',
+        headers: {
+          "Content-Type" : 'application/json',
+          'Authorization' : authstring
+        },
+      }).then(function(response) {
+        //console.log(response)
+      })
+
+      this.forceUpdate();
+      window.location.reload();
+
+
+    }
+
     listView() {
       let listViewList = []
       for (let j = 0; j < this.state.cartList.length; j++) {
@@ -143,6 +257,9 @@ class userPanelNew extends Component {
     }
 
 
+
+
+
     render() {
       return(
         <div className="container-fluid" style={{marginTop: "100px"}}  >
@@ -153,44 +270,41 @@ class userPanelNew extends Component {
             </div>
             <table className="table table-bordered text-left" id="customers" >
               <tbody>
-
                 <tr>
-                  <td>Voornaam</td>
-                  <td>{this.state.name}</td>
+                  <td><button className="searchsubmitbuttonpi" style={{fontSize: "17px"}} onClick={()=>{this.postnewinfoUser()}}>Update </button></td>
+                    <td><button className="searchsubmitbuttonpi" style={{fontSize: "17px"}} onClick={()=>{this.postnewinfoUser2()}}>Update </button></td>
+
                 </tr>
                 <tr>
-                  <td>Achternaam</td>
-                  <td>{this.state.lastname}</td>
+                  <td><input id="naamuser" placeholder={this.state.name}></input></td>
+                    <td><input id="streetuser" placeholder={this.state.street}></input></td>
                 </tr>
                 <tr>
-                  <td>Email</td>
-                  <td>{this.state.email}</td>
+                  <td><input id="achternaamuser" placeholder={this.state.lastname}></input></td>
+                    <td><input id="cityuser" placeholder={this.state.city}></input></td>
+                </tr>
+                <tr>
+                  <td><input id="emailuser" placeholder={this.state.email}></input></td>
+                    <td><input id="zipuser" placeholder={this.state.zipcode}></input></td>
                 </tr>
 
               <tr>
-                <td>Geboortedatum</td>
-                <td> {this.state.birth}
-                </td>
+                <td> {this.state.birth}</td>
+                <td><input id="houseuser" placeholder={this.state.housenumber}></input></td>
               </tr>
               <tr>
-                <td>straat</td>
-                <td>{this.state.street}</td>
+                <td> {this.state.gender}</td>
+                <td></td>
               </tr>
               <tr>
-                <td>stad</td>
-                <td>{this.state.city}</td>
-              </tr>
-              <tr>
-                <td>postcode</td>
-                <td>{this.state.zipcode}</td>
-              </tr>
-              <tr><td>huisnummer</td>
-              <td>{this.state.housenumber}</td>
-            </tr>
+                <td><input id="teluser" placeholder={this.state.tel}></input></td>
+                  <td></td>
 
+              </tr>
 
 
             </tbody>
+
           </table>
         </div>
         <div className="container">

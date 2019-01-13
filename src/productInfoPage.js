@@ -266,7 +266,7 @@ imageHelper()  {
           <div className="container-fluid" >
             <div className="row">
               <div className="col-sm-12" style={{background: "black"}}>
-                <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan cart!</p>
+                <p style={{margin: "20px 0px", color: "white"}}>Toegevoegd aan cart!</p>
               </div>
               <div className="col-sm-12" style={{background: "white"}}>
                 <img style={{margin: "5px"}} src={this.state.item.images[0]}></img>
@@ -278,7 +278,7 @@ imageHelper()  {
           <div className="container-fluid" >
             <div className="row">
               <div className="col-sm-12" style={{background: "black"}}>
-                <p style={{margin: "20px 0px", color: "white"}}>Toegevoeg aan wishlist!</p>
+                <p style={{margin: "20px 0px", color: "white"}}>Toegevoegd aan wishlist!</p>
               </div>
               <div className="col-sm-12" style={{background: "white"}}>
                 <img style={{margin: "5px"}} src={this.state.item.images[0]}></img>

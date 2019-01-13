@@ -10,12 +10,17 @@ class CartWLI extends Component {
     super(props);
     this.state = {
       totalperitem: 0,
+      quantity: "",
     }
   }
 
   componentDidMount() {
     console.log(this.props.price)
     this.setState({totalperitem: this.props.price * this.props.quantity})
+
+    if (this.props.quantity) {
+      this.setState({quantity: "Aantal: " + this.props.quantity})
+    }
   }
 
   // code() {
@@ -51,10 +56,10 @@ class CartWLI extends Component {
 
             </div>
           <div className="col-sm-6 text-left">
-            <h3 style={{color: 'rgb(46, 46, 46)', fontWeight: "500", fontSize: "30px"}} >{"€" + Math.round(this.state.totalperitem / 100 * 100) }</h3>
+            <h3 style={{color: 'rgb(46, 46, 46)', fontWeight: "500", fontSize: "30px"}} >{"€" + Math.round(this.props.price / 100 * 100) }</h3>
             <hr/>
             <br/>
-            <h3 style={{color: 'rgb(46, 46, 46)', fontWeight: "300", fontSize: "17px"}} >{"Aantal: " + this.props.quantity }</h3>
+            <h3 className="aantalll" style={{color: 'rgb(46, 46, 46)', fontWeight: "300", fontSize: "17px"}} >{ this.state.quantity }</h3>
 
             <p style={{color: "rgb(57, 57, 57)", margin: "30px 0"}}>
               {ReactHtmlParser(this.props.productSpecification)}

@@ -10,7 +10,6 @@
 }
 
 #customers {
-  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   /* border: 2px solid white; */
   width: 100%;
@@ -30,7 +29,7 @@
 }
 
 
-#customers tr:nth-child(even){background-color: #f2f2f2;}
+#customers tr{background-color: white;}
 
 /* #customers tr:hover {background-color: #ddd;} */
 
@@ -40,4 +39,21 @@
   text-align: left;
   background-color: rgba(71, 73, 88, 0.93);
   color: white;
+}
+
+
+
+#customers input {
+  cursor: pointer;
+  border: none;
+  background: rgba(62, 31, 26, 0);
+}
+
+#customers input:hover::placeholder {
+  color: rgb(167, 167, 167);
+}
+
+#customers input::placeholder {
+color: rgba(71, 73, 88, 0.933333);
+
 }
