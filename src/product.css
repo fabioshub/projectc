@@ -76,3 +76,18 @@ img {
   border: 2px solid rgb(230, 60, 60);
   color: rgb(230, 60, 60);
 }
+
+.searchinputpi {
+  border: none;
+  width: 40px;
+  box-shadow: none;
+}
+
+.searchsubmitbuttonpi {
+  padding: 5px 12px;
+  font-size: 1.8rem;
+  color: white;
+  background-color: rgb(254, 198, 101);
+  border: 2px solid white;
+  box-shadow: none;
+}

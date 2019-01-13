@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+// import './product.css'
 
 
 class ProductInfoPage extends Component {
   constructor(props){
     super(props);
+
+
     this.state = {
-      item: props.location.state.pic
+      item: props.location.state.pic,
+      QuantityProduct: 1,
     }
   }
 
@@ -25,13 +29,16 @@ class ProductInfoPage extends Component {
 
   addToCartClicked(pic) {
 
-    console.log(pic)
+    var quanquan = $("#quantity").val()
+    this.state.QuantityProduct = quanquan;
+
     if(localStorage.getItem("auth_token")) {
 
       // console.log(pic.product.id)
       let authstring = `Bearer ${localStorage.getItem("auth_token")}`
       // console.log(authstring)
-      let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": "1"}
+      let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": `${this.state.QuantityProduct}`}
+      console.log(cartitem)
       // console.log(JSON.stringify(cartitem))
       fetch('http://localhost:5000/api/cart', {
         method: 'POST',
@@ -53,9 +60,12 @@ class ProductInfoPage extends Component {
       }
       else {
         let temparray = [];
+        let QuantityArray = [];
+        QuantityArray.push(this.state.QuantityProduct)
         temparray.push(pic)
         console.log(temparray)
         // this.setState({arrayInLocalStorage: temparray})
+        localStorage.setItem('arrayInLocalStorageQuantity', JSON.stringify(QuantityArray));
         localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
       };
     }
@@ -67,6 +77,8 @@ class ProductInfoPage extends Component {
   }
 
   addToWishlistClicked(pic) {
+
+
 
     if(localStorage.getItem("auth_token")) {
 
@@ -109,6 +121,18 @@ class ProductInfoPage extends Component {
 
   }
 
+  goToPage(h) {
+    this.state.pagina = h;
+    window.scrollTo(0, 0);
+    this.forceUpdate();
+  }
+
+  quanchange() {
+    console.log("...")
+  }
+
+
+
 
   render() {
 
@@ -131,8 +155,11 @@ class ProductInfoPage extends Component {
                   <ul style={{color: 'grey', fontSize: "13px"}} >
                     {this.state.item.product.productSpecification}
                   </ul>
+                  <input id="quantity" className="searchinputpi" value="1"></input>
+                  <button className="searchsubmitbuttonpi" onClick={()=>{ if (  $("#quantity").val() > 1 )  { $("#quantity").val($("#quantity").val() - 1)}}}> - </button><button className="searchsubmitbuttonpi" onClick={()=>{ $("#quantity").val( parseInt($("#quantity").val()) + 1) }}> + </button><br/>
                 </div>
                 <div className="col-md-12" style={{marginTop: '20px'}}  >
+
                   <button  onClick={()=>{this.addToCartClicked(this.state.item)}}  style={{fontSize: '13px', fontWeight: "300", padding: "10px", marginRight: "10px"}} type="button" id="addtocartbtn" class="btn"><i class="fas fa-plus"></i> cart  <i className="fas fa-shopping-cart"></i></button>
                   <button onClick={()=>{this.addToWishlistClicked(this.state.item)}} style={{fontSize: '13px', fontWeight: "500", padding: "10px"}} type="button" id="addtowishlist" class="btn hidethisbtnwhennogli"><i class="fas fa-plus"></i> wenslijst <i className="fas fa-heart" ></i></button>
                 </div>

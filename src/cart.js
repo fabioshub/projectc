@@ -66,7 +66,7 @@ class Cart extends Component {
             console.log(pic)
             return(
                 <div>
-                  <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 / 100} image={pic.product.images}></CartWLI>
+                  <CartWLI quantity={pic.product.itemsInCart} name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 / 100} image={pic.product.images}></CartWLI>
                     <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
                 </div>
               )
@@ -105,19 +105,55 @@ class Cart extends Component {
          this.setState({"Doorgaanis": "/checkoutlogin"})
 
        let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-       let cartify = (arrayInLocalStorage.map((pic) => {return Math.round(pic.product.productPrice * 100) / 100}))
+       let cartify = (arrayInLocalStorage.map((pic) => {
+
+
+         let amount = JSON.parse(localStorage.getItem('arrayInLocalStorageQuantity'))
+
+         var foundproduct = false;
+         var productindex = 0;
+         for(var i = 0; i < arrayInLocalStorage .length; i++) {
+             if (arrayInLocalStorage[i].product.id == pic.product.id) {
+                 foundproduct = true;
+                 productindex = i;
+                 break;
+             }
+         }
+
+         return Math.round(pic.product.productPrice * 100 * amount[productindex]) / 100 / 100
+
+
+       }))
+
+       function add(a, b) {
+          return a + b;
+        }
+
+       this.state.totalPrice = cartify.reduce(add, 0);
+
        let cartList = arrayInLocalStorage.map((pic) => {
-         this.state.totalPrice  = this.state.totalPrice + Math.round(pic.product.productPrice * 100) / 100 /100;
-         // this.setState({totalPrice: totalPrice});
+         let amount = JSON.parse(localStorage.getItem('arrayInLocalStorageQuantity'))
+
+         var foundproduct = false;
+         var productindex = 0;
+         for(var i = 0; i < arrayInLocalStorage .length; i++) {
+             if (arrayInLocalStorage[i].product.id == pic.product.id) {
+                 foundproduct = true;
+                 productindex = i;
+                 break;
+             }
+         }
          return(
            <div>
-             <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 /100} image={pic.images[0]}></CartWLI>
-               <button onClick={()=>this.deleteFromWishlist(pic.product.productName)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
+             <CartWLI quantity={amount[productindex]} name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={"€" + Math.round(pic.product.productPrice * 100) / 100 /100} image={pic.images[0]}></CartWLI>
+               <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
 
            </div>
          )
        })
-       // this.setState({cartify: cartify})
+
+
+       this.setState({cartify: cartify})
        this.setState({cartList: cartList})
 
 
@@ -184,6 +220,7 @@ class Cart extends Component {
 
       let authstring = `Bearer ${localStorage.getItem("auth_token")}`
       // console.log(authstring)
+console.log(h)
       let cartitem = {"ProductId" : h, "CartQuantity": "1"}
       // console.log(JSON.stringify(cartitem))
       await fetch('http://localhost:5000/api/cart', {
@@ -202,20 +239,36 @@ class Cart extends Component {
 
 
     } else {
-    let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'));
-    let tempDeleteArray = [];
 
+
+
+    let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'));
+    let arrayInLocalStorageQuantity = JSON.parse(localStorage.getItem('arrayInLocalStorageQuantity'));
+    let tempDeleteArray = [];
+    let tempDeleteArrayQuantity = [];
+
+
+    console.log(arrayInLocalStorage[0].product.productName)
 
       for (let b = 0; b < arrayInLocalStorage.length; b++) {
+        const ccrtquan = arrayInLocalStorageQuantity[b]
         const crrentItem = arrayInLocalStorage[b]
-        if(arrayInLocalStorage[b].product.productName !== h) {
+        console.log(arrayInLocalStorage[b].product)
+        console.log(h)
+        if(arrayInLocalStorage[b].product.id !== h) {
+          tempDeleteArrayQuantity.push(ccrtquan)
           tempDeleteArray.push(crrentItem)
         } else {
-          console.log("discard " + arrayInLocalStorage[b].productName)
+
         }
 
       }
+
+
+
       localStorage.setItem('arrayInLocalStorage', JSON.stringify(tempDeleteArray));
+      localStorage.setItem('arrayInLocalStorageQuantity', JSON.stringify(tempDeleteArrayQuantity));
+
       this.forceUpdate();
       window.location.reload();
 

@@ -32,6 +32,7 @@ class Browse extends Component {
       itemAmount: 9,
       initialPageAmount: 9,
       arrayInLocalStorage: [],
+      arrayInLocalStorageQuantity: [],
       arrayInLocalStorageWishlist: [],
       item: [],
       pagina: 1,
@@ -100,6 +101,7 @@ class Browse extends Component {
                   boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)", margin: "5px"}}>
                   <Link style={{padding: "0"}} to={{ pathname: '/productinfopage', state: { pic: pic } }}> <Product desc={pic.product.productDescription} name={pic.product.productName} price={"€" +Math.round(pic.product.productPrice / 100 * 100) /100} image={pic.images[0]}/></Link>
                   <div  style={{marginRight: "10px",paddingBottom: "10px"}} >
+
                     <button type="button"  onClick={()=>{this.addToWishlistClicked(pic)}} id="addtowishlist" className="btn hidethisbtnwhennogli " style={{border: "none"}} ><i style={{fontSize: "20px", color: "rgba(255, 86, 75, 0.933333);"}} className="fas fa-heart"></i></button>
                     <button type="button" style={{marginLeft: "10px"}} onClick={()=>{this.addToCartClicked(pic); }} id="addtocartbtn" class={"btn " +"addtocartbutton"+startvalue} ><i className="fas fa-shopping-cart"></i></button>
                   </div>
@@ -265,13 +267,16 @@ class Browse extends Component {
 
 
 
-
           if(localStorage.getItem("auth_token")) {
+
+
+            console.log(pic.product.id)
 
             // console.log(pic.product.id)
             let authstring = `Bearer ${localStorage.getItem("auth_token")}`
             // console.log(authstring)
             let cartitem = {"ProductId" : `${pic.product.id}`, "CartQuantity": "1"}
+            console.log(cartitem)
             // console.log(JSON.stringify(cartitem))
             fetch('http://localhost:5000/api/cart', {
               method: 'POST',
@@ -288,16 +293,43 @@ class Browse extends Component {
             //if user is not logged in
             if(localStorage.getItem('arrayInLocalStorage')) {
               let temparray = JSON.parse(localStorage.getItem('arrayInLocalStorage'))
-              // console.log(temparray)
-              temparray.push(pic)
+              let quantityarray = JSON.parse(localStorage.getItem('arrayInLocalStorageQuantity'))
+
+              console.log(temparray[0])
+              console.log(pic)
+
+              var foundproduct = false;
+              var productindex = 0;
+              for(var i = 0; i < temparray.length; i++) {
+                  if (temparray[i].product.id == pic.product.id) {
+                      foundproduct = true;
+                      productindex = i;
+                      break;
+                  }
+              }
+
+              if (!foundproduct) {
+                temparray.push(pic)
+                quantityarray.push(1)
+                localStorage.setItem('arrayInLocalStorageQuantity', JSON.stringify(quantityarray));
+                localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
+              } else {
+                quantityarray[productindex] = quantityarray[productindex] + 1;
+                localStorage.setItem('arrayInLocalStorageQuantity', JSON.stringify(quantityarray));
+
+              }
+
               // console.log(temparray)
               // this.setState({arrayInLocalStorage: temparray})
-              localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
             }
             else {
               let temparray = this.state.arrayInLocalStorage;
+              let quantityarray = this.state.arrayInLocalStorageQuantity;
+
               temparray.push(pic)
+              quantityarray.push(1)
               // this.setState({arrayInLocalStorage: temparray})
+              localStorage.setItem('arrayInLocalStorageQuantity', JSON.stringify(quantityarray));
               localStorage.setItem('arrayInLocalStorage', JSON.stringify(temparray));
             };
 
@@ -310,6 +342,7 @@ class Browse extends Component {
 
         }
         //TODO
+
 
         addToWishlistClicked(pic) {
 
@@ -332,7 +365,7 @@ class Browse extends Component {
           this.setState({lastitemaddtowishtlist: pic.images[0]})
 
         }
-        //TODO
+        // TODO
 
         pagination()  {
           let navigatorArray = []
@@ -358,6 +391,7 @@ class Browse extends Component {
 
           return navigatorArray;
         }
+
 
         filtersOnline()  {
           let filtersArray = []
@@ -439,7 +473,7 @@ class Browse extends Component {
 
         formSubmitting(e, pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
           var searchvalue = $("#searchinput").val()
-          e.preventDefault()
+          // e.preventDefault()
 
           fetch(`http://localhost:5000/api/product/search/${pagina}/${hoeveelheid}/${searchvalue}`,{
             host: 'localhost',

@@ -19,6 +19,7 @@ class CartWLI extends Component {
           </div>
           <div className="col-xs-4 text-right ">
             <p style={{marginTop: '20px',fontFamily:'Roboto', fontWeight: '500',color:'rgb(71, 71, 71)'}} id="productname">{this.props.price}</p>
+            <p style={{marginTop: '20px',fontFamily:'Roboto', fontWeight: '500',color:'rgb(71, 71, 71)'}} id="productname">Aantal: {this.props.quantity}</p>
 
           </div>
         </div>
