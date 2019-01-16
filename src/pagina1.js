@@ -56,7 +56,7 @@ carousel() {
       <div className="container-fluid text-center">
         <div className="row">
           <div className="col-sm-12">
-            <h1  style={{margin: '30px 0', fontWeight: "600", color: "rgba(71, 73, 88, 0.93)"}}>Populair</h1>
+            <h1  style={{margin: '30px 0', fontWeight: "600", color: "rgba(71, 73, 88, 0.93)"}}>Willekeurige items</h1>
             <hr style={{border: "0px",
               height: "15px",
               width: "50px",

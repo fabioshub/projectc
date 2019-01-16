@@ -18,8 +18,7 @@ class Wishlist extends Component {
 
 
     this.state = {
-      cartList: [<div className="text-center"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je verlanglijstje is leeg :(</div> <br/>
-                <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
+      cartList: [
                 ],
       listViewList1: [],
       wishlisttocart: [100]
@@ -75,7 +74,8 @@ class Wishlist extends Component {
             return(
                 <div>
                   <CartWLI name={pic.product.productName} ID={pic.product.id} productSpecification={pic.product.productSpecification} price={ Math.round(pic.product.productPrice * 100) / 100/100 } image={pic.product.images}></CartWLI>
-                    <button onClick={()=>this.deleteFromWishlist(pic.product.id)} style={{fontSize: '17px', fontWeight: "300", background: "white"}} type="button" id="" class="btn"><i style={{color: "rgb(232, 93, 56)", fontSize: "20px"}} className="far fa-times-circle"></i> </button>
+                      <button onClick={()=>{this.WishlistToCart(pic.product.id)}} style={{fontSize: '13px', fontWeight: "500", padding: "10px", marginRight: "10px"}} type="button" id="addtocartbtn" class="btn hidethisbtnwhennogli"><i class="fas fa-plus"></i> <i className="fas fa-shopping-cart"></i></button>
+                      <button onClick={()=>this.deleteFromWishlist(pic.product.id)}  style={{fontSize: '13px', fontWeight: "300", padding: "10px", color: "white", background: "rgb(246, 115, 97)", border: "none"}} type="button" id="addtocartbtn" class="btn addtocartpip"> <i class="fas fa-trash"></i></button>
                 </div>
               )
               console.log(cartList)
@@ -85,6 +85,10 @@ class Wishlist extends Component {
 
 
             this.setState({cartList: cartList})
+
+            if (this.state.cartList.length == 0){
+              $(".showwhenempty").show()
+            }
 
 
 
@@ -97,7 +101,13 @@ class Wishlist extends Component {
   componentDidMount() {
 
     window.scrollTo(0, 0)
+    $(".showwhenempty").hide()
+
     this.fetchCartData();
+
+    console.log(this.state.cartList)
+
+
 
 
   }
@@ -127,6 +137,27 @@ class Wishlist extends Component {
         this.forceUpdate();
         window.location.reload();
 
+
+  }
+
+  WishlistToCart(h) {
+
+    let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+    // console.log(authstring)
+    let cartitem = {"ProductId" : h}
+    // console.log(JSON.stringify(cartitem))
+    fetch('http://localhost:5000/api/wishlist/tocart', {
+          method: 'POST',
+          body: JSON.stringify(cartitem),
+          type: 'application/json',
+          headers: {
+            "Content-Type" : 'application/json',
+            'Authorization' : authstring
+          },
+        }).then(results => console.log(results))
+        this.fetchCartData();
+        this.forceUpdate();
+        window.location.reload();
 
   }
 
@@ -168,7 +199,7 @@ class Wishlist extends Component {
         <div className="row text-center" style={{minHeight: "100px"}}>
           <div className="col-sm-12">
 
-                <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgba(71, 73, 88, 0.93)"}}><i className="fas fa-heart" style={{color: "rgba(255, 86, 75, 0.93)"}}></i></h1>
+                <h1  style={{margin: '30px 0', fontWeight: "500", color: "rgb(246, 115, 97)"}}><i className="fas fa-heart" style={{color: "rgba(255, 86, 75, 0.93)"}}></i></h1>
                 <hr style={{border: "0px",
                   height: "15px",
                   width: "50px",
@@ -177,7 +208,8 @@ class Wishlist extends Component {
         </div>
 
         <div className="container">
-
+          <div className="text-center showwhenempty"><div style={{fontSize: "20px", color: "rgba(71, 73, 88, 0.93)", fontWeight: "500"}}>Je verlanglijstje is leeg :(</div> <br/>
+                    <Link to="/browse"><button style={{fontSize: '17px', fontWeight: "300", padding: "10px", backgroundColor: "rgba(71, 73, 88, 0.93)", border: "none"}} type="button" id="addtocartbtn" class="btn">Let's get shoppin <i className="fas fa-shopping-cart"></i></button></Link></div>
           {this.listView()}
         </div>
 

@@ -87,6 +87,7 @@ class Login extends Component {
       }
 
       if (myJson.auth_token) {
+        localStorage.setItem('user_id', myJson.id);
         localStorage.setItem('auth_token', myJson.auth_token);
         this.setState({redirect: true})
         window.location.reload();
@@ -102,6 +103,12 @@ class Login extends Component {
 
 
     });
+
+    localStorage.removeItem('pagina');
+    localStorage.removeItem('filters');
+    localStorage.removeItem('filterarraylist');
+
+    
 
   }
 
@@ -250,14 +257,18 @@ class Login extends Component {
                 <div className="col-xs-6">
 
                     <div className="well">
-                      <h4 className="modal-title" id="myModalLabel">Login</h4>
+                      <h4 className="modal-title" id="myModalLabel" >Login</h4>
 
-                        <form id="loginForm" method="POST" className="ultimateform" onSubmit={this.handleSubmit}>
+                        <form id="loginForm" method="POST" className="ultimateform" autocomplete="on" onSubmit={this.handleSubmit}>
                           <div class="form-group">
-                            <input type="text" class="form-control " placeholder="Email" onChange={this.onChangeUsername}/>
+                            <label for="male">Emailadres</label>
+
+                            <input name="email" type="text" autocomplete="on" class="form-control " placeholder="janwit@hr.nl" onChange={this.onChangeUsername}/>
                           </div>
                           <div class="form-group">
-                            <input type="password" class="form-control " placeholder="Wachtwoord" onChange={this.onChangePassword}/>
+                            <label for="male">Wachtwoord</label>
+
+                            <input type="password" class="form-control " placeholder="Kaas12" onChange={this.onChangePassword}/>
                           </div>
                             <div id="loginErrorMsg" className="alert alert-error hide">Wrong username or password</div>
 
@@ -268,48 +279,70 @@ class Login extends Component {
                 <div className="col-xs-6">
 
                   <div className="well">
-                    <h4 className="modal-title" id="myModalLabel">Registeer</h4>
+                    <h4 className="modal-title" id="myModalLabel">Registreer</h4>
 
                     <form onSubmit={this.handleSubmitRegister} className="ultimateform">
                         <div class="form-group">
-                          <input type="text" class="form-control hiddenvaltrigger" placeholder="Email" onChange={this.onChangeUsername} required/>
+                          <label for="male">Emailadres*</label>
+
+                          <input type="text" class="form-control hiddenvaltrigger" placeholder="janwit@hr.nl" onChange={this.onChangeUsername} required/>
                         </div>
                         <div class="form-group">
-                          <input type="password" class="form-control hiddenvaltrigger" placeholder="Wachtwoord" onChange={this.onChangePassword} required/>
+                          <label for="male">Wachtwoord*</label>
+
+                          <input type="password" class="form-control hiddenvaltrigger" placeholder="Kaas23" onChange={this.onChangePassword} required/>
                         </div>
                         <div class="hiddenval">
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Naam" onChange={this.onChangeName} required/>
+                          <label for="male">Naam*</label>
+
+                          <input name="voornaam" type="text" class="form-control " placeholder="Jan" onChange={this.onChangeName} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Achternaam" onChange={this.onChangeLastname} required/>
+                          <label for="male">Achternaam*</label>
+
+                          <input name="achternaam" type="text" class="form-control " placeholder="Wit" onChange={this.onChangeLastname} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Man / vrouw" onChange={this.onChangeGender} required/>
+                          <label for="male">Man / vrouw*</label>
+
+                          <input type="text" class="form-control " placeholder="Man" onChange={this.onChangeGender} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Geboortedatum" onChange={this.onChangeBirthdate} required/>
+                          <label for="male">Geboortedatum*</label>
+
+                          <input type="text" class="form-control " placeholder="11-11-1980" onChange={this.onChangeBirthdate} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Telefoonnummer" onChange={this.onChangePhone} required/>
+                          <label for="male">Telefoonnummer*</label>
+
+                          <input type="text" class="form-control " placeholder="0620305968" onChange={this.onChangePhone} required/>
                         </div>
                         <p class="">Je adres, zodat wij weten waar je producten heen moeten.</p>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Straat" onChange={this.onChangeStreet} required/>
+                          <label for="male">Straat*</label>
+
+                          <input type="text" class="form-control " placeholder="de Pelp" onChange={this.onChangeStreet} required/>
                         </div>
 
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Stad" onChange={this.onChangeCity} required/>
+                          <label for="male">Stad*</label>
+
+                          <input type="text" class="form-control " placeholder="Rotterdam" onChange={this.onChangeCity} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Postcode" onChange={this.onChangeZipcode} required/>
+                          <label for="male">Postcode*</label>
+
+                          <input type="text" class="form-control " placeholder="1933RG" onChange={this.onChangeZipcode} required/>
                         </div>
                         <div class="form-group">
-                          <input type="text" class="form-control " placeholder="Huisnummer" onChange={this.onChangeHouse} required/>
+                          <label for="male">Huisnummer*</label>
+
+                          <input type="text" class="form-control " placeholder="14E" onChange={this.onChangeHouse} required/>
                         </div>
                         </div>
 
-                          <button type="submit" value="register" name="submit" className="btn btn-success btn-block">Registeer</button>
+                          <button type="submit" value="register" name="submit" className="btn btn-success btn-block">Registreer</button>
                       </form>
                   </div>
                 </div>

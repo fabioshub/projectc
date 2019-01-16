@@ -72,9 +72,15 @@ class Browse extends Component {
     $(".filter-bra").hide()
     $(".filter-col").hide()
     $(".filter-typ").hide()
+    $("#filterobject").css("pointer-events", "none");
+
     $(".stickything2").hide()
     $(".stickything3").hide()
     $(".pagination2").hide()
+
+    if(!localStorage.getItem("auth_token")) {
+      $(".hidethisbtnwhennogli").hide()
+    }
 
 
 
@@ -85,9 +91,13 @@ class Browse extends Component {
   if(crrntfilters !== null){
     if (crrntfilters.length > 0 ) {
       this.fetchDataFilter()
+      console.log("HIJ WERKT")
+
     } else {
       this.fetchData()
     }
+  } else {
+    this.fetchData()
   }
     // if (localStorage.getItem('filterarraylist')) {
     //   let crrntpage = JSON.parse(localStorage.getItem('filterarraylist'));
@@ -166,15 +176,22 @@ class Browse extends Component {
             )
           })
 
-          this.setState({items: items})
-          this.setState({itemsClean: items})
+          // if (this.state.filters.length == 0) {
+
+            this.setState({items: items})
+            this.setState({itemsClean: items})
+
+          // }
+
+
+
 
           // $(".turnedon").hide()
 
           $("#searchinput").val("")
           $(".spinner").fadeOut("fast");
           $(".browsegridder").fadeIn("fast");
-          $(".pagination2").fadeIn("fast");
+          $("#filterobject").css("pointer-events", "auto");          $(".pagination2").fadeIn("fast");
 
 
           if(!localStorage.getItem("auth_token")) {
@@ -189,6 +206,7 @@ class Browse extends Component {
 
 
       fetchDataFilter(filterkeyword, pagina = this.state.pagina, hoeveelheid = this.state.hoeveelheid) {
+
 
         $(".spinner").show()
         $(".pagination2").hide()
@@ -286,12 +304,16 @@ class Browse extends Component {
             $(".spinner").fadeOut("fast");
             $(".browsegridder").fadeIn("fast");
             $(".pagination2").fadeIn("fast");
+            $("#filterobject").css("pointer-events", "auto");
 
-
+            if(!localStorage.getItem("auth_token")) {
+              $(".hidethisbtnwhennogli").hide()
+            }
 
            $("#searchinput").val("")
             this.forceUpdate()
           })} else {
+            $("#filterobject").css("pointer-events", "none");
             this.fetchData()
           }
         }
@@ -543,9 +565,13 @@ class Browse extends Component {
           $(".pagination2").hide()
 
           $(".browsegridder").hide()
+          if(!localStorage.getItem("auth_token")) {
+            $(".hidethisbtnwhennogli").hide()
+          }
 
           if ($("#searchinput").val() == "") {
             this.fetchData()
+
           } else {
 
             fetch(`http://localhost:5000/api/product/search/${pagina}/${hoeveelheid}/${searchvalue}`,{
@@ -569,6 +595,8 @@ class Browse extends Component {
             }).then(data => {
               this.setState({pagesintotal: data.totalpages})
               // console.log(data.totalpages)
+
+
               let items = data.products.map((pic) => {
                 return(
                   <div>
@@ -584,12 +612,17 @@ class Browse extends Component {
                   )
                 })
 
+                if(!localStorage.getItem("auth_token")) {
+                  $(".hidethisbtnwhennogli").hide()
+                }
+
                 this.setState({items: items})
                 this.setState({itemsClean: items})
 
                 $(".spinner").fadeOut("fast");
                 $(".browsegridder").fadeIn("fast");
                 $(".pagination2").fadeIn("fast");
+                $("#filterobject").css("pointer-events", "auto");
 
 
 
@@ -597,6 +630,8 @@ class Browse extends Component {
                 this.state.filters = []
 
                 this.forceUpdate()
+
+
               })
           }
 
@@ -656,7 +691,9 @@ class Browse extends Component {
                       <div className="form-group" id="search" >
                         <input type="text" className="form-control border " style={{width: "100%"}} id="searchinput" placeholder="Zoeken... "/>
                       </div>
-                      <button id="searchsubmitbutton" type="button" onClick={(e)=>{this.state.pagina = 1; this.formSubmitting(e);}} className="btn btn-default"><i className="fas fa-search"></i></button>
+                      <button id="searchsubmitbutton" type="button" onClick={(e)=>{this.state.pagina = 1; this.formSubmitting(e); if(!localStorage.getItem("auth_token")) {
+                        $(".hidethisbtnwhennogli").hide()
+                      };}} className="btn btn-default"><i className="fas fa-search"></i></button>
                     </form>
 
 
@@ -673,11 +710,12 @@ class Browse extends Component {
                     </div>
                   </div>
                 </div>
+                <div id="filterobject">
                 <div className=" stickything4 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                         <ul  style={{
                             boxShadow: "0 5px 8px 0 rgba(0, 0, 0, 0.04), 0 9px 26px 0 rgba(0, 0, 0, 0.04)"}} className="list-group filterfloat text-left">
-                            <li onClick={() => {$("#searchinput").val("");  this.state.pagina = 1; this.fetchData();}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"600", color: "rgb(254, 198, 101)", backgroundColor: "white"}}>Reset filters</li>
+                            <li onClick={() => {$("#searchinput").val("");  this.state.pagina = 1; $("#filterobject").css("pointer-events", "none"); ;this.fetchData();}} style={{cursor: "pointer",borderRadius: '0px'}} className="list-group-item" style={{"fontWeight":"600", color: "rgb(254, 198, 101)", backgroundColor: "white"}}>Reset filters</li>
                             <li onClick={()=>{$( ".filter-CATEGORIEN" ).click(function() {$( ".filter-cat" ).toggle();});}} className="list-group-item filter-CATEGORIEN" style={{"fontWeight":"600"}}>Categorien</li>
                             <li onClick={()=>{$( ".filter-BRANDS" ).click(function() {$( ".filter-bra" ).toggle();});}} className="list-group-item filter-BRANDS" style={{"fontWeight":"600"}}>Merken</li>
                             <li onClick={()=>{$( ".filter-COLOR" ).click(function() {$( ".filter-col" ).toggle();});}} className="list-group-item filter-COLOR" style={{"fontWeight":"600"}}>Kleur</li>
@@ -729,6 +767,7 @@ class Browse extends Component {
                       </ul>
                   </div>
                 </div>
+              </div>
                 <div className=" stickything2 footer navbar-fixed-bottom content-center" style={{width: "20%"}}>
                   <div className="container-fluid" >
                     <div className="row">

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './checkoutlogin.css'
 import Product from './product'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import $ from 'jquery';
 
 
@@ -32,7 +32,9 @@ class Checkoutlogin extends Component {
       postcode: '',
       huis: '',
       phone: 0,
-      paymentoption: "PayPal"
+      paymentoption: "PayPal",
+      redirect: false,
+      discount: 0
     }
 
   }
@@ -73,6 +75,11 @@ class Checkoutlogin extends Component {
 
 
     window.scrollTo(0, 0)
+
+    if(localStorage.getItem("kortingcode")){
+    this.setState({discount: JSON.parse(localStorage.getItem("kortingcode"))})
+  }
+
 
     if(localStorage.getItem("auth_token")) {
       $(".hidetoo").hide()
@@ -141,13 +148,37 @@ class Checkoutlogin extends Component {
 
     $("#paynowboy").on("click", () => {
 
+      if(localStorage.getItem("kortingbinder")){
+
+        let temparray = JSON.parse(localStorage.getItem("kortingbinder"))
+        let newtemparray = []
+
+        this.state.discount = 0
+
+        for(var i = 0; i < temparray.length; i++) {
+            if ( Object.keys(temparray[i]) == localStorage.getItem('user_id')) {
+              console.log(Object.keys(temparray[i]) )
+
+              let tempvalue = Object.values(temparray[i])
+              this.setState({discount: parseInt(tempvalue[0])})
+
+
+            }
+        }
+      }
+
       if(localStorage.getItem("auth_token")) {
 
         let authstring = `Bearer ${localStorage.getItem("auth_token")}`
         // console.log(authstring)
         let cartitem = {
-          "OrderPaymentMethod": this.state.paymentoption
+          "OrderPaymentMethod": this.state.paymentoption,
+          "Discount": this.state.discount
       }
+
+
+
+      console.log(cartitem)
         // console.log(JSON.stringify(cartitem))
         fetch('http://localhost:5000/api/order', {
           method: 'POST',
@@ -160,19 +191,60 @@ class Checkoutlogin extends Component {
         })
 
 
+      if(localStorage.getItem("kortingbinder")){
+
+        let temparray = JSON.parse(localStorage.getItem("kortingbinder"))
+        let newtemparray = []
+
+
+        for(var i = 0; i < temparray.length; i++) {
+            if ( Object.keys(temparray[i]) == localStorage.getItem('user_id')) {
+              var filteredAry = temparray.filter(e => e !== temparray[i])
+              localStorage.setItem("kortingbinder", JSON.stringify(filteredAry))
+
+
+            }
+        }
+      }
+
+
+
+
+
+
       } else {
 
-        let  jsoncart = JSON.parse(localStorage.getItem('cartforcheckout'));
-        console.log(jsoncart)
-
-        let idarray = jsoncart.productIDs.map( (e) => {
-          return {
-            "ProductId": `${e}`, "CartQuantity" : "1"
-        }
-        })
+        let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'));
+        let arrayInLocalStorageQuantity = JSON.parse(localStorage.getItem('arrayInLocalStorageQuantity'));
+        let tempDeleteArray = [];
+        let som = 0
 
 
-        console.log(idarray)
+          for (let b = 0; b < arrayInLocalStorage.length; b++) {
+            const ccrtquan = arrayInLocalStorageQuantity[b]
+            const crrentItem = arrayInLocalStorage[b]
+            console.log(arrayInLocalStorage[b].product)
+            // console.log(h)
+            som = som + crrentItem.product.productPrice * ccrtquan
+
+            tempDeleteArray.push({"ProductId": `${crrentItem.product.id}`, "CartQuantity" : `${ccrtquan}`})
+
+
+          }
+
+
+
+        // let arrayInLocalStorage = JSON.parse(localStorage.getItem('arrayInLocalStorage'));
+        // console.log(jsoncart)
+        //
+        // let idarray = arrayInLocalStorage.productIDs.map( (e) => {
+        //   return {
+        //     "ProductId": `${e}`, "CartQuantity" : "1"
+        // }
+        // })
+
+
+        console.log(som)
 
 
         // console.log(authstring)
@@ -183,14 +255,8 @@ class Checkoutlogin extends Component {
           "ZipCode" : this.state.postcode,
           "HouseNumber" : this.state.huis,
           "OrderPaymentMethod" : this.state.paymentoption,
-          "totalPrice" : "10.00",
-          "cartItems" : [
-		{"ProductId": "1", "CartQuantity": "1"},
-	{"ProductId": "2", "CartQuantity": "1"},
-	{"ProductId": "2531", "CartQuantity": "1"},
-	{"ProductId": "5", "CartQuantity": "1"},
-	{"ProductId": "3", "CartQuantity": "1"}
-],
+          "totalPrice" : som,
+          "cartItems" : tempDeleteArray,
             "FirstName" : this.state.firstname,
             "LastName" : this.state.lastname,
             "EmailAddress" : this.state.username
@@ -208,6 +274,8 @@ class Checkoutlogin extends Component {
         })
 
         localStorage.removeItem("arrayInLocalStorage")
+        localStorage.removeItem("arrayInLocalStorageQuantity")
+
       }
 
 
@@ -216,6 +284,12 @@ class Checkoutlogin extends Component {
 
     })
 
+
+
+  }
+
+  componentWillUnmount() {
+      window.location.reload();
   }
 
   onChangeUsername = (e) => {
@@ -267,6 +341,9 @@ class Checkoutlogin extends Component {
 
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/pagina1"></Redirect>
+    } else {
     return(
 
               <form className="form" role="form" action="" method="" style={{marginTop: "200px"}}>
@@ -346,12 +423,7 @@ class Checkoutlogin extends Component {
                                   <input id="tel" name="telefoonnummer" maxlength="10" type="tel" required="required" className="form-control" placeholder="Uw telefoonnummer" onChange={this.onChangePhone}></input>
                               </div>
                             </div>
-                            <div className="form-group">
-                              <label className="control-label">Wilt u onze nieuwsbrief ontvangen?</label>
-                              <div className="checkbox">
-                                  <label className="checkbox-inline"><input type="checkbox" name="welNieuwsBrief"></input></label>
-                                </div>
-                            </div>
+
 
                                 <button className="btn btn-primary nextBtn btn-lg pull-right" type="button">Volgende stap</button>
                         </div>
@@ -426,8 +498,9 @@ class Checkoutlogin extends Component {
                             <h3>Bedankt</h3>
                             <p>Bedankt voor je bestelling.</p>
                             <p>We gaan direct voor je aan de slag!</p>
-                            <p>Je ontvangt binnen een korte tijd een email over het bezorgmoment van je bestelling.</p>
                         </div>
+                        <Link to={"/pagina1"}> <button className="btn btn-primary nextBtn btn-lg pull-right" type="button" >Terug naar home</button></Link>
+
                     </div>
                 </div>
 
@@ -435,6 +508,7 @@ class Checkoutlogin extends Component {
   </form>
 
     );
+  }
   }
 }
 

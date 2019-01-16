@@ -10,6 +10,7 @@ import Cart from './cart';
 import Wishlist from './wishlist';
 import Payscreen from './payscreen';
 
+import Radvanfortuin from './radvanfortuin';
 
 import ProductInfoPage from './productInfoPage';
 import Contact from './contact';
@@ -31,6 +32,8 @@ const Router = () => (
       <Route path="/adminpanelnew" component={AdminpanelNew} />
 
     <Route path="/login" component={Login} />
+      <Route path="/rad" component={Radvanfortuin} />
+
       <Route path="/payscreen" component={Payscreen} />
       <Route path="/checkoutlogin" component={Checkoutlogin} />
     <Route path="/cart" component={Cart} />

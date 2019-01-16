@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './navbar.css'
 import { Link } from 'react-router-dom';
 import $ from 'jquery';
+import logo from './btb.png';
+
 
 
 class Navigationbar extends Component {
@@ -10,7 +12,8 @@ class Navigationbar extends Component {
     super(props);
 
     this.state = {
-      accSymbol : "login | Registreren"
+      accSymbol : "login | Registreren",
+      newmessage: "anus"
     }
 
   }
@@ -29,16 +32,22 @@ class Navigationbar extends Component {
         }).then(response => {
           return response.json();
         }).then(myJson => {
+          console.log(myJson)
           let acciconupdate = myJson[0].firstName;
           this.setState({accSymbol: acciconupdate})
           $("#wishlistbutton").show()
           $("#loguitbutton").show()
+          $("#radbutton").show()
+          this.radclicker()
+
 
 
         });
       } else {
         $("#wishlistbutton").hide()
         $("#loguitbutton").hide()
+        $("#radbutton").hide()
+
 
       }
 
@@ -47,13 +56,23 @@ class Navigationbar extends Component {
       } else {
         $("#adminbutton").hide()
       }
+
+      $("#kortingcode").hide()
+
+
     }
 
     resettokentonull() {
       localStorage.removeItem("auth_token");
+      localStorage.removeItem("user_id");
+
       localStorage.removeItem("role")
 
       window.location.reload();
+
+      localStorage.removeItem('pagina');
+      localStorage.removeItem('filters');
+      localStorage.removeItem('filterarraylist');
 
 
     }
@@ -79,7 +98,37 @@ class Navigationbar extends Component {
       if(this.state.accSymbol == "login | Registreren")
       {return "login"}
       else
-      {return "userpanelnew"}
+      {return "userpanelnew" }
+
+    }
+
+    radclicker() {
+      if(localStorage.getItem('kortingbinder'))
+      {
+
+        // if kortingbinder contains user_id {}
+
+        let temparray = JSON.parse(localStorage.getItem("kortingbinder"))
+
+        //
+
+        // var foundproduct = false;
+        for(var i = 0; i < temparray.length; i++) {
+            if ( Object.keys(temparray[i]) == localStorage.getItem('user_id')) {
+                 $("#radbutton").hide()
+                 this.setState({newmessage: "Korting: " + Object.values(temparray[i]) + "%"})
+                 $("#kortingcode").show()
+                 // foundproduct = true;
+                // break;
+            }
+        }
+
+        // console.log(keys)
+
+
+
+
+      }
 
     }
 
@@ -105,9 +154,12 @@ class Navigationbar extends Component {
 
             <ul className="collapse navbar-collapse nav navbar-nav navbar-right" id="rightbuttons">
               <li style={{background: "white"}}  id="adminbutton"><Link style={{padding: "0"}} to={"/adminpanelnew" }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >Adminpanel</a></Link></li>
+                <li style={{background: "white"}}  id="kortingcode"> <a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)", padding: "0", margin: "0"}} >{this.state.newmessage}</a></li>
+
+                <li style={{background: "white"}}  className="radfortuin" id="radbutton"><Link style={{padding: "0"}} to={"/rad" }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >Korting winnen!</a></Link></li>
 
               <li style={{background: 'rgb(254, 198, 101)' }}  id='browsebutton'><Link to="/browse" style={{padding: "0"}}><a id="browsetext" style={{color: "white"}}>browse</a></Link></li>
-              <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i style={{color: "rgba(71, 73, 88, 0.93)"}} className='fas fa-heart' ></i> </Link></li>
+              <li  id='wishlistbutton'><Link to="/wishlist" style={{padding: '0'}}><i style={{color: "rgb(246, 115, 97)"}} className='fas fa-heart' ></i> </Link></li>
               <li id="cartbutton"><Link to="/cart" style={{padding: "0", margin: "0px 10px 0px 4px"}}><i style={{color: "rgb(254, 198, 101)"}} className="fas fa-shopping-cart"></i></Link></li>
               <li style={{background: "white"}}  id="browsebutton"><Link style={{padding: "0"}} to={"/" + this.personalclicker() }><a id="accSymbol"  style={{color: "rgba(71, 73, 88, 0.93)"}} >{this.state.accSymbol}</a></Link></li>
               <li style={{}}  id="loguitbutton" style={{padding: "16px"}} onClick={this.resettokentonull}><Link style={{padding: "0"}} to={"/pagina1" } ><a id="accSymbol" style={{color: "rgba(71, 73, 88, 0.93)", cursor: "pointer"}} >log uit</a></Link></li>

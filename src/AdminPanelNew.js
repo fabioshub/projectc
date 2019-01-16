@@ -570,10 +570,37 @@ postnewinfo3() {
   var putobject = { [vksobject] : valuenew}
   let authstring = `Bearer ${localStorage.getItem("auth_token")}`
 
-console.log(putobject)
-
 
   fetch(`http://localhost:5000/api/product/${useridb}`, {
+    method: 'DELETE',
+    // body: JSON.stringify(putobject),
+    // type: 'application/json',
+    headers: {
+      // "Content-Type" : 'application/json',
+      'Authorization' : authstring
+    },
+  }).then(function(response) {
+    //console.log(response)
+  })
+
+  // this.forceUpdate();
+  // window.location.reload();
+
+
+}
+
+deletenewinfo3() {
+  //console.log($("#valueid").val())
+  // console.log($("#valuekeyselect").val())
+  //console.log($("#valuenew").val())
+
+  let useridb = $("#valueiddelete").val()
+
+
+  let authstring = `Bearer ${localStorage.getItem("auth_token")}`
+
+
+  fetch(`http://localhost:5000/api/admin/UserId=${useridb}`, {
     method: 'DELETE',
     // body: JSON.stringify(putobject),
     // type: 'application/json',
@@ -734,6 +761,12 @@ handlePostNewItem = (e) => {
               </div>
               <div className="col-sm-8 text-center gebruikersadmin">
                 <h3 style={{margin: "40px 0", color: "rgba(71, 73, 88, 0.93)"}} className="text-left">Gebruikers </h3>
+                  <form className="navbar-form hidden-xs text-right productensadmin" style={{margin: "0", padding: "0", width: "100%"}}>
+                    <div className="form-group" id="search" >
+                      <input type="text" className="form-control border " style={{width: "100%"}} id="valueiddelete" placeholder="Delete gebruiker met ID "/>
+                    </div>
+                    <button id="searchsubmitbutton" type="button" onClick={()=>{this.state.pagina = 1; this.deletenewinfo3();}} className="btn btn-default">DELETE</button>
+                  </form>
                   <form className="navbar-form hidden-xs text-right " style={{margin: "0", padding: "0", width: "100%"}}>
                     <div className="form-group" id="value" >
                       <input type="text" className="form-control border " style={{width: "100%"}} id="valueid" placeholder="USERID"/>
@@ -765,7 +798,7 @@ handlePostNewItem = (e) => {
                 <h3 style={{margin: "40px 0", color: "rgba(71, 73, 88, 0.93)"}} className="text-left">Overige info</h3>
 
                     Totaal aantal gebruikers: {this.state.aantalusers} <br/>
-                    Totale inkomen: {this.state.totalinkomen}
+                  Totale inkomen: {"€" +Math.round(this.state.totalinkomen / 100 * 100) /100}
 
               </div>
               <div className="col-sm-4 outofstockadmin"></div>

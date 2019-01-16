@@ -142,4 +142,12 @@
 .stepwizard h3 {
   margin-bottom: 30px;
 }
+
+.modal-title {
+  margin-bottom: 20px;
+}
+
+.modal-body label {
+  margin-left: 7px;
+float:Left;}
 /* Popup box BEGIN */
